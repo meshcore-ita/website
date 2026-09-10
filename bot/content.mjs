@@ -44,17 +44,20 @@ const regionList = TOPICS.filter((t) => t.kind === 'region')
 export const REPLIES = {
   preset:
     '<b>Preset radio IT</b>\n\n' +
-    'Frequenza: <code>869.525 MHz</code>\n' +
-    'Larghezza di banda: <code>250 kHz</code>\n' +
-    'Spreading Factor: <code>SF11</code>\n' +
-    'Coding Rate: <code>CR5</code>\n\n' +
-    'Imposta questo preset su ogni nodo per restare compatibile con la mesh italiana.',
+    'Preset ufficiale MeshCore client: <b>EU/UK (Narrow)</b>\n' +
+    'Frequenza: <code>869.618 MHz</code>\n' +
+    'Larghezza di banda: <code>62.5 kHz</code>\n' +
+    'Spreading Factor: <code>SF8</code>\n' +
+    'Coding Rate: <code>CR8</code>\n\n' +
+    'Imposta questo preset su ogni nodo (repeater, room server, companion) per restare compatibile con la mesh italiana.\n\n' +
+    'Nota: il vecchio preset <code>869.525 MHz / SF11 / BW250 / CR5</code> è segnato come <b>Deprecated</b> dal progetto upstream MeshCore: i nodi rimasti su quel preset non sentono più la rete attuale e vanno aggiornati al preset Narrow qui sopra.',
+
 
   inizia:
     '<b>Come iniziare con MeshCore</b>\n\n' +
     '1. Procurati un nodo supportato: vedi /hardware\n' +
     '2. Flasha il firmware con <a href="https://flasher.meshcore.io/">flasher.meshcore.io</a>\n' +
-    '3. Imposta il preset italiano: vedi /preset\n' +
+    '3. Imposta il preset italiano attuale: vedi /preset\n' +
     '4. Assegna un nome al nodo seguendo la convenzione: vedi /nomi\n' +
     '5. Leggi la documentazione ufficiale: <a href="https://docs.meshcore.io/">docs.meshcore.io</a>\n' +
     '6. Controlla la copertura sulla mappa: <a href="https://map.meshcore.io/">map.meshcore.io</a>\n\n' +
@@ -90,6 +93,7 @@ export const REPLIES = {
     'Sotto-banda: <code>869.4–869.65 MHz</code>\n' +
     'Potenza massima: <code>500 mW ERP</code>\n' +
     'Duty cycle: <code>10%</code> (massimo 6 minuti/ora)\n\n' +
+    'Il preset attuale (869.618 MHz, BW 62.5 kHz) resta comodamente dentro la sotto-banda: 869.587–869.649 MHz.\n\n' +
     'Riferimenti normativi: ETSI EN 300 220 e Piano Nazionale di Ripartizione delle Frequenze.\n\n' +
     'Rispetta questi limiti per evitare interferenze e restare in regola.',
 
@@ -118,4 +122,37 @@ export const REPLIES = {
     'Ogni regione italiana ha un topic dedicato, con prefisso <code>IT ·</code>, per organizzare copertura, nodi e incontri locali:\n\n' +
     regionList +
     '\n\nUsa il topic della tua regione per parlare di nodi, copertura e incontri; lascia i topic generali per gli argomenti trasversali.',
+
+
+  cli:
+    '<b>Comandi CLI essenziali</b>\n\n' +
+    'Da inviare via console seriale/BLE su repeater e room server:\n\n' +
+    '<code>get radio</code> — mostra i parametri radio attuali (freq,bw,sf,cr)\n' +
+    '<code>set radio 869.618,62.5,8,8</code> — imposta il preset Narrow (richiede reboot)\n' +
+    '<code>get freq</code> / <code>set freq &lt;MHz&gt;</code> — vedi/cambia solo la frequenza\n' +
+    '<code>password &lt;nuova&gt;</code> — cambia la password admin (default: <code>password</code>)\n' +
+    '<code>set repeat on</code> — abilita il repeat su un room server\n' +
+    '<code>set lat &lt;lat&gt;</code> / <code>set lon &lt;lon&gt;</code> — imposta la posizione GPS\n' +
+    '<code>advert</code> — invia un advert flood\n' +
+    '<code>neighbors</code> — elenca i vicini diretti (solo repeater)\n' +
+    '<code>reboot</code> — riavvia il nodo\n\n' +
+    'Riferimento completo: <a href="https://docs.meshcore.io/cli_commands/">docs.meshcore.io/cli_commands</a>',
+
+  problemi:
+    '<b>Problemi comuni</b>\n\n' +
+    '<b>Il nodo non compare / last seen giorni fa</b>: quasi sempre è l\'orologio non sincronizzato. Su repeater/room server sincronizzalo con <code>clock sync</code> da un companion oppure con il comando <code>time</code> in console seriale.\n\n' +
+    '<b>Il BLE non si accoppia</b>: verifica di aver flashato il firmware Companion BLE (non quello USB-only); il codice di pairing predefinito è <code>123456</code>.\n\n' +
+    '<b>Il flasher non vede la scheda (Linux)</b>: è quasi sempre un problema di permessi sulla porta seriale, risolvibile con <code>sudo setfacl -m u:$USER:rw /dev/ttyUSB0</code>.\n\n' +
+    '<b>Nessun nodo raggiungibile</b>: la causa più comune è un preset radio diverso tra i nodi. Verifica che tutti usino il preset attuale (vedi /preset) — un nodo ancora sul preset deprecato non sente la rete.\n\n' +
+    '<b>Batteria</b>: controlla lo stato con <code>stats-core</code> in console seriale (batteria, uptime e coda); se si scarica troppo in fretta rivedi il case/la coibentazione o valuta un pannello solare per i repeater in esterna.\n\n' +
+    'Per altri casi consulta la <a href="https://docs.meshcore.io/faq/">FAQ ufficiale</a> o il topic Supporto e troubleshooting.',
+
+  app:
+    '<b>Collegare il nodo</b>\n\n' +
+    'App smartphone MeshCore (Android/iOS): cerca "MeshCore" sullo store, oppure client web <a href="https://app.meshcore.nz/">app.meshcore.nz</a> via USB seriale.\n\n' +
+    '1. Flasha il firmware Companion (BLE per l\'app smartphone, USB per il client web): vedi /inizia\n' +
+    '2. BLE: cerca il nodo nell\'app, codice di pairing predefinito <code>123456</code> (vedi /problemi se non si accoppia)\n' +
+    '3. USB: collega il nodo via cavo e apri <a href="https://app.meshcore.nz/">app.meshcore.nz</a> da Chrome, seleziona la porta seriale\n' +
+    '4. Imposta il preset radio attuale sul nodo prima di usarlo: vedi /preset\n' +
+    '5. Per amministrare repeater e room server da remoto o via console seriale: vedi /cli',
 };

@@ -49,4 +49,4 @@ ferma e stampa le istruzioni in italiano per l'owner del gruppo.
 ## Comandi registrati
 
 `/preset` `/inizia` `/hardware` `/ruoli` `/nomi` `/normativa` `/link`
-`/regole` `/regioni`
+`/regole` `/regioni` `/cli` `/problemi` `/app`
