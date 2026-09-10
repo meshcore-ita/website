@@ -38,7 +38,7 @@ function resolveSiteBase() {
         : `https://${host}/${repoName}/`;
     }
   }
-  return 'https://meshcore-ita.github.io/website/';
+  return 'https://meshcore-ita.github.io/';
 }
 
 export const SITE_BASE = resolveSiteBase();

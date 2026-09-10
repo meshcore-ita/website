@@ -1,42 +1,42 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://meshcore-ita.github.io/website/</loc>
+    <loc>https://meshcore-ita.github.io/</loc>
   </url>
   <url>
-    <loc>https://meshcore-ita.github.io/website/guida/</loc>
+    <loc>https://meshcore-ita.github.io/guida/</loc>
     <lastmod>2026-09-10</lastmod>
   </url>
   <url>
-    <loc>https://meshcore-ita.github.io/website/preset-radio/</loc>
+    <loc>https://meshcore-ita.github.io/preset-radio/</loc>
     <lastmod>2026-09-10</lastmod>
   </url>
   <url>
-    <loc>https://meshcore-ita.github.io/website/hardware/</loc>
+    <loc>https://meshcore-ita.github.io/hardware/</loc>
     <lastmod>2026-09-10</lastmod>
   </url>
   <url>
-    <loc>https://meshcore-ita.github.io/website/comandi/</loc>
+    <loc>https://meshcore-ita.github.io/comandi/</loc>
     <lastmod>2026-09-10</lastmod>
   </url>
   <url>
-    <loc>https://meshcore-ita.github.io/website/problemi/</loc>
+    <loc>https://meshcore-ita.github.io/problemi/</loc>
     <lastmod>2026-09-10</lastmod>
   </url>
   <url>
-    <loc>https://meshcore-ita.github.io/website/faq/</loc>
+    <loc>https://meshcore-ita.github.io/faq/</loc>
     <lastmod>2026-09-10</lastmod>
   </url>
   <url>
-    <loc>https://meshcore-ita.github.io/website/meshcore-vs-meshtastic/</loc>
+    <loc>https://meshcore-ita.github.io/meshcore-vs-meshtastic/</loc>
     <lastmod>2026-09-10</lastmod>
   </url>
   <url>
-    <loc>https://meshcore-ita.github.io/website/glossario/</loc>
+    <loc>https://meshcore-ita.github.io/glossario/</loc>
     <lastmod>2026-09-10</lastmod>
   </url>
   <url>
-    <loc>https://meshcore-ita.github.io/website/community/</loc>
+    <loc>https://meshcore-ita.github.io/community/</loc>
     <lastmod>2026-09-10</lastmod>
   </url>
 </urlset>
