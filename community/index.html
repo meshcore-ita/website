@@ -1,0 +1,290 @@
+<!doctype html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="color-scheme" content="dark">
+<meta name="theme-color" content="#000000">
+
+<title>Community MeshCore Italia: gruppo Telegram e come partecipare</title>
+<meta name="description" content="MeshCore ITA: community italiana indipendente di MeshCore. Gruppo Telegram pubblico, struttura dei topic, regole di convivenza e come contribuire su GitHub.">
+<link rel="canonical" href="https://meshcore-ita.github.io/community/">
+<meta name="robots" content="index,follow,max-image-preview:large">
+
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="MeshCore ITA">
+<meta property="og:title" content="Community MeshCore Italia: gruppo Telegram e come partecipare">
+<meta property="og:description" content="MeshCore ITA: community italiana indipendente di MeshCore. Gruppo Telegram pubblico, struttura dei topic, regole di convivenza e come contribuire su GitHub.">
+<meta property="og:url" content="https://meshcore-ita.github.io/community/">
+<meta property="og:image" content="https://meshcore-ita.github.io/assets/img/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:locale" content="it_IT">
+
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Community MeshCore Italia: gruppo Telegram e come partecipare">
+<meta name="twitter:description" content="MeshCore ITA: community italiana indipendente di MeshCore. Gruppo Telegram pubblico, struttura dei topic, regole di convivenza e come contribuire su GitHub.">
+<meta name="twitter:image" content="https://meshcore-ita.github.io/assets/img/og-image.png">
+
+<link rel="icon" type="image/svg+xml" href="/assets/img/favicon.svg">
+<link rel="mask-icon" href="/assets/img/favicon.svg" color="#22c55e">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@300..700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="/assets/css/style.css?v=2">
+
+<script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "name": "MeshCore ITA",
+      "url": "https://meshcore-ita.github.io/",
+      "sameAs": [
+        "https://t.me/meshcore_ita",
+        "https://github.com/meshcore-ita"
+      ]
+    },
+    {
+      "@type": "AboutPage",
+      "name": "MeshCore ITA: la community italiana",
+      "description": "Pagina di presentazione della community italiana indipendente di MeshCore: chi siamo, come partecipare e come contribuire.",
+      "about": {
+        "@type": "Organization",
+        "name": "MeshCore ITA"
+      }
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://meshcore-ita.github.io/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Community",
+          "item": "https://meshcore-ita.github.io/community/"
+        }
+      ]
+    }
+  ]
+}</script>
+</head>
+<body>
+<a class="skip-link" href="#main">Vai al contenuto</a>
+<canvas id="bg-canvas" aria-hidden="true"></canvas>
+
+<header class="site-header" data-scrolled="false">
+  <div class="site-header__inner">
+    <a class="brand" href="/">
+      <img class="brand__mark" src="/assets/img/logo.svg" alt="" width="28" height="28">
+      <span class="brand__text">MeshCore <em>ITA</em></span>
+    </a>
+    <nav class="nav" id="nav">
+      <a class="nav__link" href="/guida/">Guida</a>
+      <a class="nav__link" href="/preset-radio/">Preset radio</a>
+      <a class="nav__link" href="/hardware/">Hardware</a>
+      <a class="nav__link" href="/faq/">FAQ</a>
+      <a class="nav__link" href="/community/" aria-current="true">Community</a>
+      <a class="nav__link nav__link--ext" href="https://t.me/meshcore_ita" target="_blank" rel="noopener">TELEGRAM<span class="ext-arrow">↗</span></a>
+      <a class="nav__link nav__link--ext" href="https://github.com/meshcore-ita" target="_blank" rel="noopener">GitHub<span class="ext-arrow">↗</span></a>
+    </nav>
+    <button class="nav-toggle" aria-expanded="false" aria-controls="nav">
+      <span class="sr-only">Apri il menu</span>
+    </button>
+  </div>
+</header>
+
+<main id="main">
+
+  <section class="hero hero--page">
+    <nav class="crumbs" aria-label="Breadcrumb">
+      <ol>
+        <li><a href="/">Home</a></li>
+        <li aria-current="page">Community</li>
+      </ol>
+    </nav>
+    <p class="eyelash">Community</p>
+    <h1 class="hero__title">MeshCore ITA: la community italiana</h1>
+    <p class="hero__lede">Chi siamo, come partecipare al gruppo Telegram e come contribuire alla documentazione e al coordinamento della rete.</p>
+  </section>
+
+<section class="section">
+  <div class="section__head">
+    <p class="eyelash">Chi siamo</p>
+    <h2 class="section__title">Una community indipendente, aperta e documentata</h2>
+    <p class="section__lede">MeshCore ITA esiste per dare a chi usa MeshCore in Italia un punto di riferimento in italiano, verificato e aperto a tutti.</p>
+  </div>
+  <div class="prose">
+    <p>MeshCore ITA è una community indipendente: non è affiliata al progetto upstream MeshCore né lo rappresenta ufficialmente. MeshCore, il firmware e i client su cui ci basiamo, è un progetto open source rilasciato con licenza MIT; la nostra community italiana esiste per tre ragioni concrete. La prima è avere un preset radio condiviso, così che i nodi installati da persone diverse in città diverse si sentano davvero tra loro invece di restare isole isolate. La seconda è offrire documentazione tecnica in italiano, verificata rispetto alle fonti ufficiali del progetto e non tradotta in modo approssimativo. La terza è coordinare chi gestisce repeater e room server, così che la copertura cresca in modo ordinato invece che per tentativi scoordinati.</p>
+    <p>Tutto quello che pubblichiamo — questo sito, i contenuti del gruppo Telegram, gli strumenti di supporto — è open source e consultabile sull'organizzazione GitHub <a class="link" href="https://github.com/meshcore-ita" target="_blank" rel="noopener">github.com/meshcore-ita<span class="ext-arrow">↗</span></a>. Chi vuole verificare un'affermazione tecnica di questo sito può sempre risalire alla fonte: il codice del sito, la documentazione upstream su meshcore.io o il firmware su <a class="link" href="https://github.com/meshcore-dev/MeshCore" target="_blank" rel="noopener">github.com/meshcore-dev/MeshCore<span class="ext-arrow">↗</span></a>.</p>
+  </div>
+</section>
+
+<section class="section">
+  <div class="section__head">
+    <p class="eyelash">Partecipare</p>
+    <h2 class="section__title">Il gruppo Telegram è pubblico</h2>
+    <p class="section__lede">Non serve un invito: chiunque usi o voglia iniziare a usare MeshCore può entrare.</p>
+  </div>
+  <div class="prose">
+    <p>Il gruppo Telegram MeshCore ITA è aperto e gratuito. Che tu stia configurando il tuo primo nodo seguendo la <a class="link" href="/guida/">guida passo passo a MeshCore in italiano</a> o gestisca già un repeater da mesi, il gruppo è il posto dove presentarsi, fare domande e coordinarsi con chi ha copertura vicino a te.</p>
+    <a class="btn btn--primary" href="https://t.me/meshcore_ita" target="_blank" rel="noopener">ENTRA NEL GRUPPO TELEGRAM<span class="ext-arrow">↗</span></a>
+  </div>
+</section>
+
+<section class="section">
+  <div class="section__head">
+    <p class="eyelash">Struttura del gruppo</p>
+    <h2 class="section__title">Otto topic generali, uno per regione</h2>
+    <p class="section__lede">Il gruppo è organizzato in topic separati, per tenere le discussioni leggibili anche con molti membri attivi.</p>
+  </div>
+  <div class="grid grid--2">
+    <article class="card">
+      <p class="card__num">01</p>
+      <h3 class="card__title">Annunci</h3>
+      <p class="card__body">Comunicazioni ufficiali della community e aggiornamenti importanti.</p>
+    </article>
+    <article class="card">
+      <p class="card__num">02</p>
+      <h3 class="card__title">Benvenuti e presentazioni</h3>
+      <p class="card__body">Dove i nuovi membri si presentano al resto della community.</p>
+    </article>
+    <article class="card">
+      <p class="card__num">03</p>
+      <h3 class="card__title">Supporto e troubleshooting</h3>
+      <p class="card__body">Domande tecniche e aiuto per risolvere problemi di configurazione dei nodi.</p>
+    </article>
+    <article class="card">
+      <p class="card__num">04</p>
+      <h3 class="card__title">Hardware e antenne</h3>
+      <p class="card__body">Confronti su board, antenne, alimentazione e installazioni fisiche.</p>
+    </article>
+    <article class="card">
+      <p class="card__num">05</p>
+      <h3 class="card__title">Firmware e configurazione</h3>
+      <p class="card__body">Versioni firmware, preset radio e impostazioni dei dispositivi.</p>
+    </article>
+    <article class="card">
+      <p class="card__num">06</p>
+      <h3 class="card__title">Repeater e room server</h3>
+      <p class="card__body">Coordinamento di installazioni condivise e infrastruttura di rete.</p>
+    </article>
+    <article class="card">
+      <p class="card__num">07</p>
+      <h3 class="card__title">Mappa e copertura</h3>
+      <p class="card__body">Segnalazioni di copertura e aggiornamenti sulla mappa pubblica.</p>
+    </article>
+    <article class="card">
+      <p class="card__num">08</p>
+      <h3 class="card__title">Off-topic</h3>
+      <p class="card__body">Chiacchiere libere, non legate a MeshCore.</p>
+    </article>
+  </div>
+  <div class="prose">
+    <p>Accanto a questi otto, ogni regione italiana ha un topic dedicato con prefisso <code>IT ·</code>: Abruzzo, Basilicata, Calabria, Campania, Emilia-Romagna, Friuli-Venezia Giulia, Lazio, Liguria, Lombardia, Marche, Molise, Piemonte, Puglia, Sardegna, Sicilia, Toscana, Trentino-Alto Adige, Umbria, Valle d'Aosta e Veneto. Le discussioni locali — nuove installazioni, copertura di zona, incontri — vanno nel topic della propria regione; i topic generali restano per gli argomenti trasversali a tutta la community.</p>
+  </div>
+</section>
+
+<section class="section">
+  <div class="section__head">
+    <p class="eyelash">Regole</p>
+    <h2 class="section__title">Convivenza nel gruppo</h2>
+  </div>
+  <div class="prose">
+    <ul>
+      <li>Rispetto reciproco: niente spam, pubblicità non richiesta o offese.</li>
+      <li>Usa il topic giusto per l'argomento, compreso quello della tua regione.</li>
+      <li>Rispetta la normativa radio quando operi in banda 869 MHz: i limiti di potenza ed ERP e di duty cycle sono riassunti nella pagina del <a class="link" href="/preset-radio/">preset radio italiano per MeshCore</a>.</li>
+      <li>Niente contenuti illegali.</li>
+    </ul>
+    <p>Il regolamento completo, quando presente, è fissato in cima al gruppo. Per problemi tecnici puntuali il topic Supporto e troubleshooting resta il canale più veloce; per una diagnosi scritta, la pagina <a class="link" href="/problemi/">soluzioni ai problemi più comuni di MeshCore</a> copre i casi più frequenti passo passo.</p>
+  </div>
+</section>
+
+<section class="section">
+  <div class="section__head">
+    <p class="eyelash">Contribuire</p>
+    <h2 class="section__title">Sito, documentazione e coordinamento infrastruttura</h2>
+  </div>
+  <div class="prose">
+    <p>Questo sito, come tutto il resto della community, è open source. Se trovi un'imprecisione, un comando mancante o una pagina da migliorare, apri una issue o una pull request sul <a class="link" href="https://github.com/meshcore-ita/meshcore-ita.github.io" target="_blank" rel="noopener">repository del sito<span class="ext-arrow">↗</span></a>; le altre risorse della community sono nell'organizzazione <a class="link" href="https://github.com/meshcore-ita" target="_blank" rel="noopener">github.com/meshcore-ita<span class="ext-arrow">↗</span></a>. Ogni modifica tecnica proposta va confrontata con le fonti ufficiali del progetto MeshCore o con la pagina dei <a class="link" href="/comandi/">comandi CLI per amministrare un nodo MeshCore</a>, che elenchiamo con la stessa disciplina.</p>
+    <p>Se invece vuoi coordinare un repeater o un room server con la community, il percorso è: verifica prima nel topic Repeater e room server se qualcuno copre già la tua zona, scegli hardware coerente con la <a class="link" href="/hardware/">guida hardware alle board LoRa compatibili con MeshCore</a>, imposta il preset radio condiviso e amministra il nodo con i comandi descritti nella pagina dedicata. Una volta operativo, presenta il nodo nel gruppo e valuta di aggiungerlo alla mappa pubblica, così che chi copre la stessa area possa collaborare invece di duplicare lo sforzo.</p>
+  </div>
+</section>
+
+<section class="section">
+  <div class="section__head">
+    <p class="eyelash">Trasparenza</p>
+    <h2 class="section__title">Un marchio, una community indipendente</h2>
+  </div>
+  <div class="prose">
+    <p>MeshCore ITA è una community indipendente: non è affiliata al progetto MeshCore né ne è sponsorizzata o approvata. Il nome MeshCore resta del suo progetto e dei suoi autori upstream; questo sito e il gruppo Telegram sono iniziative della community italiana, gestite volontariamente e senza scopo di lucro. I contenuti di questo sito sono pubblicati sotto licenza CC BY 4.0, il codice del sito sotto licenza MIT: puoi riusarli citando la fonte. Per qualsiasi dubbio su cosa sia ufficiale e cosa no, la <a class="link" href="/faq/">pagina delle domande frequenti su MeshCore in italiano</a> raccoglie anche questo tipo di domande.</p>
+  </div>
+</section>
+<section class="section related" data-reveal>
+    <div class="section__head">
+      <p class="eyelash">Continua a leggere</p>
+      <h2 class="section__title">Altri contenuti MeshCore ITA</h2>
+    </div>
+    <div class="grid grid--2">
+      <a class="card" href="/glossario/">
+        <h3 class="card__title">Glossario</h3>
+        <p class="card__body">I termini tecnici di radio LoRa, rete mesh, sicurezza e firmware che incontri configurando un nodo MeshCore.</p>
+      </a>
+      <a class="card" href="/meshcore-vs-meshtastic/">
+        <h3 class="card__title">Confronti</h3>
+        <p class="card__body">Un confronto tecnico e imparziale tra i due protocolli mesh LoRa più diffusi, per capire quando scegliere l'uno o l'altro.</p>
+      </a>
+      <a class="card" href="/faq/">
+        <h3 class="card__title">FAQ</h3>
+        <p class="card__body">Le risposte alle domande più frequenti della community italiana, dal costo iniziale alla cifratura dei messaggi.</p>
+      </a>
+      <a class="card" href="/">
+        <h3 class="card__title">Home</h3>
+        <p class="card__body">Torna alla pagina principale di MeshCore ITA.</p>
+      </a>
+    </div>
+  </section>
+
+</main>
+
+<footer class="site-footer">
+  <div class="site-footer__inner">
+    <div class="foot__nav">
+      <p class="foot__nav-label">Documentazione</p>
+      <ul class="foot__nav-list">
+        <li><a href="/guida/">Guida</a></li>
+        <li><a href="/preset-radio/">Preset radio</a></li>
+        <li><a href="/hardware/">Hardware</a></li>
+        <li><a href="/comandi/">Comandi</a></li>
+        <li><a href="/problemi/">Problemi</a></li>
+        <li><a href="/faq/">FAQ</a></li>
+        <li><a href="/meshcore-vs-meshtastic/">Confronti</a></li>
+        <li><a href="/glossario/">Glossario</a></li>
+        <li><a href="/community/" aria-current="true">Community</a></li>
+      </ul>
+    </div>
+    <p class="site-footer__note">MeshCore ITA — community indipendente. Non affiliata al progetto MeshCore.</p>
+    <p class="site-footer__note">Contenuti sotto licenza CC BY 4.0, codice del sito sotto licenza MIT.</p>
+    <p class="foot__meta">Aggiornato il 10 settembre 2026</p>
+    <p class="foot__meta">Trovato un errore o vuoi aggiungere qualcosa? <a class="link" href="https://github.com/meshcore-ita/meshcore-ita.github.io/edit/main/content/community.html" target="_blank" rel="noopener">Modifica questa pagina su GitHub<span class="ext-arrow">↗</span></a> — la modifica diventa una pull request.</p>
+    <ul class="site-footer__links">
+      <li><a href="https://t.me/meshcore_ita" target="_blank" rel="noopener">Telegram<span class="ext-arrow">↗</span></a></li>
+      <li><a href="https://github.com/meshcore-ita" target="_blank" rel="noopener">GitHub<span class="ext-arrow">↗</span></a></li>
+      <li><a href="https://meshcore.io/" target="_blank" rel="noopener">MeshCore<span class="ext-arrow">↗</span></a></li>
+      <li><a href="https://flasher.meshcore.io/" target="_blank" rel="noopener">Flasher<span class="ext-arrow">↗</span></a></li>
+      <li><a href="https://map.meshcore.io/" target="_blank" rel="noopener">Mappa pubblica<span class="ext-arrow">↗</span></a></li>
+    </ul>
+  </div>
+</footer>
+
+<script type="module" src="/assets/js/main.js?v=2" defer></script>
+</body>
+</html>

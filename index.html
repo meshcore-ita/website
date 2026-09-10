@@ -7,15 +7,18 @@
 <meta name="theme-color" content="#000000">
 
 <title>MeshCore ITA — la rete mesh LoRa italiana</title>
-<meta name="description" content="MeshCore ITA è la community italiana indipendente di MeshCore: rete mesh off-grid e cifrata su radio LoRa. Preset radio condiviso, guide in italiano, coordinamento di repeater e room server.">
-<link rel="canonical" href="https://meshcore-ita.github.io/website/">
+<meta name="description" content="MeshCore ITA è la community italiana di MeshCore: guide, preset radio condiviso e hardware per la rete mesh LoRa off-grid, cifrata e senza internet in Italia.">
+<link rel="canonical" href="https://meshcore-ita.github.io/">
+<meta name="robots" content="index,follow,max-image-preview:large">
+<link rel="sitemap" type="application/xml" href="/sitemap.xml">
 
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="MeshCore ITA">
 <meta property="og:title" content="MeshCore ITA — la rete mesh LoRa italiana">
 <meta property="og:description" content="Community italiana indipendente di MeshCore: rete mesh off-grid e cifrata su radio LoRa. Preset radio condiviso, guide in italiano, coordinamento di repeater e room server.">
-<meta property="og:url" content="https://meshcore-ita.github.io/website/">
-<meta property="og:image" content="https://meshcore-ita.github.io/website/assets/img/og-image.svg">
+<meta property="og:url" content="https://meshcore-ita.github.io/">
+<meta property="og:image" content="https://meshcore-ita.github.io/assets/img/og-image.png">
+<meta property="og:image:type" content="image/png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta property="og:locale" content="it_IT">
@@ -23,14 +26,16 @@
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="MeshCore ITA — la rete mesh LoRa italiana">
 <meta name="twitter:description" content="Community italiana indipendente di MeshCore: rete mesh off-grid e cifrata su radio LoRa. Preset radio condiviso, guide in italiano, coordinamento di repeater e room server.">
-<meta name="twitter:image" content="https://meshcore-ita.github.io/website/assets/img/og-image.svg">
+<meta name="twitter:image" content="https://meshcore-ita.github.io/assets/img/og-image.png">
 
 <link rel="icon" type="image/svg+xml" href="assets/img/favicon.svg">
 <link rel="mask-icon" href="assets/img/favicon.svg" color="#22c55e">
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Geist:wght@300..700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Geist:wght@300..700&family=JetBrains+Mono:wght@400;500;600&display=swap">
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@300..700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
+<noscript><link href="https://fonts.googleapis.com/css2?family=Geist:wght@300..700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet"></noscript>
 
 <link rel="stylesheet" href="assets/css/style.css?v=2">
 
@@ -40,15 +45,52 @@
   "@graph": [
     {
       "@type": "Organization",
+      "@id": "https://meshcore-ita.github.io/#organization",
       "name": "MeshCore ITA",
-      "url": "https://meshcore-ita.github.io/website/",
-      "sameAs": ["https://github.com/meshcore-ita"]
+      "url": "https://meshcore-ita.github.io/",
+      "description": "Community italiana indipendente dedicata a MeshCore, la rete mesh LoRa cifrata e off-grid: preset radio condiviso, guide in italiano, coordinamento di repeater e room server.",
+      "sameAs": [
+        "https://github.com/meshcore-ita",
+        "https://t.me/meshcore_ita"
+      ]
     },
     {
       "@type": "WebSite",
+      "@id": "https://meshcore-ita.github.io/#website",
       "name": "MeshCore ITA",
-      "url": "https://meshcore-ita.github.io/website/",
-      "inLanguage": "it"
+      "url": "https://meshcore-ita.github.io/",
+      "description": "Guide, preset radio condiviso e documentazione in italiano su MeshCore, la rete mesh LoRa off-grid e cifrata per l'Italia.",
+      "inLanguage": "it",
+      "publisher": { "@id": "https://meshcore-ita.github.io/#organization" }
+    },
+    {
+      "@type": "ItemList",
+      "name": "Sezioni del sito MeshCore ITA",
+      "itemListElement": [
+        { "@type": "ListItem", "position": 1, "url": "https://meshcore-ita.github.io/guida/", "name": "Guida" },
+        { "@type": "ListItem", "position": 2, "url": "https://meshcore-ita.github.io/preset-radio/", "name": "Preset radio" },
+        { "@type": "ListItem", "position": 3, "url": "https://meshcore-ita.github.io/hardware/", "name": "Hardware" },
+        { "@type": "ListItem", "position": 4, "url": "https://meshcore-ita.github.io/comandi/", "name": "Comandi" },
+        { "@type": "ListItem", "position": 5, "url": "https://meshcore-ita.github.io/problemi/", "name": "Problemi" },
+        { "@type": "ListItem", "position": 6, "url": "https://meshcore-ita.github.io/faq/", "name": "FAQ" },
+        { "@type": "ListItem", "position": 7, "url": "https://meshcore-ita.github.io/meshcore-vs-meshtastic/", "name": "Confronti" },
+        { "@type": "ListItem", "position": 8, "url": "https://meshcore-ita.github.io/glossario/", "name": "Glossario" },
+        { "@type": "ListItem", "position": 9, "url": "https://meshcore-ita.github.io/community/", "name": "Community" }
+      ]
+    },
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        { "@type": "Question", "name": "Che differenza c'è con Meshtastic?", "acceptedAnswer": { "@type": "Answer", "text": "MeshCore usa un routing ibrido: advert e messaggi di canale viaggiano in flood, ma i messaggi privati usano path-discovery e routing diretto sui percorsi appresi. A differenza di Meshtastic, non tutti i nodi ripetono tutto il traffico." } },
+        { "@type": "Question", "name": "Serve una licenza radio?", "acceptedAnswer": { "@type": "Answer", "text": "No, entro i limiti di potenza ed ERP e di duty cycle della sub-banda 869.4–869.65 MHz. Questi limiti sono previsti da ETSI EN 300 220 e dal Piano Nazionale di Ripartizione delle Frequenze, quindi l'uso è libero. La responsabilità della conformità resta dell'operatore del nodo." } },
+        { "@type": "Question", "name": "Quanta copertura ho?", "acceptedAnswer": { "@type": "Answer", "text": "Dipende da orografia, altezza dell'antenna e potenza del nodo: non ci sono numeri di copertura garantiti, ogni installazione va valutata sul campo." } },
+        { "@type": "Question", "name": "Posso lasciare un nodo acceso H24?", "acceptedAnswer": { "@type": "Answer", "text": "Sì: repeater e room server sono più utili se restano sempre accesi e raggiungibili, nel rispetto dei limiti di duty cycle." } },
+        { "@type": "Question", "name": "Come entro nel gruppo?", "acceptedAnswer": { "@type": "Answer", "text": "Il gruppo Telegram MeshCore ITA è pubblico: chiunque può entrare senza bisogno di un invito. Il link è t.me/meshcore_ita." } },
+        { "@type": "Question", "name": "Il preset è obbligatorio?", "acceptedAnswer": { "@type": "Answer", "text": "Non è obbligatorio, ma è fortemente raccomandato: è ciò che garantisce l'interoperabilità tra i nodi italiani." } },
+        { "@type": "Question", "name": "Perché il preset è cambiato?", "acceptedAnswer": { "@type": "Answer", "text": "Il vecchio preset EU/UK (869.525 MHz · SF11 · BW 250 kHz · CR5) è oggi etichettato come deprecato nell'elenco ufficiale dei preset del client MeshCore. La community internazionale è passata a un preset \"narrow\" (banda più stretta, SF più basso) per una migliore interoperabilità: per l'Italia il preset attuale è 869.618 MHz · SF8 · BW 62.5 kHz · CR8, corrispondente a EU/UK (Narrow) nel client." } },
+        { "@type": "Question", "name": "Come aggiorno il firmware?", "acceptedAnswer": { "@type": "Answer", "text": "Su board ESP32 (es. Heltec V3) usa il web flasher ufficiale, oppure l'aggiornamento OTA via Wi-Fi lanciando start ota dal client admin e collegandoti all'hotspot \"MeshCore OTA\". Su board nRF (RAK, T114, Seeed XIAO) usa start ota insieme all'app nRF DFU sullo smartphone. Il bin \"non-merged\" mantiene l'abbinamento Bluetooth esistente; il bin \"merged\" lo azzera ma mantiene nome, chiavi e preset salvati." } },
+        { "@type": "Question", "name": "Il mio nodo è sulla mappa pubblica?", "acceptedAnswer": { "@type": "Answer", "text": "Non automaticamente. Per un companion, apri l'app MeshCore, vai su \"Internet Map\" e scegli \"Add me to the Map\". Per un repeater o room server, aprilo dalla lista contatti, tocca \"Share\" e poi \"Upload to Internet Map\". La mappa è consultabile su map.meshcore.io." } }
+      ]
     }
   ]
 }
@@ -66,15 +108,11 @@
     </a>
     <nav class="nav" id="nav">
       <a class="nav__link" href="#cos-e">Cos'è</a>
-      <a class="nav__link" href="#inizia">Inizia</a>
-      <a class="nav__link" href="#nodi">Nodi</a>
-      <a class="nav__link" href="#hardware">Hardware</a>
-      <a class="nav__link" href="#cli">CLI</a>
-      <a class="nav__link" href="#radio">Radio</a>
-      <a class="nav__link" href="#faq">FAQ</a>
-      <a class="nav__link" href="#problemi">Problemi</a>
-      <a class="nav__link" href="#gruppo">Gruppo</a>
-      <a class="nav__link" href="#community">Community</a>
+      <a class="nav__link" href="/guida/">Guida</a>
+      <a class="nav__link" href="/preset-radio/">Preset radio</a>
+      <a class="nav__link" href="/hardware/">Hardware</a>
+      <a class="nav__link" href="/faq/">FAQ</a>
+      <a class="nav__link" href="/community/">Community</a>
       <a class="nav__link nav__link--ext" href="https://t.me/meshcore_ita" target="_blank" rel="noopener">TELEGRAM<span class="ext-arrow">↗</span></a>
       <a class="nav__link nav__link--ext" href="https://github.com/meshcore-ita" target="_blank" rel="noopener">GitHub<span class="ext-arrow">↗</span></a>
     </nav>
@@ -143,6 +181,7 @@
         <p class="card__body">Gira su board LoRa diffuse e a basso costo, dalle Heltec V3 alle RAK4631. Firmware MIT di Scott (Ripple Radios), client mobile e web di Liam Cottle.</p>
       </article>
     </div>
+    <p class="section__lede">Per capire le differenze rispetto ad altri sistemi mesh leggi il confronto <a class="link" href="/meshcore-vs-meshtastic/">MeshCore vs Meshtastic</a>, oppure consulta il <a class="link" href="/glossario/">glossario dei termini MeshCore</a>.</p>
   </section>
 
   <section id="inizia" class="section" data-reveal>
@@ -181,6 +220,7 @@
         <a class="link" href="https://t.me/meshcore_ita" target="_blank" rel="noopener">Entra nel gruppo Telegram<span class="ext-arrow">↗</span></a>
       </li>
     </ol>
+    <p class="section__lede">Guida completa passo passo: <a class="link" href="/guida/">guida a MeshCore in italiano</a>, dal firmware al primo nodo.</p>
   </section>
 
   <section id="nodi" class="section" data-reveal>
@@ -207,6 +247,7 @@
         <p class="card__body">Trasmette telemetria o payload personalizzati sulla mesh.</p>
       </article>
     </div>
+    <p class="section__lede">Termini e definizioni complete: <a class="link" href="/glossario/">glossario MeshCore in italiano</a>.</p>
   </section>
 
   <section id="hardware" class="section" data-reveal>
@@ -227,6 +268,7 @@
       <li class="hw"><span class="hw__name">Station G2</span><span class="hw__note">pensata per repeater fissi.</span></li>
     </ul>
     <p class="section__lede"><a class="link" href="https://flasher.meshcore.io/" target="_blank" rel="noopener">Elenco aggiornato delle board sul web flasher<span class="ext-arrow">↗</span></a></p>
+    <p class="section__lede">Guida dettagliata: <a class="link" href="/hardware/">hardware e board compatibili con MeshCore</a>, con consigli per scegliere quella giusta.</p>
   </section>
 
   <section id="cli" class="section" data-reveal>
@@ -261,6 +303,7 @@
       </tbody>
     </table>
     <p class="note">Riferimento completo dei comandi CLI: <a class="link" href="https://docs.meshcore.io/cli_commands/" target="_blank" rel="noopener">docs.meshcore.io/cli_commands<span class="ext-arrow">↗</span></a></p>
+    <p class="note">Approfondimento con esempi pratici: <a class="link" href="/comandi/">comandi CLI MeshCore spiegati</a>.</p>
   </section>
 
   <section id="radio" class="section" data-reveal>
@@ -289,6 +332,7 @@
     </table>
     <p class="note">Il preset precedente — <code>869.525 MHz</code> · <code>SF11</code> · <code>BW 250 kHz</code> · <code>CR5</code> — è etichettato <strong>Deprecato</strong> nell'elenco ufficiale dei preset del client MeshCore: i nodi rimasti su quel preset non sentiranno più la rete attuale. Nel client MeshCore (app o web) scegli il preset <strong>EU/UK (Narrow)</strong> per allinearti. Riferimento: <a class="link" href="https://docs.meshcore.io/faq/" target="_blank" rel="noopener">docs.meshcore.io<span class="ext-arrow">↗</span></a></p>
     <p class="note">Uso libero senza licenza entro questi limiti, secondo ETSI EN 300 220 e il Piano Nazionale di Ripartizione delle Frequenze: la responsabilità della conformità resta dell'operatore del nodo. Riferimento normativo: <a class="link" href="https://www.loraitalia.it/wiki/normativa/" target="_blank" rel="noopener">loraitalia.it/wiki/normativa<span class="ext-arrow">↗</span></a></p>
+    <p class="note">Guida completa al preset: <a class="link" href="/preset-radio/">preset radio italiano per MeshCore</a>, con spiegazione dei parametri e migrazione dal preset deprecato.</p>
   </section>
 
   <section id="faq" class="section" data-reveal>
@@ -332,6 +376,7 @@
       <summary class="faq__q">Il mio nodo è sulla mappa pubblica?</summary>
       <p class="faq__a">Non automaticamente. Per un companion, apri l'app MeshCore, vai su "Internet Map" e scegli "Add me to the Map". Per un repeater o room server, aprilo dalla lista contatti, tocca "Share" e poi "Upload to Internet Map". La mappa è consultabile su map.meshcore.io.</p>
     </details>
+    <p class="section__lede">Altre domande e risposte: <a class="link" href="/faq/">FAQ complete su MeshCore ITA</a>.</p>
   </section>
 
   <section id="problemi" class="section" data-reveal>
@@ -366,6 +411,7 @@
         <p class="card__body">Su ESP32 lancia <code>start ota</code> dal client admin: il nodo apre l'hotspot Wi-Fi "MeshCore OTA", collegati e vai su <code>192.168.4.1/update</code>. Su board nRF (RAK, T114, Seeed XIAO) usa <code>start ota</code> insieme all'app nRF DFU dello smartphone.</p>
       </article>
     </div>
+    <p class="section__lede">Guida estesa alla risoluzione dei problemi: <a class="link" href="/problemi/">problemi comuni MeshCore e soluzioni</a>.</p>
   </section>
 
   <section id="gruppo" class="section" data-reveal>
@@ -440,6 +486,7 @@
     </ul>
     <p class="note">Convenzione dei nomi dei nodi: <code>IT-&lt;citta&gt;-NN</code> per un companion, <code>IT-&lt;citta&gt;-RPT-NN</code> per un repeater, <code>IT-&lt;citta&gt;-ROOM-NN</code> per un room server. Esempio: <code>IT-TORINO-RPT-01</code>.</p>
     <a class="btn btn--primary" href="https://t.me/meshcore_ita" target="_blank" rel="noopener">ENTRA NEL GRUPPO<span class="ext-arrow">↗</span></a>
+    <p class="note">Scopri di più sulla <a class="link" href="/community/">community italiana MeshCore</a> e su come partecipare.</p>
   </section>
 
   <section id="community" class="section section--cta" data-reveal>
@@ -449,7 +496,7 @@
       <div class="cta__actions">
         <a class="btn btn--primary" href="https://t.me/meshcore_ita" target="_blank" rel="noopener">GRUPPO TELEGRAM<span class="ext-arrow">↗</span></a>
         <a class="btn" href="https://github.com/meshcore-ita" target="_blank" rel="noopener">Organizzazione GitHub<span class="ext-arrow">↗</span></a>
-        <a class="btn" href="https://github.com/meshcore-ita/website" target="_blank" rel="noopener">Repository del sito<span class="ext-arrow">↗</span></a>
+        <a class="btn" href="https://github.com/meshcore-ita/meshcore-ita.github.io" target="_blank" rel="noopener">Repository del sito<span class="ext-arrow">↗</span></a>
         <a class="btn" href="https://docs.meshcore.io/" target="_blank" rel="noopener">Documentazione upstream<span class="ext-arrow">↗</span></a>
       </div>
     </div>
@@ -461,10 +508,23 @@
   <div class="site-footer__inner">
     <p class="site-footer__note">MeshCore ITA — community indipendente. Non affiliata al progetto MeshCore.</p>
     <p class="site-footer__note">Contenuti sotto licenza CC BY 4.0, codice del sito sotto licenza MIT.</p>
+    <p class="site-footer__note">Trovato un errore o vuoi aggiungere qualcosa? <a class="link" href="https://github.com/meshcore-ita/meshcore-ita.github.io/edit/main/index.html" target="_blank" rel="noopener">Modifica questa pagina su GitHub<span class="ext-arrow">↗</span></a> — la modifica diventa una pull request.</p>
+    <p class="site-footer__note">Documentazione</p>
+    <ul class="site-footer__links">
+      <li><a href="/guida/">Guida</a></li>
+      <li><a href="/preset-radio/">Preset radio</a></li>
+      <li><a href="/hardware/">Hardware</a></li>
+      <li><a href="/faq/">FAQ</a></li>
+      <li><a href="/community/">Community</a></li>
+      <li><a href="/comandi/">Comandi</a></li>
+      <li><a href="/problemi/">Problemi</a></li>
+      <li><a href="/meshcore-vs-meshtastic/">Confronti</a></li>
+      <li><a href="/glossario/">Glossario</a></li>
+    </ul>
     <ul class="site-footer__links">
       <li><a href="https://t.me/meshcore_ita" target="_blank" rel="noopener">Telegram<span class="ext-arrow">↗</span></a></li>
       <li><a href="https://github.com/meshcore-ita" target="_blank" rel="noopener">GitHub<span class="ext-arrow">↗</span></a></li>
-      <li><a href="https://meshcore.co.uk/" target="_blank" rel="noopener">MeshCore<span class="ext-arrow">↗</span></a></li>
+      <li><a href="https://meshcore.io/" target="_blank" rel="noopener">MeshCore<span class="ext-arrow">↗</span></a></li>
       <li><a href="https://docs.meshcore.io/" target="_blank" rel="noopener">Docs<span class="ext-arrow">↗</span></a></li>
       <li><a href="https://flasher.meshcore.io/" target="_blank" rel="noopener">Flasher<span class="ext-arrow">↗</span></a></li>
       <li><a href="https://map.meshcore.io/" target="_blank" rel="noopener">Mappa pubblica<span class="ext-arrow">↗</span></a></li>

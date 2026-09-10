@@ -2,7 +2,7 @@
 
 Sito statico della community italiana MeshCore ITA.
 
-Pubblicato su: **https://meshcore-ita.github.io/website/**
+Pubblicato su: **https://meshcore-ita.github.io/**
 
 MeshCore ITA è una community indipendente di utenti MeshCore, non affiliata al
 progetto MeshCore upstream né ad altre community italiane.

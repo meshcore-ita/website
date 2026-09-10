@@ -985,3 +985,174 @@ table.spec caption {
     text-align: left;
   }
 }
+
+/* -----------------------------------------------------------
+   Multi-page layout additions (breadcrumbs, prose, related, footer meta)
+   ----------------------------------------------------------- */
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+.hero--page {
+  min-height: auto;
+  padding-top: calc(var(--header-h) + 2.5rem);
+  padding-bottom: 2.5rem;
+  gap: 1rem;
+}
+
+.crumbs ol {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  font-family: var(--font-mono);
+  font-size: .75rem;
+  letter-spacing: .04em;
+  color: var(--dim);
+}
+
+.crumbs a {
+  color: var(--dim);
+  text-decoration: none;
+}
+
+.crumbs a:hover,
+.crumbs a:focus-visible {
+  color: var(--fg);
+}
+
+.crumbs li[aria-current="page"] {
+  color: var(--muted);
+}
+
+.crumbs li + li::before {
+  content: '\203A';
+  display: inline-block;
+  margin: 0 .5rem;
+  color: var(--line-strong);
+}
+
+.prose {
+  max-width: 72ch;
+}
+
+.prose p,
+.prose ul,
+.prose ol {
+  color: var(--muted);
+  line-height: 1.7;
+  margin: 0 0 1.1rem;
+}
+
+.prose ul,
+.prose ol {
+  padding-left: 1.35rem;
+}
+
+.prose li {
+  margin-bottom: .4rem;
+}
+
+.prose p:last-child,
+.prose ul:last-child,
+.prose ol:last-child,
+.prose li:last-child {
+  margin-bottom: 0;
+}
+
+.prose h2 {
+  font-size: clamp(1.3rem, 2.6vw, 1.8rem);
+  letter-spacing: -.01em;
+  color: var(--fg);
+  margin: 2rem 0 .75rem;
+}
+
+.prose h3 {
+  font-size: 1.1rem;
+  color: var(--fg);
+  margin: 1.5rem 0 .5rem;
+}
+
+.prose h2:first-child,
+.prose h3:first-child {
+  margin-top: 0;
+}
+
+.prose strong {
+  color: var(--fg);
+}
+
+.prose code {
+  font-family: var(--font-mono);
+  font-size: .9em;
+  color: var(--fg);
+  background: var(--panel);
+  padding: .1rem .35rem;
+  border-radius: 4px;
+}
+
+.foot__meta {
+  color: var(--dim);
+  font-family: var(--font-mono);
+  font-size: .75rem;
+  margin: 0;
+}
+
+.related .card {
+  display: block;
+  color: inherit;
+  text-decoration: none;
+}
+
+/* -----------------------------------------------------------
+   Footer navigation (Documentazione)
+   ----------------------------------------------------------- */
+
+.foot__nav {
+  display: flex;
+  flex-direction: column;
+  gap: .5rem;
+}
+
+.foot__nav-label {
+  color: var(--dim);
+  font-family: var(--font-mono);
+  font-size: .7rem;
+  text-transform: uppercase;
+  letter-spacing: .08em;
+  margin: 0;
+}
+
+.foot__nav-list {
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  gap: .75rem 1.25rem;
+  margin: 0;
+  padding: 0;
+}
+
+.foot__nav-list a {
+  color: var(--dim);
+  text-decoration: none;
+  font-family: var(--font-mono);
+  font-size: .7rem;
+  transition: color .2s;
+}
+
+.foot__nav-list a:hover,
+.foot__nav-list a:focus-visible {
+  color: var(--fg);
+}
+
+.foot__nav-list a[aria-current="true"] {
+  color: var(--accent);
+}

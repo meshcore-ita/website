@@ -23,5 +23,5 @@
 
   <text x="270" y="300" font-family="system-ui, sans-serif" font-weight="600" font-size="88" fill="#fafafa" letter-spacing="-2">MeshCore <tspan fill="#22c55e">ITA</tspan></text>
   <text x="272" y="356" font-family="system-ui, sans-serif" font-weight="400" font-size="34" fill="#8b8b8b">La rete mesh LoRa italiana</text>
-  <text x="272" y="410" font-family="ui-monospace, monospace" font-weight="400" font-size="22" fill="#5a5a5a" letter-spacing="1">869.525 MHz &#183; SF11 &#183; BW250 &#183; CR5</text>
+  <text x="272" y="410" font-family="ui-monospace, monospace" font-weight="400" font-size="22" fill="#5a5a5a" letter-spacing="1">869.618 MHz &#183; SF8 &#183; BW 62.5 kHz &#183; CR8</text>
 </svg>

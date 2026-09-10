@@ -1,0 +1,149 @@
+<!--meta
+{
+  "slug": "meshcore-vs-meshtastic",
+  "nav": "Confronti",
+  "order": 7,
+  "primary": false,
+  "title": "MeshCore vs Meshtastic: differenze di routing, ruoli e quando scegliere",
+  "description": "MeshCore vs Meshtastic: differenza tra flood e path-discovery, ruoli, hardware condiviso e quando conviene l'uno o l'altro. Confronto tecnico imparziale.",
+  "h1": "MeshCore vs Meshtastic: le differenze tecniche, senza tifo",
+  "lede": "Un confronto tecnico e imparziale tra i due protocolli mesh LoRa più diffusi, per capire quando scegliere l'uno o l'altro.",
+  "updated": "2026-09-10",
+  "jsonld": [
+    {
+      "@type": "TechArticle",
+      "headline": "MeshCore vs Meshtastic: le differenze tecniche, senza tifo",
+      "description": "Confronto tecnico tra il routing ibrido di MeshCore (flood per advert e canali, path-discovery per i messaggi diretti) e il managed flooding di Meshtastic, con ruoli dei nodi, hardware condiviso e non interoperabilità.",
+      "dateModified": "2026-09-10",
+      "inLanguage": "it",
+      "about": [
+        "MeshCore",
+        "Meshtastic"
+      ]
+    },
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "MeshCore e Meshtastic sono compatibili tra loro?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "No. Anche se entrambi usano radio LoRa, i protocolli, il formato dei pacchetti e le chiavi di cifratura sono diversi e incompatibili: un nodo MeshCore e un nodo Meshtastic non si sentono, anche sulla stessa frequenza e con lo stesso hardware."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Posso usare lo stesso hardware per entrambe le reti?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Sì, ma non nello stesso momento: board come Heltec V3 o RAK4631 sono supportate da entrambi i firmware, quindi puoi dedicare una board a MeshCore e un'altra a Meshtastic, oppure riflashare la stessa board passando da un progetto all'altro."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Qual è la differenza principale nel modo in cui instradano i messaggi?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "MeshCore separa nettamente flood (per advert e canali) e routing diretto scoperto via path-discovery (per i messaggi privati), con i soli repeater a ripetere il traffico. Meshtastic gestisce tutto con un unico meccanismo di managed flooding con backoff basato sull'SNR, a cui dalla versione 2.6 si affianca un next-hop routing per i messaggi diretti."
+          }
+        }
+      ]
+    }
+  ]
+}
+-->
+  <section class="section" data-reveal>
+    <div class="section__head">
+      <p class="eyelash">Routing</p>
+      <h2 class="section__title">Due filosofie di routing diverse</h2>
+      <p class="section__lede">Entrambi i sistemi risolvono lo stesso problema — far arrivare un messaggio su una rete LoRa senza infrastruttura — ma con meccanismi diversi.</p>
+    </div>
+    <p class="prose">In MeshCore gli advert e i messaggi di canale viaggiano sempre in flood: un repeater li ritrasmette a chiunque sia in ascolto, con un annuncio periodico predefinito ogni 12 ore (regolabile con <code>set flood.advert.interval &lt;ore&gt;</code>). I messaggi privati, invece, usano un meccanismo diverso: il primo invio raggiunge il destinatario in flood, ma la conferma di consegna che torna al mittente porta con sé l'elenco dei repeater attraversati. Da quel momento il mittente incorpora quel percorso nei pacchetti successivi, e solo i repeater che corrispondono al percorso lo ritrasmettono — è un routing diretto, non più un flood. Il limite interno del firmware è di 64 hop per pacchetto. Un punto centrale del disegno: i client MeshCore (companion) non ripetono mai il traffico altrui, solo repeater e room server lo fanno.</p>
+    <p class="prose">Meshtastic risolve il problema dei pacchetti duplicati con un meccanismo che il progetto stesso chiama "managed flooding": ogni nodo che riceve un pacchetto con un HopLimit diverso da zero prova a ritrasmetterlo, ma prima ascolta per un breve intervallo per verificare se un altro nodo lo ha già fatto — in tal caso non ritrasmette. L'intervallo di attesa dipende dal rapporto segnale/rumore (SNR) del pacchetto ricevuto: i nodi più lontani, con SNR più basso, tendono a ritrasmettere per primi, in modo che il messaggio si propaghi più lontano possibile con meno duplicati. Dalla versione 2.6, anche Meshtastic ha introdotto un meccanismo simile al routing diretto per i messaggi non broadcast: il flood iniziale stabilisce un nodo di inoltro successivo (next-hop) che i messaggi seguenti possono riutilizzare, con ritorno automatico al flood se quel percorso smette di rispondere. Il campo HopLimit nell'header dei pacchetti Meshtastic è codificato su soli 3 bit, quindi il suo valore massimo possibile è 7.</p>
+  </section>
+
+  <section class="section" data-reveal>
+    <div class="section__head">
+      <p class="eyelash">Confronto diretto</p>
+      <h2 class="section__title">MeshCore vs Meshtastic, punto per punto</h2>
+      <p class="section__lede">Le differenze tecniche principali, senza dichiarare un vincitore assoluto: dipende dall'uso.</p>
+    </div>
+    <table class="spec">
+      <caption>Routing, ruoli e licenza a confronto</caption>
+      <thead>
+        <tr>
+          <th scope="col">Parametro</th>
+          <th scope="col">MeshCore</th>
+          <th scope="col">Meshtastic</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><th scope="row">Chi ripete i pacchetti</th><td>Solo repeater e room server; i client (companion) non ripetono mai</td><td>Ogni nodo può ritrasmettere fino al limite di hop, con priorità maggiore per i ruoli Router/Repeater</td></tr>
+        <tr><th scope="row">Messaggi diretti</th><td>Path-discovery: il primo invio usa il flood, la conferma di consegna stabilisce il percorso diretto da riusare</td><td>Dalla v2.6, next-hop routing: il flood iniziale stabilisce un nodo di inoltro successivo, con fallback al flood se il percorso smette di rispondere</td></tr>
+        <tr><th scope="row">Traffico broadcast (canali/annunci)</th><td>Sempre in flood, gestito dai repeater; annuncio periodico di un repeater ogni 12 ore per impostazione predefinita</td><td>Sempre in "managed flooding": un nodo ascolta prima di ritrasmettere, con backoff basato sull'SNR per ridurre i duplicati</td></tr>
+        <tr><th scope="row">Limite di hop</th><td>64 hop, limite interno del firmware</td><td>Campo HopLimit di 3 bit nell'header, valore massimo possibile 7</td></tr>
+        <tr><th scope="row">Licenza del firmware</th><td>MIT, sviluppato da Scott (Ripple Radios)</td><td>GPL-3.0, sviluppato dal progetto open source Meshtastic</td></tr>
+      </tbody>
+    </table>
+    <p class="prose">Le conseguenze pratiche seguono direttamente da qui. In MeshCore, una volta stabilito un percorso diretto, i messaggi tra due nodi che si scrivono spesso occupano meno airtime: solo i repeater sul percorso ritrasmettono, non l'intera rete. In Meshtastic, il backoff basato sull'SNR del "managed flooding" riduce le ritrasmissioni duplicate sui broadcast, e dalla v2.6 il next-hop routing evita di rifare un flood completo per ogni messaggio diretto una volta che un percorso è stabilito. In entrambi i casi l'obiettivo è lo stesso — ridurre la congestione e l'occupazione dello spettro condiviso — perseguito con architetture diverse: MeshCore separa nettamente client e infrastruttura di ripetizione, Meshtastic lascia che qualunque nodo partecipi al flooding gestito.</p>
+  </section>
+
+  <section class="section" data-reveal>
+    <div class="section__head">
+      <p class="eyelash">Ruoli dei nodi</p>
+      <h2 class="section__title">Ruoli e hardware condiviso</h2>
+      <p class="section__lede">Il concetto di "ruolo" esiste in entrambi i progetti, ma è applicato in modo diverso.</p>
+    </div>
+    <div class="grid grid--2">
+      <article class="card" data-reveal>
+        <h3 class="card__title">Ruoli in MeshCore</h3>
+        <p class="card__body">Un nodo assume uno di quattro ruoli scelti al momento del flash del firmware: companion (client BLE/USB, non ripete), repeater (estende la copertura), room server (bacheca stile BBS con fino a 32 messaggi non letti per utente) o sensor (telemetria). Per la configurazione di ciascuno vedi la pagina <a class="link" href="/comandi/">comandi CLI per repeater e room server</a>.</p>
+      </article>
+      <article class="card" data-reveal>
+        <h3 class="card__title">Ruoli in Meshtastic</h3>
+        <p class="card__body">Meshtastic assegna un ruolo software a ogni nodo (tra cui Client, Router e Repeater) che ne modifica il comportamento nel flooding: i ruoli Router e Repeater hanno priorità più alta nel ritrasmettere un pacchetto anche se hanno già sentito un'altra ritrasmissione, mentre un Client segue il normale backoff basato sull'SNR.</p>
+      </article>
+    </div>
+    <p class="prose">Sul piano dell'hardware, i due ecosistemi si sovrappongono molto: entrambi girano su board LoRa economiche e diffuse come Heltec V3, RAK4631/WisBlock o LilyGO T-Beam. Questo non significa che le reti siano compatibili tra loro: un nodo va flashato con il firmware dell'uno o dell'altro progetto, non con entrambi contemporaneamente, e le due mesh non si sentono anche sulla stessa frequenza — protocolli, formati dei pacchetti e chiavi di cifratura sono incompatibili. Puoi però tenere board diverse per reti diverse, ad esempio una Heltec V3 su MeshCore e un'altra board separata su Meshtastic, senza alcun conflitto tra le due installazioni.</p>
+  </section>
+
+  <section class="section" data-reveal>
+    <div class="section__head">
+      <p class="eyelash">Quando scegliere quale</p>
+      <h2 class="section__title">MeshCore o Meshtastic: dipende dall'uso</h2>
+      <p class="section__lede">Nessuna delle due reti è oggettivamente "migliore": rispondono bene a esigenze diverse.</p>
+    </div>
+    <div class="grid grid--2">
+      <article class="card" data-reveal>
+        <p class="card__num">01</p>
+        <h3 class="card__title">MeshCore è indicato quando…</h3>
+        <p class="card__body">Comunichi spesso in messaggi diretti con un gruppo di contatti noti e vuoi che l'airtime della rete si concentri sui percorsi effettivamente usati, con pochi repeater dedicati a fare da infrastruttura e client che restano leggeri sul traffico condiviso.</p>
+      </article>
+      <article class="card" data-reveal>
+        <p class="card__num">02</p>
+        <h3 class="card__title">Meshtastic è indicato quando…</h3>
+        <p class="card__body">Vuoi che ogni nodo del gruppo veda automaticamente posizione e stato di tutti gli altri via broadcast periodico, con un ecosistema maturo di moduli e integrazioni costruito nel tempo dalla community Meshtastic.</p>
+      </article>
+    </div>
+    <p class="prose">Chi arriva da MeshCore e vuole approfondire i primi passi pratici può partire dalla <a class="link" href="/guida/">guida a MeshCore passo passo</a>, mentre chi ha già un nodo configurato ma non riesce a farlo comunicare con il resto della mesh italiana dovrebbe controllare il <a class="link" href="/preset-radio/">preset radio condiviso per l'Italia</a>. Le domande più comuni su costi, portata e sicurezza sono raccolte nella pagina <a class="link" href="/faq/">FAQ MeshCore</a>.</p>
+  </section>
+
+  <section class="section" data-reveal>
+    <div class="section__head">
+      <p class="eyelash">Domande frequenti</p>
+      <h2 class="section__title">Le domande più comuni sul confronto</h2>
+    </div>
+    <details class="faq">
+      <summary class="faq__q">MeshCore e Meshtastic sono compatibili tra loro?</summary>
+      <p class="faq__a">No. Anche se entrambi usano radio LoRa, i protocolli, il formato dei pacchetti e le chiavi di cifratura sono diversi e incompatibili: un nodo MeshCore e un nodo Meshtastic non si sentono, anche sulla stessa frequenza e con lo stesso hardware.</p>
+    </details>
+    <details class="faq">
+      <summary class="faq__q">Posso usare lo stesso hardware per entrambe le reti?</summary>
+      <p class="faq__a">Sì, ma non nello stesso momento: board come Heltec V3 o RAK4631 sono supportate da entrambi i firmware, quindi puoi dedicare una board a MeshCore e un'altra a Meshtastic, oppure riflashare la stessa board passando da un progetto all'altro.</p>
+    </details>
+    <details class="faq">
+      <summary class="faq__q">Qual è la differenza principale nel modo in cui instradano i messaggi?</summary>
+      <p class="faq__a">MeshCore separa nettamente flood (per advert e canali) e routing diretto scoperto via path-discovery (per i messaggi privati), con i soli repeater a ripetere il traffico. Meshtastic gestisce tutto con un unico meccanismo di managed flooding con backoff basato sull'SNR, a cui dalla versione 2.6 si affianca un next-hop routing per i messaggi diretti.</p>
+    </details>
+  </section>

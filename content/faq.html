@@ -1,0 +1,223 @@
+<!--meta
+{
+  "slug": "faq",
+  "nav": "FAQ",
+  "order": 6,
+  "primary": true,
+  "title": "FAQ MeshCore in italiano: le domande più frequenti",
+  "description": "Le domande più frequenti su MeshCore in italiano: costo, portata reale, ruoli dei nodi, cifratura, preset radio, aggiornamento firmware e mappa pubblica.",
+  "h1": "Domande frequenti su MeshCore",
+  "lede": "Le risposte alle domande più frequenti della community italiana, dal costo iniziale alla cifratura dei messaggi.",
+  "updated": "2026-09-10",
+  "jsonld": [
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Quanto costa iniziare con MeshCore?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Il firmware MeshCore è gratuito e open source con licenza MIT: nessun costo di licenza o abbonamento. Il costo iniziale è solo quello dell'hardware — una board LoRa economica come la Heltec V3 basta per iniziare come companion, mentre una seconda board dedicata serve per un repeater che estenda la copertura. GPS o schermo (T-Beam, T-Deck) fanno salire il prezzo della singola board, ma non sono necessari per comunicare. Elenco completo delle board nella pagina hardware."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Che differenza c'è tra i ruoli companion, repeater, room server e sensor?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Sono i quattro ruoli che un nodo MeshCore può assumere, a seconda del firmware flashato. Un companion è un client via BLE o USB con app mobile o interfaccia web, e non ripete mai i pacchetti altrui. Un repeater estende la copertura inoltrando i pacchetti sui percorsi appresi dal routing ibrido. Un room server funziona come una bacheca in stile BBS, con fino a 32 messaggi non letti conservati per ogni utente. Un sensor trasmette telemetria o payload personalizzati sulla mesh. Per configurare ciascun ruolo vedi la pagina comandi CLI per repeater e room server."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Serve una licenza radio per usare MeshCore in Italia?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "No, l'uso è libero senza licenza, a condizione di restare entro i limiti di potenza, ERP e duty cycle della sub-banda 869.4–869.65 MHz. Questi limiti sono definiti dalla norma ETSI EN 300 220 e dal Piano Nazionale di Ripartizione delle Frequenze italiano. La responsabilità di rispettare questi limiti resta comunque dell'operatore del singolo nodo, non della community."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Quanta portata reale ha un nodo MeshCore?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Non esiste un numero di copertura garantito: la portata reale dipende da diversi fattori concomitanti. L'orografia del terreno e la presenza di ostacoli — edifici, vegetazione, colline — contano più della distanza in linea d'aria, e l'altezza dell'antenna sopra gli ostacoli locali è spesso il fattore singolo più determinante, soprattutto per un repeater in quota. La potenza di trasmissione (comando set tx, tipicamente 1–22 dBm) e i parametri del preset radio (spreading factor e coding rate) influiscono sulla sensibilità del collegamento, a scapito della velocità di trasmissione. Per questo ogni installazione va valutata sul campo, non stimata a tavolino."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Serve una connessione internet per usare MeshCore?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "No: MeshCore funziona interamente via radio LoRa, senza SIM, senza Wi-Fi e senza infrastruttura centrale — è pensato esplicitamente per la comunicazione off-grid. L'unico uso opzionale di internet è caricare il proprio nodo sulla mappa pubblica o consultarla da un browser: sono funzioni accessorie, non necessarie per inviare e ricevere messaggi sulla mesh."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Che differenza c'è tra MeshCore e Meshtastic?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "MeshCore usa un routing ibrido: gli advert e i messaggi di canale viaggiano in flood, mentre i messaggi privati sfruttano un path-discovery che scopre e poi riutilizza un percorso diretto tra mittente e destinatario. Un client MeshCore non ripete mai il traffico degli altri nodi: solo repeater e room server lo fanno, il che riduce il traffico ripetuto e il consumo energetico dei client. Per un confronto tecnico completo vedi la pagina MeshCore vs Meshtastic."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Come sono protetti i messaggi su MeshCore?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Ogni nodo ha un'identità basata su una coppia di chiavi Ed25519, usata per firmare gli advert ed evitare lo spoofing. Le chiavi condivise tra due nodi che comunicano vengono derivate con uno scambio ECDH su curva X25519, e i messaggi vengono cifrati simmetricamente con AES-128. In pratica i contenuti restano privati anche quando un pacchetto viene ripetuto da un repeater, che non ne conosce il contenuto in chiaro."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Quanti hop può percorrere un messaggio su MeshCore?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Il firmware impone un limite interno di 64 hop per pacchetto. In condizioni reali è raro avvicinarsi a questo limite: orografia, densità di repeater e tempi di trasmissione rendono già significativo un percorso di pochi hop. Il limite esiste come tetto di sicurezza del protocollo, non come obiettivo da raggiungere."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Ogni quanto un nodo manda il proprio advert?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Un repeater manda un advert flood ogni 12 ore per impostazione predefinita, un intervallo regolabile con il comando set flood.advert.interval <ore>. Un companion, invece, si annuncia solo quando l'utente lo richiede esplicitamente dall'app o dal client web: non c'è un annuncio periodico automatico lato client."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Il preset radio è obbligatorio?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Non è obbligatorio in senso tecnico — un nodo MeshCore può funzionare su qualunque combinazione di frequenza, banda, SF e CR entro i limiti normativi — ma è fortemente raccomandato per la community italiana. Un preset condiviso è ciò che permette a nodi diversi di sentirsi tra loro: due nodi su preset differenti semplicemente non comunicano, anche se vicini. Per i dettagli vedi la pagina dedicata al preset radio italiano."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Perché il preset radio è cambiato?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Il vecchio preset EU/UK (869.525 MHz · SF11 · BW 250 kHz · CR5) è oggi etichettato come Deprecato nell'elenco ufficiale dei preset del client MeshCore. La community internazionale è passata a preset “narrow”, a banda più stretta e SF più basso, per una migliore interoperabilità. In Italia il preset attuale è 869.618 MHz · BW 62.5 kHz · SF8 · CR8, corrispondente a EU/UK (Narrow): i nodi rimasti sul vecchio preset non sentono più la rete e vanno riallineati con set radio 869.618,62.5,8,8."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Posso lasciare un nodo acceso H24?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Sì, ed è anzi consigliato per repeater e room server: sono utili alla mesh solo se restano sempre accesi e raggiungibili dagli altri nodi. Va comunque rispettato il limite di duty cycle della banda usata — 10%, massimo 6 minuti di trasmissione per ora — che riguarda il tempo di trasmissione e non il tempo di accensione del dispositivo."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Come entro nel gruppo Telegram?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Il gruppo Telegram MeshCore ITA è pubblico e aperto a chiunque, senza bisogno di un invito: basta aprire t.me/meshcore_ita↗. Il gruppo è organizzato in topic tematici e in un topic per ogni regione italiana, dove si discutono installazioni e copertura locale."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Come aggiorno il firmware?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Il metodo dipende dal chip della board. Su ESP32 (es. Heltec V3) usa il web flasher via USB, oppure aggiorna via OTA lanciando start ota dal client admin e collegandoti all'hotspot Wi-Fi “MeshCore OTA” su 192.168.4.1/update. Su board nRF (RAK4631, Heltec T114, Seeed XIAO) usa start ota insieme all'app nRF DFU sullo smartphone. Il bin “non-merged” mantiene l'abbinamento Bluetooth esistente; il “merged” lo azzera ma mantiene nome, chiavi e preset salvati. Se qualcosa va storto, la pagina sulla risoluzione dei problemi copre i casi più comuni."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Il mio nodo è visibile sulla mappa pubblica?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Non automaticamente: devi caricarlo tu. Per un companion, apri l'app MeshCore, vai su “Internet Map” e scegli “Add me to the Map”. Per un repeater o room server, aprilo dalla lista contatti, tocca “Share” e poi “Upload to Internet Map”. Una volta caricato, il nodo è consultabile sulla mappa pubblica su map.meshcore.io."
+          }
+        }
+      ]
+    }
+  ]
+}
+-->
+  <section class="section" data-reveal>
+    <div class="section__head">
+      <p class="eyelash">Iniziare</p>
+      <h2 class="section__title">Iniziare con MeshCore</h2>
+      <p class="section__lede">Le domande più comuni di chi si avvicina per la prima volta alla rete.</p>
+    </div>
+    <details class="faq">
+      <summary class="faq__q">Quanto costa iniziare con MeshCore?</summary>
+      <p class="faq__a">Il firmware MeshCore è gratuito e open source con licenza MIT: nessun costo di licenza o abbonamento. Il costo iniziale è solo quello dell'hardware — una board LoRa economica come la Heltec V3 basta per iniziare come companion, mentre una seconda board dedicata serve per un repeater che estenda la copertura. GPS o schermo (T-Beam, T-Deck) fanno salire il prezzo della singola board, ma non sono necessari per comunicare. Elenco completo delle board nella <a class="link" href="/hardware/">pagina hardware</a>.</p>
+    </details>
+    <details class="faq">
+      <summary class="faq__q">Che differenza c'è tra i ruoli companion, repeater, room server e sensor?</summary>
+      <p class="faq__a">Sono i quattro ruoli che un nodo MeshCore può assumere, a seconda del firmware flashato. Un companion è un client via BLE o USB con app mobile o interfaccia web, e non ripete mai i pacchetti altrui. Un repeater estende la copertura inoltrando i pacchetti sui percorsi appresi dal routing ibrido. Un room server funziona come una bacheca in stile BBS, con fino a 32 messaggi non letti conservati per ogni utente. Un sensor trasmette telemetria o payload personalizzati sulla mesh. Per configurare ciascun ruolo vedi la pagina <a class="link" href="/comandi/">comandi CLI per repeater e room server</a>.</p>
+    </details>
+    <details class="faq">
+      <summary class="faq__q">Serve una licenza radio per usare MeshCore in Italia?</summary>
+      <p class="faq__a">No, l'uso è libero senza licenza, a condizione di restare entro i limiti di potenza, ERP e duty cycle della sub-banda 869.4–869.65 MHz. Questi limiti sono definiti dalla norma ETSI EN 300 220 e dal Piano Nazionale di Ripartizione delle Frequenze italiano. La responsabilità di rispettare questi limiti resta comunque dell'operatore del singolo nodo, non della community.</p>
+    </details>
+    <details class="faq">
+      <summary class="faq__q">Quanta portata reale ha un nodo MeshCore?</summary>
+      <p class="faq__a">Non esiste un numero di copertura garantito: la portata reale dipende da diversi fattori concomitanti. L'orografia del terreno e la presenza di ostacoli — edifici, vegetazione, colline — contano più della distanza in linea d'aria, e l'altezza dell'antenna sopra gli ostacoli locali è spesso il fattore singolo più determinante, soprattutto per un repeater in quota. La potenza di trasmissione (comando <code>set tx</code>, tipicamente 1–22 dBm) e i parametri del preset radio (spreading factor e coding rate) influiscono sulla sensibilità del collegamento, a scapito della velocità di trasmissione. Per questo ogni installazione va valutata sul campo, non stimata a tavolino.</p>
+    </details>
+    <details class="faq">
+      <summary class="faq__q">Serve una connessione internet per usare MeshCore?</summary>
+      <p class="faq__a">No: MeshCore funziona interamente via radio LoRa, senza SIM, senza Wi-Fi e senza infrastruttura centrale — è pensato esplicitamente per la comunicazione off-grid. L'unico uso opzionale di internet è caricare il proprio nodo sulla mappa pubblica o consultarla da un browser: sono funzioni accessorie, non necessarie per inviare e ricevere messaggi sulla mesh.</p>
+    </details>
+  </section>
+
+  <section class="section" data-reveal>
+    <div class="section__head">
+      <p class="eyelash">Sotto il cofano</p>
+      <h2 class="section__title">Rete e sicurezza</h2>
+      <p class="section__lede">Come funziona il routing, la cifratura e il preset radio condiviso.</p>
+    </div>
+    <details class="faq">
+      <summary class="faq__q">Che differenza c'è tra MeshCore e Meshtastic?</summary>
+      <p class="faq__a">MeshCore usa un routing ibrido: gli advert e i messaggi di canale viaggiano in flood, mentre i messaggi privati sfruttano un path-discovery che scopre e poi riutilizza un percorso diretto tra mittente e destinatario. Un client MeshCore non ripete mai il traffico degli altri nodi: solo repeater e room server lo fanno, il che riduce il traffico ripetuto e il consumo energetico dei client. Per un confronto tecnico completo vedi la pagina <a class="link" href="/meshcore-vs-meshtastic/">MeshCore vs Meshtastic</a>.</p>
+    </details>
+    <details class="faq">
+      <summary class="faq__q">Come sono protetti i messaggi su MeshCore?</summary>
+      <p class="faq__a">Ogni nodo ha un'identità basata su una coppia di chiavi Ed25519, usata per firmare gli advert ed evitare lo spoofing. Le chiavi condivise tra due nodi che comunicano vengono derivate con uno scambio ECDH su curva X25519, e i messaggi vengono cifrati simmetricamente con AES-128. In pratica i contenuti restano privati anche quando un pacchetto viene ripetuto da un repeater, che non ne conosce il contenuto in chiaro.</p>
+    </details>
+    <details class="faq">
+      <summary class="faq__q">Quanti hop può percorrere un messaggio su MeshCore?</summary>
+      <p class="faq__a">Il firmware impone un limite interno di 64 hop per pacchetto. In condizioni reali è raro avvicinarsi a questo limite: orografia, densità di repeater e tempi di trasmissione rendono già significativo un percorso di pochi hop. Il limite esiste come tetto di sicurezza del protocollo, non come obiettivo da raggiungere.</p>
+    </details>
+    <details class="faq">
+      <summary class="faq__q">Ogni quanto un nodo manda il proprio advert?</summary>
+      <p class="faq__a">Un repeater manda un advert flood ogni 12 ore per impostazione predefinita, un intervallo regolabile con il comando <code>set flood.advert.interval &lt;ore&gt;</code>. Un companion, invece, si annuncia solo quando l'utente lo richiede esplicitamente dall'app o dal client web: non c'è un annuncio periodico automatico lato client.</p>
+    </details>
+    <details class="faq">
+      <summary class="faq__q">Il preset radio è obbligatorio?</summary>
+      <p class="faq__a">Non è obbligatorio in senso tecnico — un nodo MeshCore può funzionare su qualunque combinazione di frequenza, banda, SF e CR entro i limiti normativi — ma è fortemente raccomandato per la community italiana. Un preset condiviso è ciò che permette a nodi diversi di sentirsi tra loro: due nodi su preset differenti semplicemente non comunicano, anche se vicini. Per i dettagli vedi la <a class="link" href="/preset-radio/">pagina dedicata al preset radio italiano</a>.</p>
+    </details>
+    <details class="faq">
+      <summary class="faq__q">Perché il preset radio è cambiato?</summary>
+      <p class="faq__a">Il vecchio preset EU/UK (869.525 MHz · SF11 · BW 250 kHz · CR5) è oggi etichettato come Deprecato nell'elenco ufficiale dei preset del client MeshCore. La community internazionale è passata a preset “narrow”, a banda più stretta e SF più basso, per una migliore interoperabilità. In Italia il preset attuale è 869.618 MHz · BW 62.5 kHz · SF8 · CR8, corrispondente a EU/UK (Narrow): i nodi rimasti sul vecchio preset non sentono più la rete e vanno riallineati con <code>set radio 869.618,62.5,8,8</code>.</p>
+    </details>
+  </section>
+
+  <section class="section" data-reveal>
+    <div class="section__head">
+      <p class="eyelash">Uso quotidiano</p>
+      <h2 class="section__title">Uso quotidiano</h2>
+      <p class="section__lede">Gruppo, mappa pubblica e aggiornamenti firmware.</p>
+    </div>
+    <details class="faq">
+      <summary class="faq__q">Posso lasciare un nodo acceso H24?</summary>
+      <p class="faq__a">Sì, ed è anzi consigliato per repeater e room server: sono utili alla mesh solo se restano sempre accesi e raggiungibili dagli altri nodi. Va comunque rispettato il limite di duty cycle della banda usata — 10%, massimo 6 minuti di trasmissione per ora — che riguarda il tempo di trasmissione e non il tempo di accensione del dispositivo.</p>
+    </details>
+    <details class="faq">
+      <summary class="faq__q">Come entro nel gruppo Telegram?</summary>
+      <p class="faq__a">Il gruppo Telegram MeshCore ITA è pubblico e aperto a chiunque, senza bisogno di un invito: basta aprire <a class="link" href="https://t.me/meshcore_ita" target="_blank" rel="noopener">t.me/meshcore_ita<span class="ext-arrow">↗</span></a>. Il gruppo è organizzato in topic tematici e in un topic per ogni regione italiana, dove si discutono installazioni e copertura locale.</p>
+    </details>
+    <details class="faq">
+      <summary class="faq__q">Come aggiorno il firmware?</summary>
+      <p class="faq__a">Il metodo dipende dal chip della board. Su ESP32 (es. Heltec V3) usa il web flasher via USB, oppure aggiorna via OTA lanciando <code>start ota</code> dal client admin e collegandoti all'hotspot Wi-Fi “MeshCore OTA” su <code>192.168.4.1/update</code>. Su board nRF (RAK4631, Heltec T114, Seeed XIAO) usa <code>start ota</code> insieme all'app nRF DFU sullo smartphone. Il bin “non-merged” mantiene l'abbinamento Bluetooth esistente; il “merged” lo azzera ma mantiene nome, chiavi e preset salvati. Se qualcosa va storto, la pagina sulla <a class="link" href="/problemi/">risoluzione dei problemi</a> copre i casi più comuni.</p>
+    </details>
+    <details class="faq">
+      <summary class="faq__q">Il mio nodo è visibile sulla mappa pubblica?</summary>
+      <p class="faq__a">Non automaticamente: devi caricarlo tu. Per un companion, apri l'app MeshCore, vai su “Internet Map” e scegli “Add me to the Map”. Per un repeater o room server, aprilo dalla lista contatti, tocca “Share” e poi “Upload to Internet Map”. Una volta caricato, il nodo è consultabile sulla mappa pubblica su map.meshcore.io.</p>
+    </details>
+  </section>
