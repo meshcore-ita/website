@@ -1,0 +1,24 @@
+name: Problema tecnico del sito
+description: Link rotto, pagina che non si apre, layout rotto, errore di build.
+title: "[sito] "
+labels: ["bug"]
+body:
+  - type: input
+    id: pagina
+    attributes:
+      label: Dove succede
+      placeholder: https://meshcore-ita.github.io/guida/
+    validations:
+      required: true
+  - type: textarea
+    id: cosa
+    attributes:
+      label: Cosa succede
+      description: Comportamento osservato e comportamento atteso.
+    validations:
+      required: true
+  - type: input
+    id: ambiente
+    attributes:
+      label: Browser e dispositivo
+      placeholder: Firefox 141 su Android 15

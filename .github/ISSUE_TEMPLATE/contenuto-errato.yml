@@ -1,0 +1,37 @@
+name: Contenuto errato o da aggiornare
+description: Segnala un dato tecnico sbagliato, obsoleto o mancante sul sito.
+title: "[contenuto] "
+labels: ["contenuto"]
+body:
+  - type: input
+    id: pagina
+    attributes:
+      label: Pagina
+      description: URL o slug della pagina interessata.
+      placeholder: https://meshcore-ita.github.io/preset-radio/
+    validations:
+      required: true
+  - type: textarea
+    id: problema
+    attributes:
+      label: Cosa c'è di sbagliato
+      description: Cita il testo attuale e spiega perché non è corretto.
+    validations:
+      required: true
+  - type: textarea
+    id: corretto
+    attributes:
+      label: Qual è il dato corretto
+      description: Valore, comando o formulazione corretta.
+    validations:
+      required: true
+  - type: input
+    id: fonte
+    attributes:
+      label: Fonte
+      description: >-
+        Link upstream che conferma il dato (meshcore.io, docs.meshcore.io,
+        github.com/meshcore-dev/MeshCore, flasher.meshcore.io). Senza fonte
+        la correzione non viene applicata.
+    validations:
+      required: true

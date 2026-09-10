@@ -10,43 +10,58 @@ progetto MeshCore upstream né ad altre community italiane.
 ## Struttura
 
 ```
-index.html               markup della pagina
-assets/css/style.css     stili
-assets/js/main.js        comportamento (ES module)
-assets/img/              logo, favicon, immagine social
-.github/workflows/       deploy automatico su GitHub Pages
+content/<slug>.html      sorgenti delle pagine (meta JSON + fragment)
+templates/layout.html    layout condiviso di tutte le pagine generate
+templates/404.html       layout della pagina 404
+build.mjs                generatore statico (Node stdlib, zero dipendenze)
+index.html               home page, scritta a mano
+<slug>/index.html        pagine generate — NON modificare a mano
+sitemap.xml robots.txt   generati
+404.html                 generato
+assets/                  css, js (ES module), logo, favicon, immagine social
+bot/ worker/             bot Telegram della community
+.github/workflows/       deploy su GitHub Pages + gate di build
 ```
+
+## Build
+
+```sh
+node build.mjs          # rigenera pagine, sitemap, robots.txt, 404
+node build.mjs --check  # esce 1 se i file generati divergono dai sorgenti
+```
+
+`--check` gira in CI: una PR che modifica `content/` senza rigenerare non
+viene pubblicata.
 
 ## Sviluppo locale
 
-Nessun build step, nessuna dipendenza da installare. Basta un server statico:
-
 ```sh
-python3 -m http.server 8080
+node build.mjs && python3 -m http.server 8080
 ```
 
 Poi apri `http://localhost:8080/`.
 
 ## Pubblicazione
 
-Il deploy è automatico: ad ogni push su `main`, il workflow
-`.github/workflows/pages.yml` pubblica la root del repository su GitHub
-Pages (source: GitHub Actions). Nessuna build, nessun Jekyll (vedi
+Deploy automatico ad ogni push su `main` tramite
+`.github/workflows/pages.yml` (source: GitHub Actions, nessun Jekyll, vedi
 `.nojekyll`).
 
-I link interni e gli asset generati sono sempre relativi, quindi il sito
-funziona invariato a qualunque mount point. Gli URL assoluti (canonical,
-og:url, sitemap, robots.txt) sono risolti da `build.mjs` da `SITE_BASE` o,
-in CI, da `GITHUB_REPOSITORY`: rinominare il repo in
-`meshcore-ita.github.io` sposterebbe il sito alla root senza modifiche al
-codice.
+I link interni e gli asset sono relativi, quindi il sito funziona invariato a
+qualunque mount point. Gli URL assoluti (canonical, `og:url`, JSON-LD,
+`sitemap.xml`, `robots.txt`) sono risolti da `build.mjs` in quest'ordine:
+variabile `SITE_BASE`, poi `GITHUB_REPOSITORY` in CI, infine il fallback
+`https://meshcore-ita.github.io/`.
 
 ## Contribuire
 
-Per proporre contenuti o correzioni: apri una issue o una pull request
-(fork del repo). Le discussioni pubbliche avvengono qui su GitHub e sul
-gruppo Telegram pubblico MeshCore ITA (https://t.me/meshcore_ita), aperto
-a chiunque senza bisogno di invito.
+Vedi [CONTRIBUTING.md](CONTRIBUTING.md). In fondo a ogni pagina del sito c'è
+il link "Modifica questa pagina su GitHub", che apre l'editor sul sorgente
+giusto e produce una pull request.
+
+Le discussioni pubbliche avvengono qui su GitHub e sul gruppo Telegram
+pubblico MeshCore ITA (https://t.me/meshcore_ita), aperto a chiunque senza
+bisogno di invito.
 
 ## Licenza
 

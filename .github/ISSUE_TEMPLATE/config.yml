@@ -1,0 +1,8 @@
+blank_issues_enabled: true
+contact_links:
+  - name: Supporto e domande tecniche
+    url: https://t.me/meshcore_ita
+    about: Per aiuto sulla configurazione di un nodo usa il gruppo Telegram, non le issue.
+  - name: Documentazione ufficiale MeshCore
+    url: https://docs.meshcore.io/
+    about: Problemi del firmware o del client vanno segnalati upstream, non qui.
