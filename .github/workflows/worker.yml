@@ -1,0 +1,47 @@
+name: Deploy Worker
+
+# Pubblica il bot Telegram su Cloudflare Workers quando cambia il suo codice
+# o i testi condivisi. Richiede il secret CLOUDFLARE_API_TOKEN (permessi:
+# Account > Workers Scripts > Edit, Account > Workers AI > Edit).
+# I secret TELEGRAM_BOT_TOKEN e TELEGRAM_WEBHOOK_SECRET vengono sincronizzati
+# da GitHub verso il Worker a ogni deploy: GitHub resta l'unica fonte.
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'worker/**'
+      - 'bot/content.mjs'
+      - '.github/workflows/worker.yml'
+  workflow_dispatch:
+
+concurrency:
+  group: worker-deploy
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Sincronizza i secret del Worker
+        working-directory: worker
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          TELEGRAM_WEBHOOK_SECRET: ${{ secrets.TELEGRAM_WEBHOOK_SECRET }}
+        run: |
+          printf '%s' "$TELEGRAM_BOT_TOKEN" | npx --yes wrangler@4 secret put TELEGRAM_BOT_TOKEN
+          printf '%s' "$TELEGRAM_WEBHOOK_SECRET" | npx --yes wrangler@4 secret put TELEGRAM_WEBHOOK_SECRET
+
+      - name: Deploy
+        working-directory: worker
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+        run: npx --yes wrangler@4 deploy
