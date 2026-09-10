@@ -844,5 +844,369 @@ export const KB_CHUNKS = [
     "title": "Un marchio, una community indipendente",
     "url": "https://meshcore-ita.github.io/community/",
     "text": "MeshCore ITA è una community indipendente: non è affiliata al progetto MeshCore né ne è sponsorizzata o approvata. Il nome MeshCore resta del suo progetto e dei suoi autori upstream; questo sito e il gruppo Telegram sono iniziative della community italiana, gestite volontariamente e senza scopo di lucro. I contenuti di questo sito sono pubblicati sotto licenza CC BY 4.0, il codice del sito sotto licenza MIT: puoi riusarli citando la fonte. Per qualsiasi dubbio su cosa sia ufficiale e cosa no, la pagina delle domande frequenti su MeshCore in italiano raccoglie anche questo tipo di domande."
+  },
+  {
+    "id": "installare-repeater--quanto-guadagno-d-antenna-serve-per-un-repeater",
+    "page": "Repeater",
+    "title": "Quanto guadagno d'antenna serve per un repeater?",
+    "url": "https://meshcore-ita.github.io/installare-repeater/",
+    "text": "Dipende dal terreno intorno al repeater. Un'antenna omnidirezionale con guadagno più alto (in dBi) concentra l'energia in un lobo di irradiazione più schiacciato verso l'orizzonte: ottimo su un palo alto in pianura, meno adatto in collina dove serve irradiare anche verso il basso per raggiungere nodi a quote diverse. Un guadagno moderato con una posizione alta batte quasi sempre un guadagno alto con una posizione mediocre."
+  },
+  {
+    "id": "installare-repeater--meglio-un-connettore-sma-o-rp-sma",
+    "page": "Repeater",
+    "title": "Meglio un connettore SMA o RP-SMA?",
+    "url": "https://meshcore-ita.github.io/installare-repeater/",
+    "text": "Dipende da come è cablata la board: molte board LoRa montano un connettore RP-SMA (polarità invertita rispetto allo SMA standard), mentre alcuni cavi e antenne in commercio sono SMA. L'errore classico è comprare un'antenna o una prolunga con il connettore sbagliato e forzarla: verifica sempre la polarità prima dell'acquisto, un adattatore SMA/RP-SMA costa pochi euro e non introduce perdite significative."
+  },
+  {
+    "id": "installare-repeater--un-pannello-solare-basta-per-un-repeater-sempre-acceso",
+    "page": "Repeater",
+    "title": "Un pannello solare basta per un repeater sempre acceso?",
+    "url": "https://meshcore-ita.github.io/installare-repeater/",
+    "text": "Nella maggior parte dei casi sì, se il nodo usa una board a basso consumo (chip nRF52) con powersaving on attivo e una potenza di trasmissione non superiore al necessario. Il dimensionamento va comunque fatto sul consumo medio reale del nodo e sulle ore di luce disponibili nella stagione peggiore, non sul consumo di picco: un pannello e una batteria sottodimensionati reggono in estate e si scaricano in inverno."
+  },
+  {
+    "id": "installare-repeater--serve-una-licenza-o-un-tecnico-per-installare-un-repeater-su-un-palo-o-un-tetto",
+    "page": "Repeater",
+    "title": "Serve una licenza o un tecnico per installare un repeater su un palo o un tetto?",
+    "url": "https://meshcore-ita.github.io/installare-repeater/",
+    "text": "Per l'uso radio in sé non serve una licenza, entro i limiti di potenza e duty cycle del preset condiviso. L'installazione fisica in quota (tetti, pali, tralicci) comporta però rischi di caduta e richiede competenze e dispositivi di sicurezza adeguati: valuta di affidarti a chi ha esperienza specifica, e ricorda che la responsabilità della sicurezza dell'installazione resta sempre dell'installatore."
+  },
+  {
+    "id": "installare-repeater--nove-passaggi-per-un-repeater-permanente",
+    "page": "Repeater",
+    "title": "Nove passaggi per un repeater permanente",
+    "url": "https://meshcore-ita.github.io/installare-repeater/",
+    "text": "Un repeater condiviso serve alla mesh più di un companion privato: ogni scelta qui sotto incide direttamente sulla copertura di chi ci si appoggia."
+  },
+  {
+    "id": "installare-repeater--scegli-la-posizione",
+    "page": "Repeater",
+    "title": "Scegli la posizione",
+    "url": "https://meshcore-ita.github.io/installare-repeater/",
+    "text": "L'altezza dell'antenna sopra gli ostacoli locali conta più della potenza di trasmissione: un repeater su un tetto o traliccio con vista libera copre più lontano di uno a potenza massima ma circondato da edifici o vegetazione. Verifica cosa c'è tra il punto scelto e le direzioni da coprire — colline, palazzi, alberi maturi — perché un solo ostacolo vicino può bloccare più segnale di chilometri in linea d'aria."
+  },
+  {
+    "id": "installare-repeater--scegli-l-antenna",
+    "page": "Repeater",
+    "title": "Scegli l'antenna",
+    "url": "https://meshcore-ita.github.io/installare-repeater/",
+    "text": "Per un repeater fisso la scelta tipica è un'antenna omnidirezionale esterna, accordata sulla sub-banda 868-870 MHz: un'antenna per un'altra banda ha un ROS/SWR alto, riflette energia verso il radio invece di irradiarla e nel tempo danneggia lo stadio di uscita. Il guadagno in dBi non è sempre \"più alto meglio è\": un guadagno maggiore schiaccia il lobo di irradiazione verso l'orizzonte, utile in pianura ma penalizzante in collina. Occhio ai connettori: molte board montano SMA o RP-SMA (polarità invertita), e scambiarli è l'errore più comune in fase d'acquisto."
+  },
+  {
+    "id": "installare-repeater--scegli-il-cavo",
+    "page": "Repeater",
+    "title": "Scegli il cavo",
+    "url": "https://meshcore-ita.github.io/installare-repeater/",
+    "text": "Ogni metro di cavo coassiale introduce una perdita che si somma, in negativo, al guadagno dell'antenna: un cavo lungo e scadente può vanificare il beneficio di un'antenna con guadagno alto. Tienilo il più corto possibile — sposta il radio vicino all'antenna se serve — e scegli un cavo di qualità adeguata a 868 MHz."
+  },
+  {
+    "id": "installare-repeater--dimensiona-l-alimentazione",
+    "page": "Repeater",
+    "title": "Dimensiona l'alimentazione",
+    "url": "https://meshcore-ita.github.io/installare-repeater/",
+    "text": "Tre opzioni pratiche: rete elettrica per un'installazione indoor con presa già disponibile; PoE se il punto ha già un cablaggio di rete; pannello solare con batteria tampone (LiPo o LiFePO4) per un palo o un tetto isolato. Dimensiona il consumo, non limitarti a collegare: attiva powersaving on per far dormire il nodo tra una trasmissione e l'altra, e non alzare set tx oltre la potenza necessaria per la copertura richiesta."
+  },
+  {
+    "id": "installare-repeater--prepara-il-contenitore-stagno",
+    "page": "Repeater",
+    "title": "Prepara il contenitore stagno",
+    "url": "https://meshcore-ita.github.io/installare-repeater/",
+    "text": "Né le board né le antenne standard sono impermeabili di fabbrica: in esterno serve una custodia con grado di protezione adeguato. Usa passacavi sigillati, orienta il contenitore perché l'acqua non ristagni sopra i passacavi, e lascia un minimo di ricambio d'aria per limitare condensa e sbalzi termici."
+  },
+  {
+    "id": "installare-repeater--metti-a-terra-e-proteggi-dalle-scariche",
+    "page": "Repeater",
+    "title": "Metti a terra e proteggi dalle scariche",
+    "url": "https://meshcore-ita.github.io/installare-repeater/",
+    "text": "Un'antenna esterna su un punto alto è un bersaglio naturale per le scariche atmosferiche: dove possibile, valuta una messa a terra e uno scaricatore di sovratensione sulla linea coassiale. L'installazione su tetti, pali o tralicci comporta rischi di caduta reali e richiede competenze e sicurezza adeguate: se non hai esperienza, fatti aiutare da chi ce l'ha. La responsabilità della sicurezza dell'installazione, e del rispetto dei limiti normativi, resta dell'operatore del nodo."
+  },
+  {
+    "id": "installare-repeater--configura-il-nodo-come-repeater",
+    "page": "Repeater",
+    "title": "Configura il nodo come repeater",
+    "url": "https://meshcore-ita.github.io/installare-repeater/",
+    "text": "Collegati alla console via USB o da un client admin e imposta un nome coerente con la convenzione della community, ad esempio set name IT-Torino-RPT-01 . Allinea il preset radio con set radio 869.618,62.5,8,8 , regola la potenza con set tx <dbm> senza eccedere il necessario, attiva powersaving on se il nodo è a batteria o solare, e se serve cambia l'intervallo di annuncio con set flood.advert.interval <ore> . Applica tutto con reboot e invia un advert per farti vedere dai vicini. Sintassi completa nella pagina comandi CLI per amministrare un nodo MeshCore ."
+  },
+  {
+    "id": "installare-repeater--verifica-sul-campo",
+    "page": "Repeater",
+    "title": "Verifica sul campo",
+    "url": "https://meshcore-ita.github.io/installare-repeater/",
+    "text": "Dopo il riavvio, usa neighbors per controllare quali nodi il tuo repeater sente direttamente e stats-radio per leggere noise floor, RSSI/SNR e airtime dell'ultima ricezione. Il riscontro più affidabile resta però quello umano: chiedi nel gruppo Telegram a chi ha un nodo nella tua zona di confermare che il tuo repeater compare tra i suoi contatti dopo l'advert."
+  },
+  {
+    "id": "installare-repeater--pianifica-la-manutenzione",
+    "page": "Repeater",
+    "title": "Pianifica la manutenzione",
+    "url": "https://meshcore-ita.github.io/installare-repeater/",
+    "text": "Un repeater condiviso va controllato periodicamente: verifica che compaia ancora negli advert altrui e tieni il firmware aggiornato via OTA (Wi-Fi su ESP32, DFU su nRF52), come descritto nella pagina dei comandi. Se il nodo sparisce, la causa più comune non è la radio ma l'alimentazione o l'orologio: la pagina soluzioni ai problemi più comuni di MeshCore copre entrambi i casi con diagnosi e comando risolutivo. Attenzione trasversale"
+  },
+  {
+    "id": "installare-repeater--naming-coerente",
+    "page": "Repeater",
+    "title": "Naming coerente",
+    "url": "https://meshcore-ita.github.io/installare-repeater/",
+    "text": "Usa la convenzione IT-<citta>-RPT-NN (ad esempio IT-Torino-RPT-01 ): rende immediato per chiunque nella mesh capire cosa vede tra i contatti."
+  },
+  {
+    "id": "installare-repeater--preavviso-alla-community",
+    "page": "Repeater",
+    "title": "Preavviso alla community",
+    "url": "https://meshcore-ita.github.io/installare-repeater/",
+    "text": "Se il repeater è già in servizio, annuncia nel gruppo Telegram prima di cambiare preset radio o spostare l'antenna: un cambiamento non comunicato toglie copertura a chi non se lo aspetta."
+  },
+  {
+    "id": "installare-repeater--cosa-succede-se-sparisce",
+    "page": "Repeater",
+    "title": "Cosa succede se sparisce",
+    "url": "https://meshcore-ita.github.io/installare-repeater/",
+    "text": "Un repeater che smette di comparire negli advert altrui non è necessariamente guasto: spesso è alimentazione esaurita o orologio disallineato. Controllalo con stats-core e get radio . Scelte di alimentazione"
+  },
+  {
+    "id": "installare-repeater--rete-poe-o-solare-quando-usarli",
+    "page": "Repeater",
+    "title": "Rete, PoE o solare: quando usarli",
+    "url": "https://meshcore-ita.github.io/installare-repeater/",
+    "text": "Opzioni di alimentazione per un repeater Alimentazione Quando usarla Note Rete elettrica Installazione indoor o punto con presa già disponibile. La più semplice e affidabile; nessun dimensionamento batteria. PoE Punto già raggiunto da un cablaggio di rete (tetto, sottotetto, armadio tecnico). Evita un secondo cavo di alimentazione separato dal dato. Pannello solare + batteria Palo o tetto isolato, senza rete elettrica nelle vicinanze. Richiede board a basso consumo (nRF52), powersaving on e dimensionamento sulla stagione peggiore. Domande frequenti"
+  },
+  {
+    "id": "installare-repeater--faq-sull-installazione-di-un-repeater",
+    "page": "Repeater",
+    "title": "FAQ sull'installazione di un repeater",
+    "url": "https://meshcore-ita.github.io/installare-repeater/",
+    "text": "Per il quadro normativo vedi il preset radio italiano per MeshCore ; per le board adatte vedi la guida hardware ; per un problema dopo l'installazione vedi le soluzioni ai problemi più comuni . Per confrontarti con chi ha già installato un repeater vicino a te, il posto giusto è il gruppo Telegram MeshCore ITA ↗ ."
+  },
+  {
+    "id": "mappa-copertura--il-mio-nodo-e-automaticamente-sulla-mappa-pubblica",
+    "page": "Mappa",
+    "title": "Il mio nodo è automaticamente sulla mappa pubblica?",
+    "url": "https://meshcore-ita.github.io/mappa-copertura/",
+    "text": "No, non automaticamente: devi caricarlo tu. Per un companion, apri l'app MeshCore, vai su \"Internet Map\" e scegli \"Add me to the Map\". Per un repeater o room server, aprilo dalla lista contatti, tocca \"Share\" e poi \"Upload to Internet Map\". Una volta caricato, il nodo è consultabile sulla mappa pubblica su map.meshcore.io."
+  },
+  {
+    "id": "mappa-copertura--e-sicuro-pubblicare-la-posizione-di-un-nodo-domestico",
+    "page": "Mappa",
+    "title": "È sicuro pubblicare la posizione di un nodo domestico?",
+    "url": "https://meshcore-ita.github.io/mappa-copertura/",
+    "text": "È una scelta volontaria che va valutata caso per caso. Pubblicare la posizione esatta di un companion tenuto in casa rende identificabile pubblicamente dove abiti; per un nodo domestico molti preferiscono non caricarlo sulla mappa, oppure impostare una posizione approssimata invece delle coordinate precise. Per un repeater installato in un punto già pubblico (tetto condominiale, palo, sede di un'associazione) il rischio di privacy è minore."
+  },
+  {
+    "id": "mappa-copertura--la-mappa-mostra-la-copertura-reale-della-mesh",
+    "page": "Mappa",
+    "title": "La mappa mostra la copertura reale della mesh?",
+    "url": "https://meshcore-ita.github.io/mappa-copertura/",
+    "text": "No. La mappa mostra solo i nodi che i loro proprietari hanno scelto volontariamente di caricare, non le aree effettivamente coperte dal segnale. Un'area senza puntini sulla mappa può comunque avere copertura da nodi non pubblicati, mentre un'area con più puntini non garantisce che i messaggi passino davvero tra quei nodi: per questo serve una verifica sul campo."
+  },
+  {
+    "id": "mappa-copertura--come-verifico-la-copertura-reale-nella-mia-zona",
+    "page": "Mappa",
+    "title": "Come verifico la copertura reale nella mia zona?",
+    "url": "https://meshcore-ita.github.io/mappa-copertura/",
+    "text": "Il modo più affidabile è un test con un secondo nodo: spostati nel punto che vuoi verificare, invia un advert e controlla con neighbors e stats-radio se il tuo repeater lo riceve, leggendo RSSI e SNR. Sentire un advert non basta a garantire che un messaggio venga instradato con successo: conferma la copertura scambiando anche un messaggio di prova con un altro nodo della zona, e confrontati nel topic regionale del gruppo Telegram."
+  },
+  {
+    "id": "mappa-copertura--la-internet-map-di-meshcore",
+    "page": "Mappa",
+    "title": "La Internet Map di MeshCore",
+    "url": "https://meshcore-ita.github.io/mappa-copertura/",
+    "text": "Una mappa pubblica e consultabile da chiunque, dove i proprietari dei nodi possono decidere di comparire. La Internet Map, consultabile su map.meshcore.io ↗ , è il registro pubblico ufficiale dei nodi MeshCore che i loro proprietari hanno scelto volontariamente di condividere. Ogni puntino sulla mappa rappresenta un companion, un repeater o un room server con nome e posizione caricati da chi lo gestisce: non è un servizio di scansione automatica della rete, e un nodo acceso e perfettamente funzionante può non comparire semplicemente perché nessuno lo ha caricato. Serve principalmente per due cose: capire a colpo d'occhio dove esistono già repeater e room server pubblici prima di installarne…"
+  },
+  {
+    "id": "mappa-copertura--companion",
+    "page": "Mappa",
+    "title": "Companion",
+    "url": "https://meshcore-ita.github.io/mappa-copertura/",
+    "text": "Apri l'app MeshCore, vai su \"Internet Map\" e scegli \"Add me to the Map\". Il nodo comparirà sulla mappa pubblica con il nome e la posizione impostati sul companion."
+  },
+  {
+    "id": "mappa-copertura--repeater-o-room-server",
+    "page": "Mappa",
+    "title": "Repeater o room server",
+    "url": "https://meshcore-ita.github.io/mappa-copertura/",
+    "text": "Apri il nodo dalla lista contatti, tocca \"Share\" e poi \"Upload to Internet Map\". La posizione caricata è quella impostata sul nodo con set lat e set lon , descritti nella pagina dei comandi CLI per amministrare un nodo MeshCore . In entrambi i casi la pubblicazione è volontaria e reversibile: nessun nodo finisce sulla mappa senza un'azione esplicita di chi lo gestisce. Vale la pena farlo per un repeater o un room server pensato per servire altri, perché aiuta chi sta pianificando una nuova installazione a evitare doppioni inutili nella stessa zona; per un companion privato la scelta va ponderata con attenzione alla privacy, vedi sotto. Privacy"
+  },
+  {
+    "id": "mappa-copertura--cosa-comporta-pubblicare-una-posizione",
+    "page": "Mappa",
+    "title": "Cosa comporta pubblicare una posizione",
+    "url": "https://meshcore-ita.github.io/mappa-copertura/",
+    "text": "La mappa è pubblica: chiunque, non solo la community MeshCore, può consultarla su un browser. Caricare la posizione esatta di un companion tenuto in casa rende identificabile pubblicamente il tuo indirizzo, in modo permanente finché non rimuovi il nodo dalla mappa. Per un nodo domestico è ragionevole chiedersi se serva davvero comparire: se l'obiettivo è solo restare in contatto con la mesh locale, spesso non serve caricare il companion, mentre ha più senso caricare un eventuale repeater condiviso, la cui posizione fisica (un tetto, un palo, una sede) è già di fatto un punto pubblico e utile a chi vuole agganciarsi alla mesh. Se vuoi comunque comparire ma limitare l'esposizione, un…"
+  },
+  {
+    "id": "mappa-copertura--mappa-dei-nodi-non-mappa-della-copertura",
+    "page": "Mappa",
+    "title": "Mappa dei nodi, non mappa della copertura",
+    "url": "https://meshcore-ita.github.io/mappa-copertura/",
+    "text": "Un puntino sulla mappa dice \"questo nodo esiste ed è stato dichiarato qui\", non \"questa zona è coperta dal segnale\". Questa distinzione è la fonte più comune di aspettative sbagliate. Un'area senza puntini può comunque avere copertura reale, garantita da repeater che i loro proprietari non hanno caricato: la mancanza di puntini non significa mancanza di rete. Al contrario, più puntini ravvicinati non garantiscono che i messaggi passino davvero tra quei nodi: la copertura LoRa dipende da altezza dell'antenna, ostacoli, orografia e potenza, fattori che la mappa non misura. Due nodi vicini sulla mappa possono essere separati da una collina che li rende reciprocamente sordi. C'è anche una…"
+  },
+  {
+    "id": "mappa-copertura--come-stimare-la-copertura-reale",
+    "page": "Mappa",
+    "title": "Come stimare la copertura reale",
+    "url": "https://meshcore-ita.github.io/mappa-copertura/",
+    "text": "Segnali da controllare per stimare la copertura Comando Cosa dice sulla copertura neighbors Elenca i vicini diretti uditi di recente da un repeater: dice chi è effettivamente in portata radio, non chi è sulla mappa. stats-radio Mostra RSSI e SNR dell'ultimo pacchetto ricevuto: un RSSI molto basso o un SNR vicino allo zero indicano un collegamento al limite, anche se il pacchetto è arrivato. advert Forza un annuncio flood immediato, utile per un test rapido con un secondo nodo mentre ti sposti nel punto da verificare. Il test più affidabile resta pratico: prendi un secondo nodo, spostati nel punto da verificare, invia un advert e controlla se il repeater lo riceve con neighbors e stats-radio…"
+  },
+  {
+    "id": "mappa-copertura--faq-sulla-mappa-e-la-copertura",
+    "page": "Mappa",
+    "title": "FAQ sulla mappa e la copertura",
+    "url": "https://meshcore-ita.github.io/mappa-copertura/",
+    "text": "Per approfondire i termini tecnici usati in questa pagina vedi il glossario MeshCore ; per confrontarti su copertura e installazioni nella tua zona vedi il gruppo Telegram MeshCore ITA ↗ ."
+  },
+  {
+    "id": "app--qual-e-il-pin-per-accoppiare-il-nodo-via-bluetooth",
+    "page": "App",
+    "title": "Qual è il PIN per accoppiare il nodo via Bluetooth?",
+    "url": "https://meshcore-ita.github.io/app/",
+    "text": "Il PIN di default è 123456. Vale solo per un nodo con firmware Companion BLE: un repeater o room server non accetta mai connessioni Bluetooth, va amministrato via USB o da remoto via LoRa."
+  },
+  {
+    "id": "app--perche-un-contatto-risulta-visto-molti-giorni-fa-anche-se-e-acceso",
+    "page": "App",
+    "title": "Perché un contatto risulta \"visto molti giorni fa\" anche se è acceso?",
+    "url": "https://meshcore-ita.github.io/app/",
+    "text": "Quasi sempre è l'orologio, non la portata radio: se il nodo remoto ha l'ora sbagliata i suoi advert non aggiornano il \"last seen\". La pagina sui problemi comuni copre diagnosi e comandi per risincronizzarlo."
+  },
+  {
+    "id": "app--posso-amministrare-un-repeater-via-bluetooth-come-un-companion",
+    "page": "App",
+    "title": "Posso amministrare un repeater via Bluetooth come un companion?",
+    "url": "https://meshcore-ita.github.io/app/",
+    "text": "No: un repeater o room server non apre mai una connessione Bluetooth. Si amministra via USB con un client admin, oppure da remoto via LoRa collegandoti dall'app a un tuo companion."
+  },
+  {
+    "id": "app--il-client-web-funziona-anche-da-smartphone",
+    "page": "App",
+    "title": "Il client web funziona anche da smartphone?",
+    "url": "https://meshcore-ita.github.io/app/",
+    "text": "Dipende dal browser: usa il Web Bluetooth, supportato da Chrome su Android e desktop ma non da Safari su iOS. Su iPhone conviene l'app nativa; da computer il client web si collega anche via USB."
+  },
+  {
+    "id": "app--come-so-se-un-messaggio-diretto-e-arrivato-davvero",
+    "page": "App",
+    "title": "Come so se un messaggio diretto è arrivato davvero?",
+    "url": "https://meshcore-ita.github.io/app/",
+    "text": "Il client segnala inviato o consegnato in base alla conferma che torna dal destinatario; senza conferma entro il timeout ritenta da solo. Un messaggio di canale non ha invece conferma di consegna."
+  },
+  {
+    "id": "app--non-il-primo-setup-come-si-usa-meshcore-ogni-giorno",
+    "page": "App",
+    "title": "Non il primo setup: come si usa MeshCore ogni giorno",
+    "url": "https://meshcore-ita.github.io/app/",
+    "text": "Se il nodo non è ancora flashato o accoppiato, parti dalla guida; questa pagina presuppone un nodo già configurato e allineato al preset radio condiviso. Una volta completata la guida passo passo a MeshCore in italiano , l'uso quotidiano passa quasi sempre da un client: l'app sul telefono o il client web dal computer. Il nodo LoRa resta acceso e fa da modem radio; il client è l'interfaccia con cui leggi e scrivi messaggi, gestisci i contatti e cambi le impostazioni. Questa pagina copre l'uso di tutti i giorni, non il flash del firmware né il primo accoppiamento. Client"
+  },
+  {
+    "id": "app--tre-strade-per-parlare-col-nodo",
+    "page": "App",
+    "title": "Tre strade per parlare col nodo",
+    "url": "https://meshcore-ita.github.io/app/",
+    "text": "Il nodo companion resta lo stesso; cambia solo il dispositivo con cui ti ci colleghi."
+  },
+  {
+    "id": "app--app-android",
+    "page": "App",
+    "title": "App Android",
+    "url": "https://meshcore-ita.github.io/app/",
+    "text": "Si installa dallo store del dispositivo e si collega al nodo companion via Bluetooth Low Energy: la strada più comoda per l'uso mobile quotidiano."
+  },
+  {
+    "id": "app--app-ios",
+    "page": "App",
+    "title": "App iOS",
+    "url": "https://meshcore-ita.github.io/app/",
+    "text": "Stessa app, stessa interfaccia, stesso accoppiamento BLE: su iPhone e iPad la connessione Bluetooth funziona come su Android."
+  },
+  {
+    "id": "app--client-web",
+    "page": "App",
+    "title": "Client web",
+    "url": "https://meshcore-ita.github.io/app/",
+    "text": "Su app.meshcore.nz ↗ , senza installare nulla: Web Bluetooth del browser oppure connessione USB seriale, comoda da computer. Accoppiamento"
+  },
+  {
+    "id": "app--connettersi-al-nodo-bluetooth-o-usb",
+    "page": "App",
+    "title": "Connettersi al nodo: Bluetooth o USB",
+    "url": "https://meshcore-ita.github.io/app/",
+    "text": "Un nodo con firmware Companion BLE si accoppia cercandolo tra i dispositivi Bluetooth e inserendo il PIN di default 123456 . Un nodo Companion USB-only, o semplicemente collegato via cavo, si raggiunge invece con una connessione seriale, supportata sia dall'app sia dal client web. Un dettaglio spesso frainteso: un nodo con firmware repeater o room server non apre mai una connessione Bluetooth diretta; per amministrarlo servono un client admin via USB oppure la gestione remota via LoRa dall'app, collegandoti prima a un tuo companion. Interfaccia"
+  },
+  {
+    "id": "app--contatti-messaggi-diretti-canali-e-room-server",
+    "page": "App",
+    "title": "Contatti, messaggi diretti, canali e room server",
+    "url": "https://meshcore-ita.github.io/app/",
+    "text": "L'elenco contatti è il punto centrale del client: raccoglie ogni nodo di cui hai ricevuto un advert, con l'indicazione di quando è stato \"visto\" l'ultima volta. Un contatto normale apre una chat diretta uno-a-uno; i canali funzionano invece come una bacheca condivisa in flood, dove chiunque nel canale legge tutti i messaggi. Un room server è diverso da entrambi: è un server BBS che conserva i messaggi non letti — fino a 32 per utente — così puoi tornare online più tardi e recuperarli, invece di perderli come accade con un canale se sei fuori portata al momento dell'invio. Contatti"
+  },
+  {
+    "id": "app--come-si-aggiunge-e-si-riscopre-un-contatto",
+    "page": "App",
+    "title": "Come si aggiunge (e si riscopre) un contatto",
+    "url": "https://meshcore-ita.github.io/app/",
+    "text": "Un contatto compare automaticamente quando il tuo nodo riceve il suo advert, diretto o ripetuto da un repeater della mesh; da lì puoi salvarlo in modo permanente. Un companion invia il proprio advert solo su richiesta esplicita dell'utente, non periodicamente: se un nodo vicino non ti trova tra i suoi contatti, la soluzione più semplice è inviarne uno nuovo dal client. Se invece un contatto già noto risulta \"visto\" molti giorni fa pur essendo acceso, la causa quasi sempre non è la portata radio ma l'orologio: un advert con timestamp non plausibile non aggiorna il \"last seen\". La pagina sulla risoluzione dei problemi più comuni di MeshCore copre diagnosi e comandi per risincronizzare l'ora.…"
+  },
+  {
+    "id": "app--canale-o-messaggio-diretto-cosa-cambia-in-pratica",
+    "page": "App",
+    "title": "Canale o messaggio diretto: cosa cambia in pratica",
+    "url": "https://meshcore-ita.github.io/app/",
+    "text": "Un messaggio di canale viaggia sempre in flood: parte, viene ripetuto da ogni repeater che lo sente e raggiunge chiunque sia nel canale in quel momento, senza conferma di consegna. Un messaggio diretto funziona diversamente: il primo invio raggiunge comunque il destinatario in flood, ma la conferma di consegna che torna indietro porta con sé i repeater attraversati, e da quel momento il client riusa quel percorso per i messaggi successivi. In pratica un canale è immediato ma \"spara e spera\"; un diretto è più lento al primo invio — deve scoprire il percorso — ma più affidabile e più veloce in seguito, perché non deve più floodare l'intera mesh. Il confronto tecnico completo con il \"managed…"
+  },
+  {
+    "id": "app--cosa-puoi-cambiare-sul-nodo-dal-client",
+    "page": "App",
+    "title": "Cosa puoi cambiare sul nodo dal client",
+    "url": "https://meshcore-ita.github.io/app/",
+    "text": "Dal client puoi modificare le impostazioni principali del nodo senza toccare la CLI: il nome (convenzione IT-<citta>-NN descritta nella guida), il preset radio — frequenza, banda, spreading factor e coding rate, sempre allineati al preset radio italiano per MeshCore — e la potenza di trasmissione, da tenere solo quanto serve per la copertura richiesta. Le stesse impostazioni sono raggiungibili via riga di comando; l'elenco completo è nella pagina comandi CLI per amministrare un nodo MeshCore , utile soprattutto per un repeater che il client BLE non raggiunge direttamente. Mappa e batteria"
+  },
+  {
+    "id": "app--mappa-pubblica-e-autonomia-del-companion",
+    "page": "App",
+    "title": "Mappa pubblica e autonomia del companion",
+    "url": "https://meshcore-ita.github.io/app/",
+    "text": "Dal client puoi caricare il tuo nodo sulla mappa pubblica map.meshcore.io: la procedura, diversa per un companion rispetto a un repeater o room server, è nella pagina delle domande frequenti su MeshCore in italiano ; per leggere cosa mostra la mappa vedi la pagina dedicata alla mappa di copertura MeshCore . Sul fronte batteria, un companion connesso via Bluetooth consuma più di un nodo lasciato solo in ricezione: se lo usi come base fissa, alimentarlo via USB evita sorprese; in mobilità il consumo dipende soprattutto da quanto a lungo l'app resta connessa via BLE. Domande frequenti"
+  },
+  {
+    "id": "regioni--perche-meshcore-cresce-regione-per-regione",
+    "page": "Regioni",
+    "title": "Perché MeshCore cresce regione per regione",
+    "url": "https://meshcore-ita.github.io/regioni/",
+    "text": "Un nodo LoRa parla con chi ha vicino, non con l'Italia intera: la mesh si costruisce a partire da isole locali che si allargano. MeshCore non ha un server centrale: ogni nodo comunica solo con chi riesce a sentire in radio, direttamente o attraverso repeater intermedi. Due nodi a 400 km di distanza semplicemente non si sentono, qualunque sia il preset radio impostato: non è un limite di configurazione, è fisica della propagazione LoRa. Per questo la community italiana organizza il gruppo Telegram con un topic per ciascuna regione: le discussioni utili — chi ha già copertura, dove serve un repeater, chi cerca un aggancio — hanno senso solo tra persone geograficamente vicine. Una mesh…"
+  },
+  {
+    "id": "regioni--tutte-le-regioni-italiane-nel-gruppo-telegram",
+    "page": "Regioni",
+    "title": "Tutte le regioni italiane nel gruppo Telegram",
+    "url": "https://meshcore-ita.github.io/regioni/",
+    "text": "Ogni regione ha un topic dedicato con prefisso IT · , dove si discute copertura, installazioni e aggancio tra nodi vicini. Topic regionali del gruppo Telegram MeshCore ITA Regione Topic Telegram Abruzzo Topic Abruzzo ↗ Basilicata Topic Basilicata ↗ Calabria Topic Calabria ↗ Campania Topic Campania ↗ Emilia-Romagna Topic Emilia-Romagna ↗ Friuli-Venezia Giulia Topic Friuli-Venezia Giulia ↗ Lazio Topic Lazio ↗ Liguria Topic Liguria ↗ Lombardia Topic Lombardia ↗ Marche Topic Marche ↗ Molise Topic Molise ↗ Piemonte Topic Piemonte ↗ Puglia Topic Puglia ↗ Sardegna Topic Sardegna ↗ Sicilia Topic Sicilia ↗ Toscana Topic Toscana ↗ Trentino-Alto Adige Topic Trentino-Alto Adige ↗ Umbria Topic Umbria ↗…"
+  },
+  {
+    "id": "regioni--cosa-scrivere-quando-arrivi-nel-topic-della-tua-regione",
+    "page": "Regioni",
+    "title": "Cosa scrivere quando arrivi nel topic della tua regione",
+    "url": "https://meshcore-ita.github.io/regioni/",
+    "text": "Un messaggio di presentazione utile è breve ma specifico: indica la zona di massima (comune o area, non serve l'indirizzo esatto), il tipo di nodo che hai — companion, repeater o room server — e il tipo di antenna e installazione, ad esempio \"companion portatile con antenna stock\" oppure \"repeater fisso in terrazzo a 15 metri con antenna 5.8 dBi\". Specifica anche cosa cerchi: se stai solo verificando se c'è copertura vicino a te, se cerchi un aggancio con un nodo esistente, o se hai un repeater da proporre come punto condiviso di zona. Più il messaggio è concreto, più è facile per chi è già attivo nella tua area capire se e come collegarti, invece di dover fare domande di chiarimento.…"
+  },
+  {
+    "id": "regioni--da-nodi-isolati-a-mesh-locale",
+    "page": "Regioni",
+    "title": "Da nodi isolati a mesh locale",
+    "url": "https://meshcore-ita.github.io/regioni/",
+    "text": "Un aggancio tra due nodi vicini si verifica concretamente, non si stima a tavolino: dopo esservi messi d'accordo nel topic regionale, allineate entrambi i nodi allo stesso preset radio italiano per MeshCore — nodi su preset diversi non si sentono anche se a pochi metri — e poi inviate un advert da entrambe le parti per verificare che ciascuno compaia nei contatti dell'altro. Se l'aggancio diretto non funziona per orografia o distanza, il passo successivo è capire se un repeater esistente nella zona può fare da ponte tra i due nodi: chi lo gestisce può confermarlo nel topic. Da qui la mesh locale cresce per aggiunte successive: ogni nuovo nodo che si aggancia a uno già presente estende…"
+  },
+  {
+    "id": "regioni--proporre-un-repeater-di-zona",
+    "page": "Regioni",
+    "title": "Proporre un repeater di zona",
+    "url": "https://meshcore-ita.github.io/regioni/",
+    "text": "Se hai una posizione in quota o comunque sopraelevata rispetto agli ostacoli locali — un tetto, un traliccio, un'altura — puoi valutare di installare un repeater condiviso invece di un secondo companion. Prima di procedere, verifica nel topic della tua regione se qualcuno copre già la tua zona: un repeater doppione a poca distanza da uno esistente aggiunge poco e complica la disambiguazione dei percorsi sulla mesh. Se la copertura manca davvero, la pagina come installare un repeater MeshCore copre l'installazione passo passo, dalla scelta della board all'amministrazione via CLI; una volta operativo, annuncialo nel topic regionale e valuta di caricarlo sulla mappa pubblica, così chi è nella…"
+  },
+  {
+    "id": "regioni--la-copertura-non-e-garantita-va-verificata-sul-campo",
+    "page": "Regioni",
+    "title": "La copertura non è garantita: va verificata sul campo",
+    "url": "https://meshcore-ita.github.io/regioni/",
+    "text": "Nessuna delle informazioni raccolte nei topic regionali, né la presenza di un repeater sulla mappa pubblica, sostituisce una verifica reale. Orografia, ostacoli, altezza dell'antenna e persino le condizioni atmosferiche influiscono sulla portata effettiva più della distanza in linea d'aria: un repeater segnalato come attivo può non raggiungere un punto che sembra vicino sulla carta. Prima di contare su una copertura per un uso critico, verificala di persona con un contatto reale e uno scambio di messaggi, e tienila aggiornata nel topic regionale se cambia: un nodo spento o rimosso senza avviso lascia altri a fare affidamento su una copertura che non c'è più. Per approfondire i fattori che…"
   }
 ];

@@ -1,0 +1,190 @@
+<!--meta
+{
+  "slug": "app",
+  "nav": "App",
+  "order": 12,
+  "primary": false,
+  "title": "App MeshCore: uso quotidiano da Android, iOS e client web",
+  "description": "Come si usa MeshCore ogni giorno: app Android, app iOS o client web app.meshcore.nz, contatti, messaggi diretti, canali, room server e impostazioni del nodo.",
+  "h1": "MeshCore ogni giorno: app Android, iOS e client web",
+  "lede": "Il primo setup è nella guida; qui vediamo come si usa MeshCore giorno per giorno una volta che il nodo è già configurato.",
+  "updated": "2026-09-11",
+  "jsonld": [
+    {
+      "@type": "TechArticle",
+      "headline": "MeshCore ogni giorno: app Android, iOS e client web",
+      "description": "Guida all'uso quotidiano di MeshCore: connessione al nodo via BLE o USB, interfaccia contatti/canali/room server, differenza tra messaggi di canale e diretti, impostazioni del nodo dal client.",
+      "dateModified": "2026-09-11",
+      "inLanguage": "it",
+      "about": "MeshCore companion app"
+    },
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Qual è il PIN per accoppiare il nodo via Bluetooth?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Il PIN di default è 123456. Vale solo per un nodo con firmware Companion BLE: un repeater o room server non accetta mai connessioni Bluetooth, va amministrato via USB o da remoto via LoRa."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Perché un contatto risulta \"visto molti giorni fa\" anche se è acceso?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Quasi sempre è l'orologio, non la portata radio: se il nodo remoto ha l'ora sbagliata i suoi advert non aggiornano il \"last seen\". La pagina sui problemi comuni copre diagnosi e comandi per risincronizzarlo."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Posso amministrare un repeater via Bluetooth come un companion?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "No: un repeater o room server non apre mai una connessione Bluetooth. Si amministra via USB con un client admin, oppure da remoto via LoRa collegandoti dall'app a un tuo companion."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Il client web funziona anche da smartphone?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Dipende dal browser: usa il Web Bluetooth, supportato da Chrome su Android e desktop ma non da Safari su iOS. Su iPhone conviene l'app nativa; da computer il client web si collega anche via USB."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Come so se un messaggio diretto è arrivato davvero?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Il client segnala inviato o consegnato in base alla conferma che torna dal destinatario; senza conferma entro il timeout ritenta da solo. Un messaggio di canale non ha invece conferma di consegna."
+          }
+        }
+      ]
+    }
+  ]
+}
+-->
+<section class="section">
+  <div class="section__head">
+    <p class="eyelash">Uso quotidiano</p>
+    <h2 class="section__title">Non il primo setup: come si usa MeshCore ogni giorno</h2>
+    <p class="section__lede">Se il nodo non è ancora flashato o accoppiato, parti dalla guida; questa pagina presuppone un nodo già configurato e allineato al preset radio condiviso.</p>
+  </div>
+  <div class="prose">
+    <p>Una volta completata la <a class="link" href="../guida/">guida passo passo a MeshCore in italiano</a>, l'uso quotidiano passa quasi sempre da un client: l'app sul telefono o il client web dal computer. Il nodo LoRa resta acceso e fa da modem radio; il client è l'interfaccia con cui leggi e scrivi messaggi, gestisci i contatti e cambi le impostazioni. Questa pagina copre l'uso di tutti i giorni, non il flash del firmware né il primo accoppiamento.</p>
+  </div>
+</section>
+
+<section class="section">
+  <div class="section__head">
+    <p class="eyelash">Client</p>
+    <h2 class="section__title">Tre strade per parlare col nodo</h2>
+    <p class="section__lede">Il nodo companion resta lo stesso; cambia solo il dispositivo con cui ti ci colleghi.</p>
+  </div>
+  <div class="grid grid--3">
+    <article class="card">
+      <p class="card__num">01</p>
+      <h3 class="card__title">App Android</h3>
+      <p class="card__body">Si installa dallo store del dispositivo e si collega al nodo companion via Bluetooth Low Energy: la strada più comoda per l'uso mobile quotidiano.</p>
+    </article>
+    <article class="card">
+      <p class="card__num">02</p>
+      <h3 class="card__title">App iOS</h3>
+      <p class="card__body">Stessa app, stessa interfaccia, stesso accoppiamento BLE: su iPhone e iPad la connessione Bluetooth funziona come su Android.</p>
+    </article>
+    <article class="card">
+      <p class="card__num">03</p>
+      <h3 class="card__title">Client web</h3>
+      <p class="card__body">Su <a class="link" href="https://app.meshcore.nz/" target="_blank" rel="noopener">app.meshcore.nz<span class="ext-arrow">↗</span></a>, senza installare nulla: Web Bluetooth del browser oppure connessione USB seriale, comoda da computer.</p>
+    </article>
+  </div>
+</section>
+
+<section class="section">
+  <div class="section__head">
+    <p class="eyelash">Accoppiamento</p>
+    <h2 class="section__title">Connettersi al nodo: Bluetooth o USB</h2>
+  </div>
+  <div class="prose">
+    <p>Un nodo con firmware Companion BLE si accoppia cercandolo tra i dispositivi Bluetooth e inserendo il PIN di default <code>123456</code>. Un nodo Companion USB-only, o semplicemente collegato via cavo, si raggiunge invece con una connessione seriale, supportata sia dall'app sia dal client web. Un dettaglio spesso frainteso: un nodo con firmware repeater o room server non apre mai una connessione Bluetooth diretta; per amministrarlo servono un client admin via USB oppure la gestione remota via LoRa dall'app, collegandoti prima a un tuo companion.</p>
+  </div>
+</section>
+
+<section class="section">
+  <div class="section__head">
+    <p class="eyelash">Interfaccia</p>
+    <h2 class="section__title">Contatti, messaggi diretti, canali e room server</h2>
+  </div>
+  <div class="prose">
+    <p>L'elenco contatti è il punto centrale del client: raccoglie ogni nodo di cui hai ricevuto un advert, con l'indicazione di quando è stato "visto" l'ultima volta. Un contatto normale apre una chat diretta uno-a-uno; i canali funzionano invece come una bacheca condivisa in flood, dove chiunque nel canale legge tutti i messaggi. Un room server è diverso da entrambi: è un server BBS che conserva i messaggi non letti — fino a 32 per utente — così puoi tornare online più tardi e recuperarli, invece di perderli come accade con un canale se sei fuori portata al momento dell'invio.</p>
+  </div>
+</section>
+
+<section class="section">
+  <div class="section__head">
+    <p class="eyelash">Contatti</p>
+    <h2 class="section__title">Come si aggiunge (e si riscopre) un contatto</h2>
+  </div>
+  <div class="prose">
+    <p>Un contatto compare automaticamente quando il tuo nodo riceve il suo advert, diretto o ripetuto da un repeater della mesh; da lì puoi salvarlo in modo permanente. Un companion invia il proprio advert solo su richiesta esplicita dell'utente, non periodicamente: se un nodo vicino non ti trova tra i suoi contatti, la soluzione più semplice è inviarne uno nuovo dal client. Se invece un contatto già noto risulta "visto" molti giorni fa pur essendo acceso, la causa quasi sempre non è la portata radio ma l'orologio: un advert con timestamp non plausibile non aggiorna il "last seen". La pagina sulla <a class="link" href="../problemi/">risoluzione dei problemi più comuni di MeshCore</a> copre diagnosi e comandi per risincronizzare l'ora.</p>
+  </div>
+</section>
+
+<section class="section">
+  <div class="section__head">
+    <p class="eyelash">Routing</p>
+    <h2 class="section__title">Canale o messaggio diretto: cosa cambia in pratica</h2>
+  </div>
+  <div class="prose">
+    <p>Un messaggio di canale viaggia sempre in flood: parte, viene ripetuto da ogni repeater che lo sente e raggiunge chiunque sia nel canale in quel momento, senza conferma di consegna. Un messaggio diretto funziona diversamente: il primo invio raggiunge comunque il destinatario in flood, ma la conferma di consegna che torna indietro porta con sé i repeater attraversati, e da quel momento il client riusa quel percorso per i messaggi successivi. In pratica un canale è immediato ma "spara e spera"; un diretto è più lento al primo invio — deve scoprire il percorso — ma più affidabile e più veloce in seguito, perché non deve più floodare l'intera mesh. Il confronto tecnico completo con il "managed flooding" di Meshtastic è nella pagina <a class="link" href="../meshcore-vs-meshtastic/">MeshCore vs Meshtastic</a>.</p>
+  </div>
+</section>
+
+<section class="section">
+  <div class="section__head">
+    <p class="eyelash">Impostazioni</p>
+    <h2 class="section__title">Cosa puoi cambiare sul nodo dal client</h2>
+  </div>
+  <div class="prose">
+    <p>Dal client puoi modificare le impostazioni principali del nodo senza toccare la CLI: il nome (convenzione <code>IT-&lt;citta&gt;-NN</code> descritta nella guida), il preset radio — frequenza, banda, spreading factor e coding rate, sempre allineati al <a class="link" href="../preset-radio/">preset radio italiano per MeshCore</a> — e la potenza di trasmissione, da tenere solo quanto serve per la copertura richiesta. Le stesse impostazioni sono raggiungibili via riga di comando; l'elenco completo è nella pagina <a class="link" href="../comandi/">comandi CLI per amministrare un nodo MeshCore</a>, utile soprattutto per un repeater che il client BLE non raggiunge direttamente.</p>
+  </div>
+</section>
+
+<section class="section">
+  <div class="section__head">
+    <p class="eyelash">Mappa e batteria</p>
+    <h2 class="section__title">Mappa pubblica e autonomia del companion</h2>
+  </div>
+  <div class="prose">
+    <p>Dal client puoi caricare il tuo nodo sulla mappa pubblica map.meshcore.io: la procedura, diversa per un companion rispetto a un repeater o room server, è nella pagina delle <a class="link" href="../faq/">domande frequenti su MeshCore in italiano</a>; per leggere cosa mostra la mappa vedi la pagina dedicata alla <a class="link" href="../mappa-copertura/">mappa di copertura MeshCore</a>. Sul fronte batteria, un companion connesso via Bluetooth consuma più di un nodo lasciato solo in ricezione: se lo usi come base fissa, alimentarlo via USB evita sorprese; in mobilità il consumo dipende soprattutto da quanto a lungo l'app resta connessa via BLE.</p>
+  </div>
+</section>
+
+<section class="section">
+  <div class="section__head">
+    <p class="eyelash">Domande frequenti</p>
+    <h2 class="section__title">Domande frequenti sull'app</h2>
+  </div>
+  <details class="faq">
+    <summary class="faq__q">Qual è il PIN per accoppiare il nodo via Bluetooth?</summary>
+    <p class="faq__a">Il PIN di default è 123456. Vale solo per un nodo con firmware Companion BLE: un repeater o room server non accetta mai connessioni Bluetooth, va amministrato via USB o da remoto via LoRa.</p>
+  </details>
+  <details class="faq">
+    <summary class="faq__q">Perché un contatto risulta "visto molti giorni fa" anche se è acceso?</summary>
+    <p class="faq__a">Quasi sempre è l'orologio, non la portata radio: se il nodo remoto ha l'ora sbagliata i suoi advert non aggiornano il "last seen". La pagina sui problemi comuni copre diagnosi e comandi per risincronizzarlo.</p>
+  </details>
+  <details class="faq">
+    <summary class="faq__q">Posso amministrare un repeater via Bluetooth come un companion?</summary>
+    <p class="faq__a">No: un repeater o room server non apre mai una connessione Bluetooth. Si amministra via USB con un client admin, oppure da remoto via LoRa collegandoti dall'app a un tuo companion.</p>
+  </details>
+  <details class="faq">
+    <summary class="faq__q">Il client web funziona anche da smartphone?</summary>
+    <p class="faq__a">Dipende dal browser: usa il Web Bluetooth, supportato da Chrome su Android e desktop ma non da Safari su iOS. Su iPhone conviene l'app nativa; da computer il client web si collega anche via USB.</p>
+  </details>
+  <details class="faq">
+    <summary class="faq__q">Come so se un messaggio diretto è arrivato davvero?</summary>
+    <p class="faq__a">Il client segnala inviato o consegnato in base alla conferma che torna dal destinatario; senza conferma entro il timeout ritenta da solo. Un messaggio di canale non ha invece conferma di consegna.</p>
+  </details>
+</section>

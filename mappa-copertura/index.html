@@ -1,0 +1,311 @@
+<!doctype html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="color-scheme" content="dark">
+<meta name="theme-color" content="#000000">
+
+<title>Mappa e copertura MeshCore: come funziona map.meshcore.io</title>
+<meta name="description" content="Mappa pubblica MeshCore: cosa mostra map.meshcore.io, come aggiungere companion e repeater, privacy della posizione e come stimare la copertura reale.">
+<link rel="canonical" href="https://meshcore-ita.github.io/mappa-copertura/">
+<meta name="robots" content="index,follow,max-image-preview:large">
+
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="MeshCore ITA">
+<meta property="og:title" content="Mappa e copertura MeshCore: come funziona map.meshcore.io">
+<meta property="og:description" content="Mappa pubblica MeshCore: cosa mostra map.meshcore.io, come aggiungere companion e repeater, privacy della posizione e come stimare la copertura reale.">
+<meta property="og:url" content="https://meshcore-ita.github.io/mappa-copertura/">
+<meta property="og:image" content="https://meshcore-ita.github.io/assets/img/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:locale" content="it_IT">
+
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Mappa e copertura MeshCore: come funziona map.meshcore.io">
+<meta name="twitter:description" content="Mappa pubblica MeshCore: cosa mostra map.meshcore.io, come aggiungere companion e repeater, privacy della posizione e come stimare la copertura reale.">
+<meta property="twitter:image" content="https://meshcore-ita.github.io/assets/img/og-image.png">
+
+<link rel="icon" type="image/svg+xml" href="../assets/img/favicon.svg">
+<link rel="mask-icon" href="../assets/img/favicon.svg" color="#22c55e">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Geist:wght@300..700&family=JetBrains+Mono:wght@400;500;600&display=swap">
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@300..700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
+<noscript><link href="https://fonts.googleapis.com/css2?family=Geist:wght@300..700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet"></noscript>
+
+<link rel="stylesheet" href="../assets/css/style.css?v=2">
+
+<script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "TechArticle",
+      "headline": "Mappa e copertura MeshCore: come funziona map.meshcore.io",
+      "description": "Guida alla Internet Map pubblica di MeshCore, a come aggiungere un nodo e a come stimare la copertura reale della mesh oltre ciò che mostra la mappa.",
+      "inLanguage": "it",
+      "about": "MeshCore Internet Map"
+    },
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Il mio nodo è automaticamente sulla mappa pubblica?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "No, non automaticamente: devi caricarlo tu. Per un companion, apri l'app MeshCore, vai su \"Internet Map\" e scegli \"Add me to the Map\". Per un repeater o room server, aprilo dalla lista contatti, tocca \"Share\" e poi \"Upload to Internet Map\". Una volta caricato, il nodo è consultabile sulla mappa pubblica su map.meshcore.io."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "È sicuro pubblicare la posizione di un nodo domestico?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "È una scelta volontaria che va valutata caso per caso. Pubblicare la posizione esatta di un companion tenuto in casa rende identificabile pubblicamente dove abiti; per un nodo domestico molti preferiscono non caricarlo sulla mappa, oppure impostare una posizione approssimata invece delle coordinate precise. Per un repeater installato in un punto già pubblico (tetto condominiale, palo, sede di un'associazione) il rischio di privacy è minore."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "La mappa mostra la copertura reale della mesh?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "No. La mappa mostra solo i nodi che i loro proprietari hanno scelto volontariamente di caricare, non le aree effettivamente coperte dal segnale. Un'area senza puntini sulla mappa può comunque avere copertura da nodi non pubblicati, mentre un'area con più puntini non garantisce che i messaggi passino davvero tra quei nodi: per questo serve una verifica sul campo."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Come verifico la copertura reale nella mia zona?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Il modo più affidabile è un test con un secondo nodo: spostati nel punto che vuoi verificare, invia un advert e controlla con neighbors e stats-radio se il tuo repeater lo riceve, leggendo RSSI e SNR. Sentire un advert non basta a garantire che un messaggio venga instradato con successo: conferma la copertura scambiando anche un messaggio di prova con un altro nodo della zona, e confrontati nel topic regionale del gruppo Telegram."
+          }
+        }
+      ]
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://meshcore-ita.github.io/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Mappa",
+          "item": "https://meshcore-ita.github.io/mappa-copertura/"
+        }
+      ]
+    }
+  ]
+}</script>
+</head>
+<body>
+<a class="skip-link" href="#main">Vai al contenuto</a>
+<canvas id="bg-canvas" aria-hidden="true"></canvas>
+
+<header class="site-header" data-scrolled="false">
+  <div class="site-header__inner">
+    <a class="brand" href="../">
+      <img class="brand__mark" src="../assets/img/logo.svg" alt="" width="28" height="28">
+      <span class="brand__text">MeshCore <em>ITA</em></span>
+    </a>
+    <nav class="nav" id="nav">
+      <a class="nav__link" href="../guida/">Guida</a>
+      <a class="nav__link" href="../preset-radio/">Preset radio</a>
+      <a class="nav__link" href="../hardware/">Hardware</a>
+      <a class="nav__link" href="../faq/">FAQ</a>
+      <a class="nav__link" href="../community/">Community</a>
+      <a class="nav__link nav__link--ext" href="https://t.me/meshcore_ita" target="_blank" rel="noopener">TELEGRAM<span class="ext-arrow">↗</span></a>
+      <a class="nav__link nav__link--ext" href="https://github.com/meshcore-ita" target="_blank" rel="noopener">GitHub<span class="ext-arrow">↗</span></a>
+    </nav>
+    <button class="nav-toggle" aria-expanded="false" aria-controls="nav">
+      <span class="sr-only">Apri il menu</span>
+    </button>
+  </div>
+</header>
+
+<main id="main">
+
+  <section class="hero hero--page">
+    <nav class="crumbs" aria-label="Breadcrumb">
+      <ol>
+        <li><a href="../">Home</a></li>
+        <li aria-current="page">Mappa</li>
+      </ol>
+    </nav>
+    <p class="eyelash">Mappa</p>
+    <h1 class="hero__title">La mappa pubblica e la copertura reale</h1>
+    <p class="hero__lede">Cosa mostra la Internet Map di MeshCore, come caricarci un nodo e perché non equivale alla copertura effettiva della mesh.</p>
+  </section>
+
+<section class="section">
+  <div class="section__head">
+    <p class="eyelash">Cos'è</p>
+    <h2 class="section__title">La Internet Map di MeshCore</h2>
+    <p class="section__lede">Una mappa pubblica e consultabile da chiunque, dove i proprietari dei nodi possono decidere di comparire.</p>
+  </div>
+  <div class="prose">
+    <p>La Internet Map, consultabile su <a class="link" href="https://map.meshcore.io/" target="_blank" rel="noopener">map.meshcore.io<span class="ext-arrow">↗</span></a>, è il registro pubblico ufficiale dei nodi MeshCore che i loro proprietari hanno scelto volontariamente di condividere. Ogni puntino sulla mappa rappresenta un companion, un repeater o un room server con nome e posizione caricati da chi lo gestisce: non è un servizio di scansione automatica della rete, e un nodo acceso e perfettamente funzionante può non comparire semplicemente perché nessuno lo ha caricato.</p>
+    <p>Serve principalmente per due cose: capire a colpo d'occhio dove esistono già repeater e room server pubblici prima di installarne uno nuovo, e dare un riferimento visivo a chi sta valutando se un'area ha già una qualche forma di copertura dichiarata. Non sostituisce, per i motivi spiegati più sotto, una misura di copertura radio reale.</p>
+  </div>
+</section>
+
+<section class="section">
+  <div class="section__head">
+    <p class="eyelash">Come partecipare</p>
+    <h2 class="section__title">Aggiungere un nodo alla mappa</h2>
+  </div>
+  <div class="grid grid--2">
+    <article class="card">
+      <p class="card__num">01</p>
+      <h3 class="card__title">Companion</h3>
+      <p class="card__body">Apri l'app MeshCore, vai su "Internet Map" e scegli "Add me to the Map". Il nodo comparirà sulla mappa pubblica con il nome e la posizione impostati sul companion.</p>
+    </article>
+    <article class="card">
+      <p class="card__num">02</p>
+      <h3 class="card__title">Repeater o room server</h3>
+      <p class="card__body">Apri il nodo dalla lista contatti, tocca "Share" e poi "Upload to Internet Map". La posizione caricata è quella impostata sul nodo con <code>set lat</code> e <code>set lon</code>, descritti nella pagina dei <a class="link" href="../comandi/">comandi CLI per amministrare un nodo MeshCore</a>.</p>
+    </article>
+  </div>
+  <div class="prose">
+    <p>In entrambi i casi la pubblicazione è volontaria e reversibile: nessun nodo finisce sulla mappa senza un'azione esplicita di chi lo gestisce. Vale la pena farlo per un repeater o un room server pensato per servire altri, perché aiuta chi sta pianificando una nuova installazione a evitare doppioni inutili nella stessa zona; per un companion privato la scelta va ponderata con attenzione alla privacy, vedi sotto.</p>
+  </div>
+</section>
+
+<section class="section">
+  <div class="section__head">
+    <p class="eyelash">Privacy</p>
+    <h2 class="section__title">Cosa comporta pubblicare una posizione</h2>
+  </div>
+  <div class="prose">
+    <p>La mappa è pubblica: chiunque, non solo la community MeshCore, può consultarla su un browser. Caricare la posizione esatta di un companion tenuto in casa rende identificabile pubblicamente il tuo indirizzo, in modo permanente finché non rimuovi il nodo dalla mappa. Per un nodo domestico è ragionevole chiedersi se serva davvero comparire: se l'obiettivo è solo restare in contatto con la mesh locale, spesso non serve caricare il companion, mentre ha più senso caricare un eventuale repeater condiviso, la cui posizione fisica (un tetto, un palo, una sede) è già di fatto un punto pubblico e utile a chi vuole agganciarsi alla mesh.</p>
+    <p>Se vuoi comunque comparire ma limitare l'esposizione, un compromesso comune è impostare sul nodo una posizione approssimata — la zona ma non l'indirizzo esatto — invece delle coordinate precise di casa. Ricorda che la responsabilità di questa scelta, come per qualsiasi dato pubblicato online, resta di chi gestisce il nodo.</p>
+  </div>
+</section>
+
+<section class="section">
+  <div class="section__head">
+    <p class="eyelash">Il limite della mappa</p>
+    <h2 class="section__title">Mappa dei nodi, non mappa della copertura</h2>
+    <p class="section__lede">Un puntino sulla mappa dice "questo nodo esiste ed è stato dichiarato qui", non "questa zona è coperta dal segnale".</p>
+  </div>
+  <div class="prose">
+    <p>Questa distinzione è la fonte più comune di aspettative sbagliate. Un'area senza puntini può comunque avere copertura reale, garantita da repeater che i loro proprietari non hanno caricato: la mancanza di puntini non significa mancanza di rete. Al contrario, più puntini ravvicinati non garantiscono che i messaggi passino davvero tra quei nodi: la copertura LoRa dipende da altezza dell'antenna, ostacoli, orografia e potenza, fattori che la mappa non misura. Due nodi vicini sulla mappa possono essere separati da una collina che li rende reciprocamente sordi.</p>
+    <p>C'è anche una differenza tecnica interna alla mesh, tra sentire un advert e riuscire a instradare un messaggio: un nodo può ricevere l'annuncio periodico di un repeater lontano (un pacchetto flood) senza che questo garantisca che un messaggio privato, che richiede un percorso instradato con successo (path discovery), arrivi con la stessa affidabilità. Per questi termini vedi il <a class="link" href="../glossario/">glossario dei termini tecnici di MeshCore</a>.</p>
+  </div>
+</section>
+
+<section class="section">
+  <div class="section__head">
+    <p class="eyelash">Verifica sul campo</p>
+    <h2 class="section__title">Come stimare la copertura reale</h2>
+  </div>
+  <table class="spec">
+    <caption>Segnali da controllare per stimare la copertura</caption>
+    <thead>
+      <tr><th scope="col">Comando</th><th scope="col">Cosa dice sulla copertura</th></tr>
+    </thead>
+    <tbody>
+      <tr><th scope="row"><code>neighbors</code></th><td>Elenca i vicini diretti uditi di recente da un repeater: dice chi è effettivamente in portata radio, non chi è sulla mappa.</td></tr>
+      <tr><th scope="row"><code>stats-radio</code></th><td>Mostra RSSI e SNR dell'ultimo pacchetto ricevuto: un RSSI molto basso o un SNR vicino allo zero indicano un collegamento al limite, anche se il pacchetto è arrivato.</td></tr>
+      <tr><th scope="row"><code>advert</code></th><td>Forza un annuncio flood immediato, utile per un test rapido con un secondo nodo mentre ti sposti nel punto da verificare.</td></tr>
+    </tbody>
+  </table>
+  <div class="prose">
+    <p>Il test più affidabile resta pratico: prendi un secondo nodo, spostati nel punto da verificare, invia un <code>advert</code> e controlla se il repeater lo riceve con <code>neighbors</code> e <code>stats-radio</code>. Per confermare che la copertura sia utilizzabile, scambia anche un messaggio di prova: un advert ricevuto con SNR basso può non bastare a instradare messaggi in modo affidabile. Sintassi completa nella pagina dei <a class="link" href="../comandi/">comandi CLI di MeshCore</a>; se sospetti un problema di preset, confrontalo con il <a class="link" href="../preset-radio/">preset radio italiano</a>.</p>
+    <p>Condividi i dati raccolti nel topic regionale del gruppo Telegram: cresce così la conoscenza collettiva della copertura reale, più affidabile della sola mappa. Chi valuta di <a class="link" href="../installare-repeater/">installare un repeater</a> troverà quei riscontri più utili di qualsiasi puntino sulla mappa.</p>
+  </div>
+</section>
+
+<section class="section">
+  <div class="section__head">
+    <p class="eyelash">Domande frequenti</p>
+    <h2 class="section__title">FAQ sulla mappa e la copertura</h2>
+  </div>
+  <details class="faq">
+    <summary class="faq__q">Il mio nodo è automaticamente sulla mappa pubblica?</summary>
+    <p class="faq__a">No, non automaticamente: devi caricarlo tu. Per un companion, apri l'app MeshCore, vai su "Internet Map" e scegli "Add me to the Map". Per un repeater o room server, aprilo dalla lista contatti, tocca "Share" e poi "Upload to Internet Map". Una volta caricato, il nodo è consultabile sulla mappa pubblica su map.meshcore.io.</p>
+  </details>
+  <details class="faq">
+    <summary class="faq__q">È sicuro pubblicare la posizione di un nodo domestico?</summary>
+    <p class="faq__a">È una scelta volontaria che va valutata caso per caso. Pubblicare la posizione esatta di un companion tenuto in casa rende identificabile pubblicamente dove abiti; per un nodo domestico molti preferiscono non caricarlo sulla mappa, oppure impostare una posizione approssimata invece delle coordinate precise. Per un repeater installato in un punto già pubblico (tetto condominiale, palo, sede di un'associazione) il rischio di privacy è minore.</p>
+  </details>
+  <details class="faq">
+    <summary class="faq__q">La mappa mostra la copertura reale della mesh?</summary>
+    <p class="faq__a">No. La mappa mostra solo i nodi che i loro proprietari hanno scelto volontariamente di caricare, non le aree effettivamente coperte dal segnale. Un'area senza puntini sulla mappa può comunque avere copertura da nodi non pubblicati, mentre un'area con più puntini non garantisce che i messaggi passino davvero tra quei nodi: per questo serve una verifica sul campo.</p>
+  </details>
+  <details class="faq">
+    <summary class="faq__q">Come verifico la copertura reale nella mia zona?</summary>
+    <p class="faq__a">Il modo più affidabile è un test con un secondo nodo: spostati nel punto che vuoi verificare, invia un advert e controlla con neighbors e stats-radio se il tuo repeater lo riceve, leggendo RSSI e SNR. Sentire un advert non basta a garantire che un messaggio venga instradato con successo: conferma la copertura scambiando anche un messaggio di prova con un altro nodo della zona, e confrontati nel topic regionale del gruppo Telegram.</p>
+  </details>
+  <p class="section__lede">Per approfondire i termini tecnici usati in questa pagina vedi il <a class="link" href="../glossario/">glossario MeshCore</a>; per confrontarti su copertura e installazioni nella tua zona vedi il <a class="link" href="https://t.me/meshcore_ita" target="_blank" rel="noopener">gruppo Telegram MeshCore ITA<span class="ext-arrow">↗</span></a>.</p>
+</section>
+<section class="section related" data-reveal>
+    <div class="section__head">
+      <p class="eyelash">Continua a leggere</p>
+      <h2 class="section__title">Altri contenuti MeshCore ITA</h2>
+    </div>
+    <div class="grid grid--2">
+      <a class="card" href="../installare-repeater/">
+        <h3 class="card__title">Repeater</h3>
+        <p class="card__body">Dalla scelta della posizione alla configurazione via CLI: come mettere in servizio un repeater permanente sulla mesh italiana.</p>
+      </a>
+      <a class="card" href="../app/">
+        <h3 class="card__title">App</h3>
+        <p class="card__body">Il primo setup è nella guida; qui vediamo come si usa MeshCore giorno per giorno una volta che il nodo è già configurato.</p>
+      </a>
+      <a class="card" href="../community/">
+        <h3 class="card__title">Community</h3>
+        <p class="card__body">Chi siamo, come partecipare al gruppo Telegram e come contribuire alla documentazione e al coordinamento della rete.</p>
+      </a>
+      <a class="card" href="../">
+        <h3 class="card__title">Home</h3>
+        <p class="card__body">Torna alla pagina principale di MeshCore ITA.</p>
+      </a>
+    </div>
+  </section>
+
+</main>
+
+<footer class="site-footer">
+  <div class="site-footer__inner">
+    <div class="foot__nav">
+      <p class="foot__nav-label">Documentazione</p>
+      <ul class="foot__nav-list">
+        <li><a href="../guida/">Guida</a></li>
+        <li><a href="../preset-radio/">Preset radio</a></li>
+        <li><a href="../hardware/">Hardware</a></li>
+        <li><a href="../comandi/">Comandi</a></li>
+        <li><a href="../problemi/">Problemi</a></li>
+        <li><a href="../faq/">FAQ</a></li>
+        <li><a href="../meshcore-vs-meshtastic/">Confronti</a></li>
+        <li><a href="../glossario/">Glossario</a></li>
+        <li><a href="../community/">Community</a></li>
+        <li><a href="../installare-repeater/">Repeater</a></li>
+        <li><a href="../mappa-copertura/" aria-current="true">Mappa</a></li>
+        <li><a href="../app/">App</a></li>
+        <li><a href="../regioni/">Regioni</a></li>
+      </ul>
+    </div>
+    <p class="site-footer__note">MeshCore ITA — community indipendente. Non affiliata al progetto MeshCore.</p>
+    <p class="site-footer__note">Contenuti sotto licenza CC BY 4.0, codice del sito sotto licenza MIT.</p>
+    <p class="foot__meta">Aggiornato il 11 settembre 2026</p>
+    <p class="foot__meta">Trovato un errore o vuoi aggiungere qualcosa? <a class="link" href="https://github.com/meshcore-ita/meshcore-ita.github.io/edit/main/content/mappa-copertura.html" target="_blank" rel="noopener">Modifica questa pagina su GitHub<span class="ext-arrow">↗</span></a> — la modifica diventa una pull request.</p>
+    <ul class="site-footer__links">
+      <li><a href="https://t.me/meshcore_ita" target="_blank" rel="noopener">Telegram<span class="ext-arrow">↗</span></a></li>
+      <li><a href="https://github.com/meshcore-ita" target="_blank" rel="noopener">GitHub<span class="ext-arrow">↗</span></a></li>
+      <li><a href="https://meshcore.io/" target="_blank" rel="noopener">MeshCore<span class="ext-arrow">↗</span></a></li>
+      <li><a href="https://flasher.meshcore.io/" target="_blank" rel="noopener">Flasher<span class="ext-arrow">↗</span></a></li>
+      <li><a href="https://map.meshcore.io/" target="_blank" rel="noopener">Mappa pubblica<span class="ext-arrow">↗</span></a></li>
+    </ul>
+  </div>
+</footer>
+
+<script type="module" src="../assets/js/main.js?v=2" defer></script>
+</body>
+</html>

@@ -1,0 +1,176 @@
+<!--meta
+{
+  "slug": "installare-repeater",
+  "nav": "Repeater",
+  "order": 10,
+  "primary": false,
+  "title": "Installare un repeater MeshCore: antenna, alimentazione, comandi",
+  "description": "Guida pratica per installare un repeater MeshCore: posizione, antenna e cavo, alimentazione solare o PoE, contenitore stagno, messa a terra e configurazione CLI.",
+  "h1": "Installare un repeater MeshCore",
+  "lede": "Dalla scelta della posizione alla configurazione via CLI: come mettere in servizio un repeater permanente sulla mesh italiana.",
+  "updated": "2026-09-11",
+  "jsonld": [
+    {
+      "@type": "HowTo",
+      "name": "Come installare un repeater MeshCore",
+      "description": "Guida passo passo per installare un repeater MeshCore permanente: posizione, antenna, cavo, alimentazione, contenitore, messa a terra e configurazione CLI.",
+      "step": [
+        { "@type": "HowToStep", "name": "Scegli la posizione", "text": "Preferisci l'altezza e la linea di vista libera agli ostacoli: l'altezza dell'antenna conta più della potenza di trasmissione.", "url": "https://meshcore-ita.github.io/installare-repeater/#posizione" },
+        { "@type": "HowToStep", "name": "Scegli l'antenna", "text": "Usa un'antenna omnidirezionale accordata sulla banda 868-870 MHz, verifica il ROS/SWR e non scambiare i connettori SMA/RP-SMA.", "url": "https://meshcore-ita.github.io/installare-repeater/#antenna" },
+        { "@type": "HowToStep", "name": "Scegli il cavo", "text": "Usa un cavo coassiale il più corto possibile e di buona qualità: un cavo lungo vanifica il guadagno dell'antenna.", "url": "https://meshcore-ita.github.io/installare-repeater/#cavo" },
+        { "@type": "HowToStep", "name": "Dimensiona l'alimentazione", "text": "Scegli tra rete elettrica, PoE o pannello solare con batteria, dimensionando il consumo con powersaving on.", "url": "https://meshcore-ita.github.io/installare-repeater/#alimentazione" },
+        { "@type": "HowToStep", "name": "Prepara il contenitore stagno", "text": "Usa una custodia con grado di protezione adeguato, passacavi sigillati e uno sfogo per l'umidità.", "url": "https://meshcore-ita.github.io/installare-repeater/#contenitore" },
+        { "@type": "HowToStep", "name": "Metti a terra e proteggi dalle scariche", "text": "Valuta una messa a terra e uno scaricatore sulla linea d'antenna; il lavoro in quota è responsabilità dell'installatore.", "url": "https://meshcore-ita.github.io/installare-repeater/#messa-a-terra" },
+        { "@type": "HowToStep", "name": "Configura il nodo come repeater", "text": "Imposta nome, preset radio, potenza e risparmio energetico da CLI, poi invia un advert.", "url": "https://meshcore-ita.github.io/installare-repeater/#configurazione" },
+        { "@type": "HowToStep", "name": "Verifica sul campo", "text": "Controlla neighbors e stats-radio e fatti confermare la ricezione da un altro nodo nel gruppo Telegram.", "url": "https://meshcore-ita.github.io/installare-repeater/#verifica" },
+        { "@type": "HowToStep", "name": "Pianifica la manutenzione", "text": "Aggiorna il firmware periodicamente e verifica che il nodo continui a comparire negli advert altrui.", "url": "https://meshcore-ita.github.io/installare-repeater/#manutenzione" }
+      ]
+    },
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Quanto guadagno d'antenna serve per un repeater?",
+          "acceptedAnswer": { "@type": "Answer", "text": "Dipende dal terreno intorno al repeater. Un'antenna omnidirezionale con guadagno più alto (in dBi) concentra l'energia in un lobo di irradiazione più schiacciato verso l'orizzonte: ottimo su un palo alto in pianura, meno adatto in collina dove serve irradiare anche verso il basso per raggiungere nodi a quote diverse. Un guadagno moderato con una posizione alta batte quasi sempre un guadagno alto con una posizione mediocre." }
+        },
+        {
+          "@type": "Question",
+          "name": "Meglio un connettore SMA o RP-SMA?",
+          "acceptedAnswer": { "@type": "Answer", "text": "Dipende da come è cablata la board: molte board LoRa montano un connettore RP-SMA (polarità invertita rispetto allo SMA standard), mentre alcuni cavi e antenne in commercio sono SMA. L'errore classico è comprare un'antenna o una prolunga con il connettore sbagliato e forzarla: verifica sempre la polarità prima dell'acquisto, un adattatore SMA/RP-SMA costa pochi euro e non introduce perdite significative." }
+        },
+        {
+          "@type": "Question",
+          "name": "Un pannello solare basta per un repeater sempre acceso?",
+          "acceptedAnswer": { "@type": "Answer", "text": "Nella maggior parte dei casi sì, se il nodo usa una board a basso consumo (chip nRF52) con powersaving on attivo e una potenza di trasmissione non superiore al necessario. Il dimensionamento va comunque fatto sul consumo medio reale del nodo e sulle ore di luce disponibili nella stagione peggiore, non sul consumo di picco: un pannello e una batteria sottodimensionati reggono in estate e si scaricano in inverno." }
+        },
+        {
+          "@type": "Question",
+          "name": "Serve una licenza o un tecnico per installare un repeater su un palo o un tetto?",
+          "acceptedAnswer": { "@type": "Answer", "text": "Per l'uso radio in sé non serve una licenza, entro i limiti di potenza e duty cycle del preset condiviso. L'installazione fisica in quota (tetti, pali, tralicci) comporta però rischi di caduta e richiede competenze e dispositivi di sicurezza adeguati: valuta di affidarti a chi ha esperienza specifica, e ricorda che la responsabilità della sicurezza dell'installazione resta sempre dell'installatore." }
+        }
+      ]
+    }
+  ]
+}
+-->
+<section class="section">
+  <div class="section__head">
+    <p class="eyelash">Dalla teoria alla pratica</p>
+    <h2 class="section__title">Nove passaggi per un repeater permanente</h2>
+    <p class="section__lede">Un repeater condiviso serve alla mesh più di un companion privato: ogni scelta qui sotto incide direttamente sulla copertura di chi ci si appoggia.</p>
+  </div>
+  <ol class="steps">
+    <li class="step" id="posizione">
+      <p class="step__num">01</p>
+      <h3 class="step__title">Scegli la posizione</h3>
+      <p class="step__body">L'altezza dell'antenna sopra gli ostacoli locali conta più della potenza di trasmissione: un repeater su un tetto o traliccio con vista libera copre più lontano di uno a potenza massima ma circondato da edifici o vegetazione. Verifica cosa c'è tra il punto scelto e le direzioni da coprire — colline, palazzi, alberi maturi — perché un solo ostacolo vicino può bloccare più segnale di chilometri in linea d'aria.</p>
+    </li>
+    <li class="step" id="antenna">
+      <p class="step__num">02</p>
+      <h3 class="step__title">Scegli l'antenna</h3>
+      <p class="step__body">Per un repeater fisso la scelta tipica è un'antenna omnidirezionale esterna, accordata sulla sub-banda 868-870 MHz: un'antenna per un'altra banda ha un ROS/SWR alto, riflette energia verso il radio invece di irradiarla e nel tempo danneggia lo stadio di uscita. Il guadagno in dBi non è sempre "più alto meglio è": un guadagno maggiore schiaccia il lobo di irradiazione verso l'orizzonte, utile in pianura ma penalizzante in collina. Occhio ai connettori: molte board montano SMA o RP-SMA (polarità invertita), e scambiarli è l'errore più comune in fase d'acquisto.</p>
+    </li>
+    <li class="step" id="cavo">
+      <p class="step__num">03</p>
+      <h3 class="step__title">Scegli il cavo</h3>
+      <p class="step__body">Ogni metro di cavo coassiale introduce una perdita che si somma, in negativo, al guadagno dell'antenna: un cavo lungo e scadente può vanificare il beneficio di un'antenna con guadagno alto. Tienilo il più corto possibile — sposta il radio vicino all'antenna se serve — e scegli un cavo di qualità adeguata a 868 MHz.</p>
+    </li>
+    <li class="step" id="alimentazione">
+      <p class="step__num">04</p>
+      <h3 class="step__title">Dimensiona l'alimentazione</h3>
+      <p class="step__body">Tre opzioni pratiche: rete elettrica per un'installazione indoor con presa già disponibile; PoE se il punto ha già un cablaggio di rete; pannello solare con batteria tampone (LiPo o LiFePO4) per un palo o un tetto isolato. Dimensiona il consumo, non limitarti a collegare: attiva <code>powersaving on</code> per far dormire il nodo tra una trasmissione e l'altra, e non alzare <code>set tx</code> oltre la potenza necessaria per la copertura richiesta.</p>
+    </li>
+    <li class="step" id="contenitore">
+      <p class="step__num">05</p>
+      <h3 class="step__title">Prepara il contenitore stagno</h3>
+      <p class="step__body">Né le board né le antenne standard sono impermeabili di fabbrica: in esterno serve una custodia con grado di protezione adeguato. Usa passacavi sigillati, orienta il contenitore perché l'acqua non ristagni sopra i passacavi, e lascia un minimo di ricambio d'aria per limitare condensa e sbalzi termici.</p>
+    </li>
+    <li class="step" id="messa-a-terra">
+      <p class="step__num">06</p>
+      <h3 class="step__title">Metti a terra e proteggi dalle scariche</h3>
+      <p class="step__body">Un'antenna esterna su un punto alto è un bersaglio naturale per le scariche atmosferiche: dove possibile, valuta una messa a terra e uno scaricatore di sovratensione sulla linea coassiale. L'installazione su tetti, pali o tralicci comporta rischi di caduta reali e richiede competenze e sicurezza adeguate: se non hai esperienza, fatti aiutare da chi ce l'ha. La responsabilità della sicurezza dell'installazione, e del rispetto dei limiti normativi, resta dell'operatore del nodo.</p>
+    </li>
+    <li class="step" id="configurazione">
+      <p class="step__num">07</p>
+      <h3 class="step__title">Configura il nodo come repeater</h3>
+      <p class="step__body">Collegati alla console via USB o da un client admin e imposta un nome coerente con la convenzione della community, ad esempio <code>set name IT-Torino-RPT-01</code>. Allinea il preset radio con <code>set radio 869.618,62.5,8,8</code>, regola la potenza con <code>set tx &lt;dbm&gt;</code> senza eccedere il necessario, attiva <code>powersaving on</code> se il nodo è a batteria o solare, e se serve cambia l'intervallo di annuncio con <code>set flood.advert.interval &lt;ore&gt;</code>. Applica tutto con <code>reboot</code> e invia un <code>advert</code> per farti vedere dai vicini. Sintassi completa nella pagina <a class="link" href="../comandi/">comandi CLI per amministrare un nodo MeshCore</a>.</p>
+    </li>
+    <li class="step" id="verifica">
+      <p class="step__num">08</p>
+      <h3 class="step__title">Verifica sul campo</h3>
+      <p class="step__body">Dopo il riavvio, usa <code>neighbors</code> per controllare quali nodi il tuo repeater sente direttamente e <code>stats-radio</code> per leggere noise floor, RSSI/SNR e airtime dell'ultima ricezione. Il riscontro più affidabile resta però quello umano: chiedi nel gruppo Telegram a chi ha un nodo nella tua zona di confermare che il tuo repeater compare tra i suoi contatti dopo l'advert.</p>
+    </li>
+    <li class="step" id="manutenzione">
+      <p class="step__num">09</p>
+      <h3 class="step__title">Pianifica la manutenzione</h3>
+      <p class="step__body">Un repeater condiviso va controllato periodicamente: verifica che compaia ancora negli advert altrui e tieni il firmware aggiornato via OTA (Wi-Fi su ESP32, DFU su nRF52), come descritto nella pagina dei comandi. Se il nodo sparisce, la causa più comune non è la radio ma l'alimentazione o l'orologio: la pagina <a class="link" href="../problemi/">soluzioni ai problemi più comuni di MeshCore</a> copre entrambi i casi con diagnosi e comando risolutivo.</p>
+    </li>
+  </ol>
+</section>
+
+<section class="section">
+  <div class="section__head">
+    <p class="eyelash">Attenzione trasversale</p>
+    <h2 class="section__title">Tre cose facili da trascurare</h2>
+  </div>
+  <div class="grid grid--3">
+    <article class="card">
+      <p class="card__num">01</p>
+      <h3 class="card__title">Naming coerente</h3>
+      <p class="card__body">Usa la convenzione <code>IT-&lt;citta&gt;-RPT-NN</code> (ad esempio <code>IT-Torino-RPT-01</code>): rende immediato per chiunque nella mesh capire cosa vede tra i contatti.</p>
+    </article>
+    <article class="card">
+      <p class="card__num">02</p>
+      <h3 class="card__title">Preavviso alla community</h3>
+      <p class="card__body">Se il repeater è già in servizio, annuncia nel gruppo Telegram prima di cambiare preset radio o spostare l'antenna: un cambiamento non comunicato toglie copertura a chi non se lo aspetta.</p>
+    </article>
+    <article class="card">
+      <p class="card__num">03</p>
+      <h3 class="card__title">Cosa succede se sparisce</h3>
+      <p class="card__body">Un repeater che smette di comparire negli advert altrui non è necessariamente guasto: spesso è alimentazione esaurita o orologio disallineato. Controllalo con <code>stats-core</code> e <code>get radio</code>.</p>
+    </article>
+  </div>
+</section>
+
+<section class="section">
+  <div class="section__head">
+    <p class="eyelash">Scelte di alimentazione</p>
+    <h2 class="section__title">Rete, PoE o solare: quando usarli</h2>
+  </div>
+  <table class="spec">
+    <caption>Opzioni di alimentazione per un repeater</caption>
+    <thead>
+      <tr><th scope="col">Alimentazione</th><th scope="col">Quando usarla</th><th scope="col">Note</th></tr>
+    </thead>
+    <tbody>
+      <tr><th scope="row">Rete elettrica</th><td>Installazione indoor o punto con presa già disponibile.</td><td>La più semplice e affidabile; nessun dimensionamento batteria.</td></tr>
+      <tr><th scope="row">PoE</th><td>Punto già raggiunto da un cablaggio di rete (tetto, sottotetto, armadio tecnico).</td><td>Evita un secondo cavo di alimentazione separato dal dato.</td></tr>
+      <tr><th scope="row">Pannello solare + batteria</th><td>Palo o tetto isolato, senza rete elettrica nelle vicinanze.</td><td>Richiede board a basso consumo (nRF52), <code>powersaving on</code> e dimensionamento sulla stagione peggiore.</td></tr>
+    </tbody>
+  </table>
+</section>
+
+<section class="section">
+  <div class="section__head">
+    <p class="eyelash">Domande frequenti</p>
+    <h2 class="section__title">FAQ sull'installazione di un repeater</h2>
+  </div>
+  <details class="faq">
+    <summary class="faq__q">Quanto guadagno d'antenna serve per un repeater?</summary>
+    <p class="faq__a">Dipende dal terreno intorno al repeater. Un'antenna omnidirezionale con guadagno più alto (in dBi) concentra l'energia in un lobo di irradiazione più schiacciato verso l'orizzonte: ottimo su un palo alto in pianura, meno adatto in collina dove serve irradiare anche verso il basso per raggiungere nodi a quote diverse. Un guadagno moderato con una posizione alta batte quasi sempre un guadagno alto con una posizione mediocre.</p>
+  </details>
+  <details class="faq">
+    <summary class="faq__q">Meglio un connettore SMA o RP-SMA?</summary>
+    <p class="faq__a">Dipende da come è cablata la board: molte board LoRa montano un connettore RP-SMA (polarità invertita rispetto allo SMA standard), mentre alcuni cavi e antenne in commercio sono SMA. L'errore classico è comprare un'antenna o una prolunga con il connettore sbagliato e forzarla: verifica sempre la polarità prima dell'acquisto, un adattatore SMA/RP-SMA costa pochi euro e non introduce perdite significative.</p>
+  </details>
+  <details class="faq">
+    <summary class="faq__q">Un pannello solare basta per un repeater sempre acceso?</summary>
+    <p class="faq__a">Nella maggior parte dei casi sì, se il nodo usa una board a basso consumo (chip nRF52) con powersaving on attivo e una potenza di trasmissione non superiore al necessario. Il dimensionamento va comunque fatto sul consumo medio reale del nodo e sulle ore di luce disponibili nella stagione peggiore, non sul consumo di picco: un pannello e una batteria sottodimensionati reggono in estate e si scaricano in inverno.</p>
+  </details>
+  <details class="faq">
+    <summary class="faq__q">Serve una licenza o un tecnico per installare un repeater su un palo o un tetto?</summary>
+    <p class="faq__a">Per l'uso radio in sé non serve una licenza, entro i limiti di potenza e duty cycle del preset condiviso. L'installazione fisica in quota (tetti, pali, tralicci) comporta però rischi di caduta e richiede competenze e dispositivi di sicurezza adeguati: valuta di affidarti a chi ha esperienza specifica, e ricorda che la responsabilità della sicurezza dell'installazione resta sempre dell'installatore.</p>
+  </details>
+  <p class="section__lede">Per il quadro normativo vedi il <a class="link" href="../preset-radio/">preset radio italiano per MeshCore</a>; per le board adatte vedi la <a class="link" href="../hardware/">guida hardware</a>; per un problema dopo l'installazione vedi le <a class="link" href="../problemi/">soluzioni ai problemi più comuni</a>. Per confrontarti con chi ha già installato un repeater vicino a te, il posto giusto è il <a class="link" href="https://t.me/meshcore_ita" target="_blank" rel="noopener">gruppo Telegram MeshCore ITA<span class="ext-arrow">↗</span></a>.</p>
+</section>
