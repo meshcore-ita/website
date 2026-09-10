@@ -20,6 +20,54 @@ function parseCommand(text) {
   return COMMANDS.has(name) ? name : null;
 }
 
+// Testo libero rivolto al bot: "/chiedi <domanda>" oppure una menzione
+// @meshcore_ita_bot. Con privacy mode attiva sono gli unici messaggi che il
+// bot riceve, quindi non serve altro filtro.
+function parseQuestion(text) {
+  if (typeof text !== 'string') return null;
+  const asked = /^\/chiedi(@meshcore_ita_bot)?\b/i.test(text)
+    ? text.replace(/^\/chiedi(@meshcore_ita_bot)?\s*/i, '')
+    : text.includes(`@${BOT_USERNAME}`)
+      ? text.replaceAll(`@${BOT_USERNAME}`, ' ').trim()
+      : null;
+  if (!asked) return null;
+  const q = asked.trim();
+  return q.length >= 3 && q.length <= 400 ? q : null;
+}
+
+const stripTags = (s) => s.replace(/<[^>]+>/g, '');
+
+// La knowledge base è la stessa dei comandi: il modello non deve sapere
+// niente che non sia già stato verificato e pubblicato.
+const KB = Object.entries(REPLIES)
+  .map(([k, v]) => `### /${k}\n${stripTags(v)}`)
+  .join('\n\n');
+
+const SYSTEM = `Sei l'assistente del gruppo Telegram MeshCore ITA, community italiana indipendente di MeshCore (rete mesh LoRa off-grid).
+Rispondi SOLO in italiano, in massimo 6 righe, senza saluti né chiacchiere.
+Usa esclusivamente le informazioni nella BASE DI CONOSCENZA qui sotto.
+Regole non negoziabili:
+- Non inventare MAI frequenze, parametri radio, limiti di potenza o comandi. Se un valore non è nella base di conoscenza, dì che non lo sai e rimanda a https://docs.meshcore.io/ .
+- Il preset corretto è esattamente 869.618 MHz / SF8 / BW 62.5 kHz / CR8 (EU/UK Narrow). Riportalo alla lettera quando serve.
+- Quando esiste un comando che copre la domanda, suggeriscilo (es. /preset, /cli, /problemi, /app, /hardware, /ruoli, /nomi, /normativa, /link, /regole, /regioni).
+- Niente Markdown e niente tag HTML: solo testo semplice.
+
+BASE DI CONOSCENZA
+${KB}`;
+
+async function answerWithAI(env, question) {
+  const res = await env.AI.run('@cf/meta/llama-3.3-70b-instruct-fp8-fast', {
+    messages: [
+      { role: 'system', content: SYSTEM },
+      { role: 'user', content: question },
+    ],
+    max_tokens: 320,
+    temperature: 0.2,
+  });
+  const text = (res?.response ?? '').trim();
+  return text || 'Non ho una risposta affidabile. Prova con /link oppure scrivi nel topic Supporto e troubleshooting.';
+}
+
 async function sendMessage(token, payload) {
   const res = await fetch(`https://api.telegram.org/bot${token}/sendMessage`, {
     method: 'POST',
@@ -38,22 +86,40 @@ export default {
 
     const update = await request.json().catch(() => null);
     const message = update?.message;
-    const command = parseCommand(message?.text);
-    if (!command) return new Response('ok');
+    if (!message?.chat) return new Response('ok');
 
     const chatId = String(message.chat.id);
     if (env.TELEGRAM_CHAT_ID && chatId !== String(env.TELEGRAM_CHAT_ID)) return new Response('ok');
 
-    const payload = {
+    const command = parseCommand(message.text);
+    const question = command ? null : parseQuestion(message.text);
+    if (!command && !question) return new Response('ok');
+
+    const base = {
       chat_id: message.chat.id,
-      text: REPLIES[command],
       parse_mode: 'HTML',
       link_preview_options: { is_disabled: true },
     };
-    if (message.message_thread_id) payload.message_thread_id = message.message_thread_id;
+    if (message.message_thread_id) base.message_thread_id = message.message_thread_id;
 
-    // Telegram ritenta se la risposta tarda: rispondiamo subito, invio in background.
-    ctx.waitUntil(sendMessage(env.TELEGRAM_BOT_TOKEN, payload));
+    if (command) {
+      ctx.waitUntil(sendMessage(env.TELEGRAM_BOT_TOKEN, { ...base, text: REPLIES[command] }));
+      return new Response('ok');
+    }
+
+    // Risposta AI: testo semplice, nessun tag da escapare.
+    ctx.waitUntil(
+      answerWithAI(env, question)
+        .then((text) => sendMessage(env.TELEGRAM_BOT_TOKEN, { ...base, text, parse_mode: undefined }))
+        .catch(async (err) => {
+          console.error(`AI error: ${err.message}`);
+          await sendMessage(env.TELEGRAM_BOT_TOKEN, {
+            ...base,
+            text: 'Al momento non riesco a rispondere. Usa /link o scrivi nel topic Supporto e troubleshooting.',
+            parse_mode: undefined,
+          });
+        }),
+    );
     return new Response('ok');
   },
 };

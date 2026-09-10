@@ -5,6 +5,10 @@ compatibility_date = "2026-09-01"
 # Espone il Worker su <name>.<subdomain>.workers.dev
 workers_dev = true
 
+# Workers AI: risposte in linguaggio naturale con /chiedi o menzionando il bot
+[ai]
+binding = "AI"
+
 # Chat del gruppo MeshCore ITA: il bot ignora gli update di altre chat.
 [vars]
 TELEGRAM_CHAT_ID = "-1003711129218"

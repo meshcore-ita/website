@@ -46,6 +46,23 @@ node worker/set-webhook.mjs --delete   # rimuove il webhook
 systemctl --user enable --now meshcore-ita-bot   # torna al long-polling
 ```
 
+## Risposte AI
+
+Oltre ai comandi fissi, il Worker risponde al testo libero con Workers AI
+(`@cf/meta/llama-3.3-70b-instruct-fp8-fast`, binding `AI` in `wrangler.toml`):
+
+- `/chiedi <domanda>` oppure un messaggio che menziona `@meshcore_ita_bot`
+- la domanda deve stare fra 3 e 400 caratteri, altrimenti viene ignorata
+- il modello riceve come unica fonte i testi di `bot/content.mjs`, ripuliti dai
+  tag: non può citare comandi o frequenze che non abbiamo già verificato
+- il preset corretto è ripetuto nel system prompt come vincolo esplicito
+- se il modello o la quota falliscono, il bot manda un messaggio di fallback e
+  i comandi statici continuano a funzionare
+
+Il free tier di Workers AI include 10.000 neuron al giorno; superata la quota
+le chiamate AI falliscono ma i comandi restano operativi. Per disattivare la
+funzione basta rimuovere la sezione `[ai]` da `wrangler.toml` e rideployare.
+
 ## Note
 
 - Il Worker accetta solo POST con header `x-telegram-bot-api-secret-token`
