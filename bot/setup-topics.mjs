@@ -67,6 +67,21 @@ async function tg(token, method, payload) {
   return { ok: data.ok, result: data.result, description: data.description };
 }
 
+const sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
+
+// Telegram limita la creazione di topic: su 429 attende retry_after e riprova.
+async function tgWithRetry(token, method, payload, attempts = 5) {
+  for (let attempt = 1; ; attempt += 1) {
+    const res = await tg(token, method, payload);
+    if (res.ok) return res;
+    const wait = /retry after (\d+)/i.exec(res.description || '');
+    if (!wait || attempt >= attempts) return res;
+    const seconds = Number(wait[1]) + 1;
+    console.log(`Rate limit: attendo ${seconds}s e riprovo (${method})`);
+    await sleep(seconds * 1000);
+  }
+}
+
 function pickIcon(stickers, index) {
   const sticker = stickers && stickers.length ? stickers[index % stickers.length] : null;
   const icon = { icon_color: ICON_COLORS[index % ICON_COLORS.length] };
@@ -135,7 +150,7 @@ async function main() {
     const payload = { chat_id: CHAT_ID, name: topic.name, icon_color: icon.icon_color };
     if (icon.icon_custom_emoji_id) payload.icon_custom_emoji_id = icon.icon_custom_emoji_id;
 
-    const res = await tg(token, 'createForumTopic', payload);
+    const res = await tgWithRetry(token, 'createForumTopic', payload);
     if (!res.ok) {
       if (isForumPermissionError(res.description)) {
         printForumInstructions(res.description);
@@ -153,6 +168,7 @@ async function main() {
     saveState(state);
     created += 1;
     console.log(`Creato: ${topic.name} (thread ${res.result.message_thread_id})`);
+    await sleep(1200);
   }
 
   console.log(`\nCompletato: ${created} creati, ${skipped} già presenti.`);
