@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" width="1200" height="630" role="img" aria-label="MeshCore ITA — la rete mesh LoRa italiana">
+  <defs>
+    <radialGradient id="bgfade" cx="50%" cy="35%" r="75%">
+      <stop offset="0%" stop-color="#111318"/>
+      <stop offset="100%" stop-color="#000000"/>
+    </radialGradient>
+  </defs>
+  <rect width="1200" height="630" fill="#000"/>
+  <rect width="1200" height="630" fill="url(#bgfade)"/>
+
+  <g transform="translate(96,225)" fill="none" stroke="#3a3a3a" stroke-width="1.5" stroke-linecap="round">
+    <line x1="40" y1="0" x2="0" y2="70"/>
+    <line x1="40" y1="0" x2="80" y2="70"/>
+    <line x1="0" y1="70" x2="80" y2="70"/>
+    <line x1="40" y1="0" x2="40" y2="40"/>
+  </g>
+  <g transform="translate(96,225)">
+    <circle cx="40" cy="0" r="6" fill="#22c55e"/>
+    <circle cx="0" cy="70" r="6" fill="#22c55e"/>
+    <circle cx="80" cy="70" r="6" fill="#e11d48"/>
+    <circle cx="40" cy="40" r="7" fill="#22c55e"/>
+  </g>
+
+  <text x="270" y="300" font-family="system-ui, sans-serif" font-weight="600" font-size="88" fill="#fafafa" letter-spacing="-2">MeshCore <tspan fill="#22c55e">ITA</tspan></text>
+  <text x="272" y="356" font-family="system-ui, sans-serif" font-weight="400" font-size="34" fill="#8b8b8b">La rete mesh LoRa italiana</text>
+  <text x="272" y="410" font-family="ui-monospace, monospace" font-weight="400" font-size="22" fill="#5a5a5a" letter-spacing="1">869.525 MHz &#183; SF11 &#183; BW250 &#183; CR5</text>
+</svg>
