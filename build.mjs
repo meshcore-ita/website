@@ -130,6 +130,108 @@ function readContentFiles() {
   return files.map(parseContentFile);
 }
 
+// --- knowledge base extraction (worker/kb.generated.mjs) ---------------
+// Chunks the visible text of every content page (one per <h2>/<h3> section,
+// plus one per FAQ question/answer pair) for the Telegram bot's runtime
+// retrieval. Deterministic: same input always yields the same output, so
+// `--check` can catch drift the same way it does for the HTML pages.
+
+const KB_CHUNK_MAX_CHARS = 700;
+const ENTITY_RE = /&lt;|&gt;|&amp;|&#39;|&quot;|&nbsp;/g;
+const ENTITY_MAP = { '&lt;': '<', '&gt;': '>', '&amp;': '&', '&#39;': "'", '&quot;': '"', '&nbsp;': ' ' };
+const FAQ_BLOCK_RE = /<details class="faq">([\s\S]*?)<\/details>/g;
+const FAQ_QUESTION_RE = /<summary class="faq__q">([\s\S]*?)<\/summary>/;
+const HEADING_RE = /<h([23])[^>]*>([\s\S]*?)<\/h\1>/g;
+
+function decodeEntities(text) {
+  return text.replace(ENTITY_RE, (m) => ENTITY_MAP[m]);
+}
+
+function stripTags(html) {
+  return decodeEntities(html.replace(/<[^>]+>/g, ' '))
+    .replace(/\s+/g, ' ')
+    .trim();
+}
+
+function truncateAtWord(text, max = KB_CHUNK_MAX_CHARS) {
+  if (text.length <= max) return text;
+  const cut = text.slice(0, max);
+  const lastSpace = cut.lastIndexOf(' ');
+  return `${(lastSpace > 0 ? cut.slice(0, lastSpace) : cut).trim()}…`;
+}
+
+function slugify(text) {
+  return (
+    text
+      .normalize('NFD')
+      .replace(/[\u0300-\u036f]/g, '')
+      .toLowerCase()
+      .replace(/[^a-z0-9]+/g, '-')
+      .replace(/^-+|-+$/g, '') || 'sezione'
+  );
+}
+
+function extractPageChunks(meta, fragment) {
+  const page = meta.nav;
+  const url = `${SITE_BASE}${meta.slug}/`;
+  const clean = fragment.replace(/<p class="(?:step|card)__num">[^<]*<\/p>/g, '');
+  const chunks = [];
+  const usedIds = new Set();
+
+  const addChunk = (title, rawText) => {
+    const text = truncateAtWord(rawText);
+    if (!title || !text) return;
+    const base = `${meta.slug}--${slugify(title)}`;
+    let id = base;
+    let n = 2;
+    while (usedIds.has(id)) {
+      id = `${base}-${n}`;
+      n += 1;
+    }
+    usedIds.add(id);
+    chunks.push({ id, page, title, url, text });
+  };
+
+  // FAQ question/answer pairs become their own chunks first, then get
+  // stripped out so the heading pass below doesn't duplicate them.
+  FAQ_BLOCK_RE.lastIndex = 0;
+  let faqMatch;
+  while ((faqMatch = FAQ_BLOCK_RE.exec(clean))) {
+    const inner = faqMatch[1];
+    const qMatch = FAQ_QUESTION_RE.exec(inner);
+    if (!qMatch) continue;
+    const answerHtml = inner.slice(qMatch.index + qMatch[0].length);
+    addChunk(stripTags(qMatch[1]), stripTags(answerHtml));
+  }
+  const withoutFaq = clean.replace(FAQ_BLOCK_RE, '');
+
+  // Every <h2>/<h3> owns the text up to the next heading of either level.
+  HEADING_RE.lastIndex = 0;
+  const headings = [...withoutFaq.matchAll(HEADING_RE)];
+  for (let i = 0; i < headings.length; i += 1) {
+    const heading = headings[i];
+    const start = heading.index + heading[0].length;
+    const end = i + 1 < headings.length ? headings[i + 1].index : withoutFaq.length;
+    addChunk(stripTags(heading[2]), stripTags(withoutFaq.slice(start, end)));
+  }
+
+  return chunks;
+}
+
+function buildKbModule(pages) {
+  const sorted = [...pages].sort((a, b) => a.meta.order - b.meta.order);
+  const chunks = sorted.flatMap(({ meta, fragment }) => extractPageChunks(meta, fragment));
+  const banner = [
+    '// File generato automaticamente da build.mjs — NON modificare a mano.',
+    '// Per rigenerare: node build.mjs',
+    '//',
+    '// Frammenti (sezioni <h2>/<h3> e domande FAQ) delle pagine content/*.html,',
+    '// usati da worker/worker.mjs come base di conoscenza aggiuntiva per le',
+    '// risposte generate dal modello AI del bot Telegram.',
+  ].join('\n');
+  return `${banner}\nexport const KB_CHUNKS = ${JSON.stringify(chunks, null, 2)};\n`;
+}
+
 // --- rendering helpers --------------------------------------------------
 // Content pages live at depth 1 (<slug>/index.html), so their nav/footer
 // links to other pages are relative ("../<slug>/"). 404.html is served by
@@ -281,6 +383,7 @@ function computeOutputs() {
   outputs.set('sitemap.xml', buildSitemap(pages));
   outputs.set('robots.txt', buildRobots());
   outputs.set('404.html', renderNotFound(notFoundTemplate, pages));
+  outputs.set(join('worker', 'kb.generated.mjs'), buildKbModule(pages));
   return { pages, outputs };
 }
 
@@ -328,12 +431,12 @@ function main() {
       process.exitCode = 1;
       return;
     }
-    console.log(`OK: ${outputs.size} file generati sono aggiornati (${pages.length} pagine + sitemap.xml + robots.txt + 404.html).`);
+    console.log(`OK: ${outputs.size} file generati sono aggiornati (${pages.length} pagine + sitemap.xml + robots.txt + 404.html + worker/kb.generated.mjs).`);
     return;
   }
 
   writeOutputs(outputs);
-  console.log(`Generati ${outputs.size} file (${pages.length} pagine + sitemap.xml + robots.txt + 404.html).`);
+  console.log(`Generati ${outputs.size} file (${pages.length} pagine + sitemap.xml + robots.txt + 404.html + worker/kb.generated.mjs).`);
 }
 
 main();

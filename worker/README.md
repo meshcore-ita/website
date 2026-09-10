@@ -53,8 +53,10 @@ Oltre ai comandi fissi, il Worker risponde al testo libero con Workers AI
 
 - `/chiedi <domanda>` oppure un messaggio che menziona `@meshcore_ita_bot`
 - la domanda deve stare fra 3 e 400 caratteri, altrimenti viene ignorata
-- il modello riceve come unica fonte i testi di `bot/content.mjs`, ripuliti dai
-  tag: non può citare comandi o frequenze che non abbiamo già verificato
+- il modello riceve i testi di `bot/content.mjs` (ripuliti dai tag) come base
+  sempre presente, più eventuali frammenti pertinenti delle pagine del sito
+  (vedi sotto): non può citare comandi, frequenze o URL che non siano già
+  stati verificati e pubblicati
 - il preset corretto è ripetuto nel system prompt come vincolo esplicito
 - se il modello o la quota falliscono, il bot manda un messaggio di fallback e
   i comandi statici continuano a funzionare
@@ -62,6 +64,29 @@ Oltre ai comandi fissi, il Worker risponde al testo libero con Workers AI
 Il free tier di Workers AI include 10.000 neuron al giorno; superata la quota
 le chiamate AI falliscono ma i comandi restano operativi. Per disattivare la
 funzione basta rimuovere la sezione `[ai]` da `wrangler.toml` e rideployare.
+
+## Base di conoscenza dal sito
+
+Oltre ai comandi, il Worker cerca nelle pagine `content/*.html` i frammenti
+pertinenti alla domanda:
+
+- `build.mjs` divide ogni pagina in frammenti (uno per sezione `<h2>`/`<h3>`,
+  più uno per ogni domanda `<details class="faq">`) e li scrive in
+  `worker/kb.generated.mjs`, un modulo generato — non modificarlo a mano,
+  rilanciare `node build.mjs` dopo ogni modifica a `content/*.html`
+- a runtime, `worker.mjs` normalizza la domanda (minuscolo, senza accenti,
+  senza stopword italiane) e assegna un punteggio ai frammenti per
+  sovrapposizione di termini (i match nel titolo pesano più di quelli nel
+  testo, più un bonus per le frasi multi-parola)
+- i 3-4 frammenti col punteggio più alto, entro un budget di ~4000 caratteri,
+  vengono aggiunti al system prompt sotto un'intestazione dedicata; se nessun
+  frammento supera la soglia minima, il prompt resta solo la base dei comandi
+- il modello può chiudere la risposta con l'URL della pagina d'origine solo
+  se l'ha davvero usata, e non può mai inventarne uno
+
+`node build.mjs --check` fallisce se `worker/kb.generated.mjs` non è
+aggiornato rispetto a `content/*.html`, quindi è coperto dallo stesso
+controllo CI degli altri file generati.
 
 ## Note
 
