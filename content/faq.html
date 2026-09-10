@@ -146,11 +146,11 @@
     </div>
     <details class="faq">
       <summary class="faq__q">Quanto costa iniziare con MeshCore?</summary>
-      <p class="faq__a">Il firmware MeshCore è gratuito e open source con licenza MIT: nessun costo di licenza o abbonamento. Il costo iniziale è solo quello dell'hardware — una board LoRa economica come la Heltec V3 basta per iniziare come companion, mentre una seconda board dedicata serve per un repeater che estenda la copertura. GPS o schermo (T-Beam, T-Deck) fanno salire il prezzo della singola board, ma non sono necessari per comunicare. Elenco completo delle board nella <a class="link" href="/hardware/">pagina hardware</a>.</p>
+      <p class="faq__a">Il firmware MeshCore è gratuito e open source con licenza MIT: nessun costo di licenza o abbonamento. Il costo iniziale è solo quello dell'hardware — una board LoRa economica come la Heltec V3 basta per iniziare come companion, mentre una seconda board dedicata serve per un repeater che estenda la copertura. GPS o schermo (T-Beam, T-Deck) fanno salire il prezzo della singola board, ma non sono necessari per comunicare. Elenco completo delle board nella <a class="link" href="../hardware/">pagina hardware</a>.</p>
     </details>
     <details class="faq">
       <summary class="faq__q">Che differenza c'è tra i ruoli companion, repeater, room server e sensor?</summary>
-      <p class="faq__a">Sono i quattro ruoli che un nodo MeshCore può assumere, a seconda del firmware flashato. Un companion è un client via BLE o USB con app mobile o interfaccia web, e non ripete mai i pacchetti altrui. Un repeater estende la copertura inoltrando i pacchetti sui percorsi appresi dal routing ibrido. Un room server funziona come una bacheca in stile BBS, con fino a 32 messaggi non letti conservati per ogni utente. Un sensor trasmette telemetria o payload personalizzati sulla mesh. Per configurare ciascun ruolo vedi la pagina <a class="link" href="/comandi/">comandi CLI per repeater e room server</a>.</p>
+      <p class="faq__a">Sono i quattro ruoli che un nodo MeshCore può assumere, a seconda del firmware flashato. Un companion è un client via BLE o USB con app mobile o interfaccia web, e non ripete mai i pacchetti altrui. Un repeater estende la copertura inoltrando i pacchetti sui percorsi appresi dal routing ibrido. Un room server funziona come una bacheca in stile BBS, con fino a 32 messaggi non letti conservati per ogni utente. Un sensor trasmette telemetria o payload personalizzati sulla mesh. Per configurare ciascun ruolo vedi la pagina <a class="link" href="../comandi/">comandi CLI per repeater e room server</a>.</p>
     </details>
     <details class="faq">
       <summary class="faq__q">Serve una licenza radio per usare MeshCore in Italia?</summary>
@@ -174,7 +174,7 @@
     </div>
     <details class="faq">
       <summary class="faq__q">Che differenza c'è tra MeshCore e Meshtastic?</summary>
-      <p class="faq__a">MeshCore usa un routing ibrido: gli advert e i messaggi di canale viaggiano in flood, mentre i messaggi privati sfruttano un path-discovery che scopre e poi riutilizza un percorso diretto tra mittente e destinatario. Un client MeshCore non ripete mai il traffico degli altri nodi: solo repeater e room server lo fanno, il che riduce il traffico ripetuto e il consumo energetico dei client. Per un confronto tecnico completo vedi la pagina <a class="link" href="/meshcore-vs-meshtastic/">MeshCore vs Meshtastic</a>.</p>
+      <p class="faq__a">MeshCore usa un routing ibrido: gli advert e i messaggi di canale viaggiano in flood, mentre i messaggi privati sfruttano un path-discovery che scopre e poi riutilizza un percorso diretto tra mittente e destinatario. Un client MeshCore non ripete mai il traffico degli altri nodi: solo repeater e room server lo fanno, il che riduce il traffico ripetuto e il consumo energetico dei client. Per un confronto tecnico completo vedi la pagina <a class="link" href="../meshcore-vs-meshtastic/">MeshCore vs Meshtastic</a>.</p>
     </details>
     <details class="faq">
       <summary class="faq__q">Come sono protetti i messaggi su MeshCore?</summary>
@@ -190,7 +190,7 @@
     </details>
     <details class="faq">
       <summary class="faq__q">Il preset radio è obbligatorio?</summary>
-      <p class="faq__a">Non è obbligatorio in senso tecnico — un nodo MeshCore può funzionare su qualunque combinazione di frequenza, banda, SF e CR entro i limiti normativi — ma è fortemente raccomandato per la community italiana. Un preset condiviso è ciò che permette a nodi diversi di sentirsi tra loro: due nodi su preset differenti semplicemente non comunicano, anche se vicini. Per i dettagli vedi la <a class="link" href="/preset-radio/">pagina dedicata al preset radio italiano</a>.</p>
+      <p class="faq__a">Non è obbligatorio in senso tecnico — un nodo MeshCore può funzionare su qualunque combinazione di frequenza, banda, SF e CR entro i limiti normativi — ma è fortemente raccomandato per la community italiana. Un preset condiviso è ciò che permette a nodi diversi di sentirsi tra loro: due nodi su preset differenti semplicemente non comunicano, anche se vicini. Per i dettagli vedi la <a class="link" href="../preset-radio/">pagina dedicata al preset radio italiano</a>.</p>
     </details>
     <details class="faq">
       <summary class="faq__q">Perché il preset radio è cambiato?</summary>
@@ -214,7 +214,7 @@
     </details>
     <details class="faq">
       <summary class="faq__q">Come aggiorno il firmware?</summary>
-      <p class="faq__a">Il metodo dipende dal chip della board. Su ESP32 (es. Heltec V3) usa il web flasher via USB, oppure aggiorna via OTA lanciando <code>start ota</code> dal client admin e collegandoti all'hotspot Wi-Fi “MeshCore OTA” su <code>192.168.4.1/update</code>. Su board nRF (RAK4631, Heltec T114, Seeed XIAO) usa <code>start ota</code> insieme all'app nRF DFU sullo smartphone. Il bin “non-merged” mantiene l'abbinamento Bluetooth esistente; il “merged” lo azzera ma mantiene nome, chiavi e preset salvati. Se qualcosa va storto, la pagina sulla <a class="link" href="/problemi/">risoluzione dei problemi</a> copre i casi più comuni.</p>
+      <p class="faq__a">Il metodo dipende dal chip della board. Su ESP32 (es. Heltec V3) usa il web flasher via USB, oppure aggiorna via OTA lanciando <code>start ota</code> dal client admin e collegandoti all'hotspot Wi-Fi “MeshCore OTA” su <code>192.168.4.1/update</code>. Su board nRF (RAK4631, Heltec T114, Seeed XIAO) usa <code>start ota</code> insieme all'app nRF DFU sullo smartphone. Il bin “non-merged” mantiene l'abbinamento Bluetooth esistente; il “merged” lo azzera ma mantiene nome, chiavi e preset salvati. Se qualcosa va storto, la pagina sulla <a class="link" href="../problemi/">risoluzione dei problemi</a> copre i casi più comuni.</p>
     </details>
     <details class="faq">
       <summary class="faq__q">Il mio nodo è visibile sulla mappa pubblica?</summary>

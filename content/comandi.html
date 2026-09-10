@@ -28,7 +28,7 @@
   </div>
   <div class="prose">
     <p>Il primo è via USB seriale: colleghi il nodo al computer con un cavo dati (non solo di ricarica) e apri una console seriale, ad esempio il web flasher ufficiale dal browser oppure <code>picocom</code> da terminale su Linux. Questo metodo funziona anche prima di aver mai configurato il nodo, perché non richiede una rete mesh già funzionante. Il secondo è da remoto, tramite un client MeshCore (app o web) già autenticato come amministratore sul nodo target: utile per un repeater o un room server già installato in un punto alto o difficile da raggiungere fisicamente. In entrambi i casi serve la password admin, il cui valore di default è <code>password</code>: cambiala non appena metti in servizio un nodo, con il comando descritto più sotto.</p>
-    <p>Per l'elenco delle board supportate e delle differenze tra chip ESP32 e nRF52 (rilevanti per capire quale comando OTA usare) consulta la <a class="link" href="/hardware/">guida hardware alle board LoRa compatibili con MeshCore</a>. Se il flasher o il terminale seriale non vedono la porta su Linux, è quasi sempre un problema di permessi: la pagina <a class="link" href="/problemi/">soluzioni ai problemi più comuni di MeshCore</a> spiega come risolverlo con <code>setfacl</code>.</p>
+    <p>Per l'elenco delle board supportate e delle differenze tra chip ESP32 e nRF52 (rilevanti per capire quale comando OTA usare) consulta la <a class="link" href="../hardware/">guida hardware alle board LoRa compatibili con MeshCore</a>. Se il flasher o il terminale seriale non vedono la porta su Linux, è quasi sempre un problema di permessi: la pagina <a class="link" href="../problemi/">soluzioni ai problemi più comuni di MeshCore</a> spiega come risolverlo con <code>setfacl</code>.</p>
   </div>
 </section>
 
@@ -76,7 +76,7 @@
     </tbody>
   </table>
   <div class="prose">
-    <p>Per allineare un nodo al preset condiviso dalla community italiana il comando è <code>set radio 869.618,62.5,8,8</code> seguito da <code>reboot</code>: i dettagli sul preset, sul perché è cambiato e sulla differenza col vecchio preset deprecato sono nella pagina dedicata al <a class="link" href="/preset-radio/">preset radio italiano per MeshCore</a>. Attenzione: cambiare i parametri radio su un nodo già in servizio lo disallinea immediatamente dal resto della mesh finché non lo riporti allo stesso preset di tutti gli altri; su un repeater o room server condiviso, annuncia la modifica nel gruppo prima di farla, così chi dipende da quel nodo non perde copertura senza preavviso. Il significato tecnico di banda, spreading factor, coding rate, RSSI, SNR e airtime è spiegato nel <a class="link" href="/glossario/">glossario dei termini tecnici MeshCore</a>.</p>
+    <p>Per allineare un nodo al preset condiviso dalla community italiana il comando è <code>set radio 869.618,62.5,8,8</code> seguito da <code>reboot</code>: i dettagli sul preset, sul perché è cambiato e sulla differenza col vecchio preset deprecato sono nella pagina dedicata al <a class="link" href="../preset-radio/">preset radio italiano per MeshCore</a>. Attenzione: cambiare i parametri radio su un nodo già in servizio lo disallinea immediatamente dal resto della mesh finché non lo riporti allo stesso preset di tutti gli altri; su un repeater o room server condiviso, annuncia la modifica nel gruppo prima di farla, così chi dipende da quel nodo non perde copertura senza preavviso. Il significato tecnico di banda, spreading factor, coding rate, RSSI, SNR e airtime è spiegato nel <a class="link" href="../glossario/">glossario dei termini tecnici MeshCore</a>.</p>
   </div>
 </section>
 
@@ -96,7 +96,7 @@
     </tbody>
   </table>
   <div class="prose">
-    <p>Su un repeater alimentato a batteria o pannello solare, <code>powersaving on</code> è spesso la prima leva da usare se l'autonomia non basta, insieme a una potenza TX (<code>set tx</code>) non più alta del necessario per la copertura richiesta. Se la batteria si scarica comunque troppo in fretta, <code>stats-core</code> aiuta a capire se il problema è di consumo o se il nodo si sta riavviando in loop: la pagina <a class="link" href="/problemi/">soluzioni ai problemi più comuni di MeshCore</a> copre anche questo caso insieme ad altri sintomi frequenti.</p>
+    <p>Su un repeater alimentato a batteria o pannello solare, <code>powersaving on</code> è spesso la prima leva da usare se l'autonomia non basta, insieme a una potenza TX (<code>set tx</code>) non più alta del necessario per la copertura richiesta. Se la batteria si scarica comunque troppo in fretta, <code>stats-core</code> aiuta a capire se il problema è di consumo o se il nodo si sta riavviando in loop: la pagina <a class="link" href="../problemi/">soluzioni ai problemi più comuni di MeshCore</a> copre anche questo caso insieme ad altri sintomi frequenti.</p>
   </div>
 </section>
 
@@ -136,6 +136,6 @@
     </tbody>
   </table>
   <div class="prose">
-    <p>Su board ESP32 come Heltec V3, <code>start ota</code> apre un hotspot Wi-Fi chiamato "MeshCore OTA": ti colleghi a quell'hotspot dal telefono o dal computer e vai su <code>192.168.4.1/update</code> per caricare il nuovo firmware. Su board nRF52 (RAK4631, Heltec T114, Seeed XIAO) lo stesso comando prepara il nodo, ma il caricamento avviene con l'app nRF DFU dello smartphone. In entrambi i casi non scollegare l'alimentazione del nodo durante il trasferimento: un OTA interrotto a metà può lasciare il nodo in uno stato da recuperare via USB con il web flasher. Nota anche la differenza tra bin "merged" (azzera l'abbinamento Bluetooth esistente ma mantiene nome, chiavi e preset salvati) e bin "non-merged" (mantiene l'abbinamento Bluetooth): la scelta sbagliata costringe a un nuovo pairing BLE non necessario. La domanda "come aggiorno il firmware" è coperta con più dettaglio anche nella pagina <a class="link" href="/faq/">domande frequenti su MeshCore in italiano</a>.</p>
+    <p>Su board ESP32 come Heltec V3, <code>start ota</code> apre un hotspot Wi-Fi chiamato "MeshCore OTA": ti colleghi a quell'hotspot dal telefono o dal computer e vai su <code>192.168.4.1/update</code> per caricare il nuovo firmware. Su board nRF52 (RAK4631, Heltec T114, Seeed XIAO) lo stesso comando prepara il nodo, ma il caricamento avviene con l'app nRF DFU dello smartphone. In entrambi i casi non scollegare l'alimentazione del nodo durante il trasferimento: un OTA interrotto a metà può lasciare il nodo in uno stato da recuperare via USB con il web flasher. Nota anche la differenza tra bin "merged" (azzera l'abbinamento Bluetooth esistente ma mantiene nome, chiavi e preset salvati) e bin "non-merged" (mantiene l'abbinamento Bluetooth): la scelta sbagliata costringe a un nuovo pairing BLE non necessario. La domanda "come aggiorno il firmware" è coperta con più dettaglio anche nella pagina <a class="link" href="../faq/">domande frequenti su MeshCore in italiano</a>.</p>
   </div>
 </section>

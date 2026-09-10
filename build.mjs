@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 // MeshCore ITA — static site generator. Node stdlib only, no dependencies.
 // Reads templates/layout.html + every content/<slug>.html and writes
-// <slug>/index.html plus sitemap.xml at the repo root.
+// <slug>/index.html, sitemap.xml, robots.txt and 404.html at the repo root.
 //
 // Usage:
 //   node build.mjs           write generated files to disk
@@ -12,11 +12,46 @@ import { join, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 const ROOT = dirname(fileURLToPath(import.meta.url));
-const BASE_URL = 'https://meshcore-ita.github.io/';
+
+// --- site base resolution ------------------------------------------------
+// Every internal link/asset in generated pages is relative, so the site
+// works unchanged at any mount point. Only the handful of URLs that must be
+// absolute (canonical, og:*, JSON-LD, sitemap <loc>, robots.txt Sitemap:)
+// need a real origin, resolved in order from:
+//   1. SITE_BASE env var, verbatim (must end with "/").
+//   2. GITHUB_REPOSITORY env var, set automatically by GitHub Actions:
+//        "<owner>/<owner>.github.io" -> "https://<owner>.github.io/"
+//        "<owner>/<repo>"            -> "https://<owner>.github.io/<repo>/"
+//   3. Fallback: this repo's current GitHub Pages URL. If the repo is later
+//      renamed to meshcore-ita.github.io, case 2 makes this resolve to the
+//      root automatically, with no code change.
+function resolveSiteBase() {
+  const envBase = process.env.SITE_BASE;
+  if (envBase) return envBase;
+  const repo = process.env.GITHUB_REPOSITORY;
+  if (repo) {
+    const [owner, repoName] = repo.split('/');
+    if (owner && repoName) {
+      const host = `${owner}.github.io`;
+      return repoName.toLowerCase() === host.toLowerCase()
+        ? `https://${host}/`
+        : `https://${host}/${repoName}/`;
+    }
+  }
+  return 'https://meshcore-ita.github.io/website/';
+}
+
+export const SITE_BASE = resolveSiteBase();
+if (!SITE_BASE.endsWith('/')) {
+  throw new Error(`SITE_BASE deve terminare con "/": ${SITE_BASE}`);
+}
+
 const REPO_EDIT_BASE =
   'https://github.com/meshcore-ita/meshcore-ita.github.io/edit/main/';
 const CONTENT_DIR = join(ROOT, 'content');
-const LAYOUT_PATH = join(ROOT, 'templates', 'layout.html');
+const TEMPLATES_DIR = join(ROOT, 'templates');
+const LAYOUT_PATH = join(TEMPLATES_DIR, 'layout.html');
+const NOT_FOUND_TEMPLATE_PATH = join(TEMPLATES_DIR, '404.html');
 
 const REQUIRED_KEYS = ['slug', 'nav', 'order', 'primary', 'title', 'description', 'h1', 'lede', 'updated'];
 
@@ -96,14 +131,21 @@ function readContentFiles() {
 }
 
 // --- rendering helpers --------------------------------------------------
+// Content pages live at depth 1 (<slug>/index.html), so their nav/footer
+// links to other pages are relative ("../<slug>/"). 404.html is served by
+// GitHub Pages at arbitrary depths, so it renders the same nav/footer with
+// absolute links instead — both share the logic below via `hrefFor`.
 
-function buildNav(pages, currentSlug) {
+const relativeHref = (slug) => `../${slug}/`;
+const absoluteHref = (slug) => `${SITE_BASE}${slug}/`;
+
+function buildNav(pages, currentSlug, hrefFor) {
   const sorted = pages
     .filter(({ meta }) => meta.primary)
     .sort((a, b) => a.meta.order - b.meta.order);
   const lines = sorted.map(({ meta }) => {
     const current = meta.slug === currentSlug ? ' aria-current="true"' : '';
-    return `      <a class="nav__link" href="/${meta.slug}/"${current}>${escape(meta.nav)}</a>`;
+    return `      <a class="nav__link" href="${hrefFor(meta.slug)}"${current}>${escape(meta.nav)}</a>`;
   });
   for (const ext of EXTERNAL_NAV_LINKS) {
     lines.push(
@@ -113,11 +155,11 @@ function buildNav(pages, currentSlug) {
   return lines.join('\n');
 }
 
-function buildFooterNav(pages, currentSlug) {
+function buildFooterNav(pages, currentSlug, hrefFor) {
   const sorted = [...pages].sort((a, b) => a.meta.order - b.meta.order);
   const items = sorted.map(({ meta }) => {
     const current = meta.slug === currentSlug ? ' aria-current="true"' : '';
-    return `        <li><a href="/${meta.slug}/"${current}>${escape(meta.nav)}</a></li>`;
+    return `        <li><a href="${hrefFor(meta.slug)}"${current}>${escape(meta.nav)}</a></li>`;
   });
   return `      <p class="foot__nav-label">Documentazione</p>
       <ul class="foot__nav-list">
@@ -126,13 +168,13 @@ ${items.join('\n')}
 }
 
 function buildJsonLd(meta) {
-  const canonical = `${BASE_URL}${meta.slug}/`;
+  const canonical = `${SITE_BASE}${meta.slug}/`;
   const graph = [
     ...meta.jsonld,
     {
       '@type': 'BreadcrumbList',
       itemListElement: [
-        { '@type': 'ListItem', position: 1, name: 'Home', item: BASE_URL },
+        { '@type': 'ListItem', position: 1, name: 'Home', item: SITE_BASE },
         { '@type': 'ListItem', position: 2, name: meta.nav, item: canonical },
       ],
     },
@@ -159,8 +201,8 @@ function buildRelated(pages, currentSlug) {
         <p class="card__body">${escape(body)}</p>
       </a>`;
 
-  const cards = nearest.map(({ meta }) => card(`/${meta.slug}/`, meta.nav, meta.lede)).join('');
-  const homeCard = card('/', 'Home', 'Torna alla pagina principale di MeshCore ITA.');
+  const cards = nearest.map(({ meta }) => card(relativeHref(meta.slug), meta.nav, meta.lede)).join('');
+  const homeCard = card('../', 'Home', 'Torna alla pagina principale di MeshCore ITA.');
 
   return `<section class="section related" data-reveal>
     <div class="section__head">
@@ -173,14 +215,15 @@ function buildRelated(pages, currentSlug) {
 }
 
 function renderPage(layout, meta, fragment, pages) {
-  const canonical = `${BASE_URL}${meta.slug}/`;
+  const canonical = `${SITE_BASE}${meta.slug}/`;
   const replacements = {
     '{{TITLE}}': escape(meta.title),
     '{{DESCRIPTION}}': escape(meta.description),
     '{{CANONICAL}}': canonical,
+    '{{OG_IMAGE}}': `${SITE_BASE}assets/img/og-image.png`,
     '{{JSONLD}}': buildJsonLd(meta),
-    '{{NAV}}': buildNav(pages, meta.slug),
-    '{{FOOTER_NAV}}': buildFooterNav(pages, meta.slug),
+    '{{NAV}}': buildNav(pages, meta.slug, relativeHref),
+    '{{FOOTER_NAV}}': buildFooterNav(pages, meta.slug, relativeHref),
     '{{BREADCRUMB_LABEL}}': escape(meta.nav),
     '{{EYELASH}}': escape(meta.nav),
     '{{H1}}': escape(meta.h1),
@@ -197,15 +240,32 @@ function renderPage(layout, meta, fragment, pages) {
   return html;
 }
 
+function renderNotFound(template, pages) {
+  const replacements = {
+    '{{BASE}}': SITE_BASE,
+    '{{NAV}}': buildNav(pages, null, absoluteHref),
+    '{{FOOTER_NAV}}': buildFooterNav(pages, null, absoluteHref),
+  };
+  let html = template;
+  for (const [token, value] of Object.entries(replacements)) {
+    html = html.split(token).join(value);
+  }
+  return html;
+}
+
 function buildSitemap(pages) {
   const sorted = [...pages].sort((a, b) => a.meta.order - b.meta.order);
-  const urls = [`  <url>\n    <loc>${BASE_URL}</loc>\n  </url>`];
+  const urls = [`  <url>\n    <loc>${SITE_BASE}</loc>\n  </url>`];
   for (const { meta } of sorted) {
     urls.push(
-      `  <url>\n    <loc>${BASE_URL}${meta.slug}/</loc>\n    <lastmod>${meta.updated}</lastmod>\n  </url>`
+      `  <url>\n    <loc>${SITE_BASE}${meta.slug}/</loc>\n    <lastmod>${meta.updated}</lastmod>\n  </url>`
     );
   }
   return `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${urls.join('\n')}\n</urlset>\n`;
+}
+
+function buildRobots() {
+  return `User-agent: *\nAllow: /\n\nSitemap: ${SITE_BASE}sitemap.xml\n`;
 }
 
 // --- orchestration --------------------------------------------------
@@ -213,11 +273,14 @@ function buildSitemap(pages) {
 function computeOutputs() {
   const pages = readContentFiles();
   const layout = readFileSync(LAYOUT_PATH, 'utf8');
+  const notFoundTemplate = readFileSync(NOT_FOUND_TEMPLATE_PATH, 'utf8');
   const outputs = new Map();
   for (const { meta, fragment } of pages) {
     outputs.set(join(meta.slug, 'index.html'), renderPage(layout, meta, fragment, pages));
   }
   outputs.set('sitemap.xml', buildSitemap(pages));
+  outputs.set('robots.txt', buildRobots());
+  outputs.set('404.html', renderNotFound(notFoundTemplate, pages));
   return { pages, outputs };
 }
 
@@ -265,12 +328,12 @@ function main() {
       process.exitCode = 1;
       return;
     }
-    console.log(`OK: ${outputs.size} file generati sono aggiornati (${pages.length} pagine + sitemap.xml).`);
+    console.log(`OK: ${outputs.size} file generati sono aggiornati (${pages.length} pagine + sitemap.xml + robots.txt + 404.html).`);
     return;
   }
 
   writeOutputs(outputs);
-  console.log(`Generati ${outputs.size} file (${pages.length} pagine + sitemap.xml).`);
+  console.log(`Generati ${outputs.size} file (${pages.length} pagine + sitemap.xml + robots.txt + 404.html).`);
 }
 
 main();

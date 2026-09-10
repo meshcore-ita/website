@@ -8,15 +8,15 @@
 
 <title>MeshCore vs Meshtastic: differenze di routing, ruoli e quando scegliere</title>
 <meta name="description" content="MeshCore vs Meshtastic: differenza tra flood e path-discovery, ruoli, hardware condiviso e quando conviene l'uno o l'altro. Confronto tecnico imparziale.">
-<link rel="canonical" href="https://meshcore-ita.github.io/meshcore-vs-meshtastic/">
+<link rel="canonical" href="https://meshcore-ita.github.io/website/meshcore-vs-meshtastic/">
 <meta name="robots" content="index,follow,max-image-preview:large">
 
 <meta property="og:type" content="article">
 <meta property="og:site_name" content="MeshCore ITA">
 <meta property="og:title" content="MeshCore vs Meshtastic: differenze di routing, ruoli e quando scegliere">
 <meta property="og:description" content="MeshCore vs Meshtastic: differenza tra flood e path-discovery, ruoli, hardware condiviso e quando conviene l'uno o l'altro. Confronto tecnico imparziale.">
-<meta property="og:url" content="https://meshcore-ita.github.io/meshcore-vs-meshtastic/">
-<meta property="og:image" content="https://meshcore-ita.github.io/assets/img/og-image.png">
+<meta property="og:url" content="https://meshcore-ita.github.io/website/meshcore-vs-meshtastic/">
+<meta property="og:image" content="https://meshcore-ita.github.io/website/assets/img/og-image.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta property="og:locale" content="it_IT">
@@ -24,16 +24,16 @@
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="MeshCore vs Meshtastic: differenze di routing, ruoli e quando scegliere">
 <meta name="twitter:description" content="MeshCore vs Meshtastic: differenza tra flood e path-discovery, ruoli, hardware condiviso e quando conviene l'uno o l'altro. Confronto tecnico imparziale.">
-<meta name="twitter:image" content="https://meshcore-ita.github.io/assets/img/og-image.png">
+<meta property="twitter:image" content="https://meshcore-ita.github.io/website/assets/img/og-image.png">
 
-<link rel="icon" type="image/svg+xml" href="/assets/img/favicon.svg">
-<link rel="mask-icon" href="/assets/img/favicon.svg" color="#22c55e">
+<link rel="icon" type="image/svg+xml" href="../assets/img/favicon.svg">
+<link rel="mask-icon" href="../assets/img/favicon.svg" color="#22c55e">
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Geist:wght@300..700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 
-<link rel="stylesheet" href="/assets/css/style.css?v=2">
+<link rel="stylesheet" href="../assets/css/style.css?v=2">
 
 <script type="application/ld+json">{
   "@context": "https://schema.org",
@@ -85,13 +85,13 @@
           "@type": "ListItem",
           "position": 1,
           "name": "Home",
-          "item": "https://meshcore-ita.github.io/"
+          "item": "https://meshcore-ita.github.io/website/"
         },
         {
           "@type": "ListItem",
           "position": 2,
           "name": "Confronti",
-          "item": "https://meshcore-ita.github.io/meshcore-vs-meshtastic/"
+          "item": "https://meshcore-ita.github.io/website/meshcore-vs-meshtastic/"
         }
       ]
     }
@@ -104,16 +104,16 @@
 
 <header class="site-header" data-scrolled="false">
   <div class="site-header__inner">
-    <a class="brand" href="/">
-      <img class="brand__mark" src="/assets/img/logo.svg" alt="" width="28" height="28">
+    <a class="brand" href="../">
+      <img class="brand__mark" src="../assets/img/logo.svg" alt="" width="28" height="28">
       <span class="brand__text">MeshCore <em>ITA</em></span>
     </a>
     <nav class="nav" id="nav">
-      <a class="nav__link" href="/guida/">Guida</a>
-      <a class="nav__link" href="/preset-radio/">Preset radio</a>
-      <a class="nav__link" href="/hardware/">Hardware</a>
-      <a class="nav__link" href="/faq/">FAQ</a>
-      <a class="nav__link" href="/community/">Community</a>
+      <a class="nav__link" href="../guida/">Guida</a>
+      <a class="nav__link" href="../preset-radio/">Preset radio</a>
+      <a class="nav__link" href="../hardware/">Hardware</a>
+      <a class="nav__link" href="../faq/">FAQ</a>
+      <a class="nav__link" href="../community/">Community</a>
       <a class="nav__link nav__link--ext" href="https://t.me/meshcore_ita" target="_blank" rel="noopener">TELEGRAM<span class="ext-arrow">↗</span></a>
       <a class="nav__link nav__link--ext" href="https://github.com/meshcore-ita" target="_blank" rel="noopener">GitHub<span class="ext-arrow">↗</span></a>
     </nav>
@@ -128,7 +128,7 @@
   <section class="hero hero--page">
     <nav class="crumbs" aria-label="Breadcrumb">
       <ol>
-        <li><a href="/">Home</a></li>
+        <li><a href="../">Home</a></li>
         <li aria-current="page">Confronti</li>
       </ol>
     </nav>
@@ -182,7 +182,7 @@
     <div class="grid grid--2">
       <article class="card" data-reveal>
         <h3 class="card__title">Ruoli in MeshCore</h3>
-        <p class="card__body">Un nodo assume uno di quattro ruoli scelti al momento del flash del firmware: companion (client BLE/USB, non ripete), repeater (estende la copertura), room server (bacheca stile BBS con fino a 32 messaggi non letti per utente) o sensor (telemetria). Per la configurazione di ciascuno vedi la pagina <a class="link" href="/comandi/">comandi CLI per repeater e room server</a>.</p>
+        <p class="card__body">Un nodo assume uno di quattro ruoli scelti al momento del flash del firmware: companion (client BLE/USB, non ripete), repeater (estende la copertura), room server (bacheca stile BBS con fino a 32 messaggi non letti per utente) o sensor (telemetria). Per la configurazione di ciascuno vedi la pagina <a class="link" href="../comandi/">comandi CLI per repeater e room server</a>.</p>
       </article>
       <article class="card" data-reveal>
         <h3 class="card__title">Ruoli in Meshtastic</h3>
@@ -210,7 +210,7 @@
         <p class="card__body">Vuoi che ogni nodo del gruppo veda automaticamente posizione e stato di tutti gli altri via broadcast periodico, con un ecosistema maturo di moduli e integrazioni costruito nel tempo dalla community Meshtastic.</p>
       </article>
     </div>
-    <p class="prose">Chi arriva da MeshCore e vuole approfondire i primi passi pratici può partire dalla <a class="link" href="/guida/">guida a MeshCore passo passo</a>, mentre chi ha già un nodo configurato ma non riesce a farlo comunicare con il resto della mesh italiana dovrebbe controllare il <a class="link" href="/preset-radio/">preset radio condiviso per l'Italia</a>. Le domande più comuni su costi, portata e sicurezza sono raccolte nella pagina <a class="link" href="/faq/">FAQ MeshCore</a>.</p>
+    <p class="prose">Chi arriva da MeshCore e vuole approfondire i primi passi pratici può partire dalla <a class="link" href="../guida/">guida a MeshCore passo passo</a>, mentre chi ha già un nodo configurato ma non riesce a farlo comunicare con il resto della mesh italiana dovrebbe controllare il <a class="link" href="../preset-radio/">preset radio condiviso per l'Italia</a>. Le domande più comuni su costi, portata e sicurezza sono raccolte nella pagina <a class="link" href="../faq/">FAQ MeshCore</a>.</p>
   </section>
 
   <section class="section" data-reveal>
@@ -237,19 +237,19 @@
       <h2 class="section__title">Altri contenuti MeshCore ITA</h2>
     </div>
     <div class="grid grid--2">
-      <a class="card" href="/faq/">
+      <a class="card" href="../faq/">
         <h3 class="card__title">FAQ</h3>
         <p class="card__body">Le risposte alle domande più frequenti della community italiana, dal costo iniziale alla cifratura dei messaggi.</p>
       </a>
-      <a class="card" href="/glossario/">
+      <a class="card" href="../glossario/">
         <h3 class="card__title">Glossario</h3>
         <p class="card__body">I termini tecnici di radio LoRa, rete mesh, sicurezza e firmware che incontri configurando un nodo MeshCore.</p>
       </a>
-      <a class="card" href="/problemi/">
+      <a class="card" href="../problemi/">
         <h3 class="card__title">Problemi</h3>
         <p class="card__body">Nove casi reali segnalati dalla community italiana, ciascuno con diagnosi, causa e comando risolutivo.</p>
       </a>
-      <a class="card" href="/">
+      <a class="card" href="../">
         <h3 class="card__title">Home</h3>
         <p class="card__body">Torna alla pagina principale di MeshCore ITA.</p>
       </a>
@@ -263,15 +263,15 @@
     <div class="foot__nav">
       <p class="foot__nav-label">Documentazione</p>
       <ul class="foot__nav-list">
-        <li><a href="/guida/">Guida</a></li>
-        <li><a href="/preset-radio/">Preset radio</a></li>
-        <li><a href="/hardware/">Hardware</a></li>
-        <li><a href="/comandi/">Comandi</a></li>
-        <li><a href="/problemi/">Problemi</a></li>
-        <li><a href="/faq/">FAQ</a></li>
-        <li><a href="/meshcore-vs-meshtastic/" aria-current="true">Confronti</a></li>
-        <li><a href="/glossario/">Glossario</a></li>
-        <li><a href="/community/">Community</a></li>
+        <li><a href="../guida/">Guida</a></li>
+        <li><a href="../preset-radio/">Preset radio</a></li>
+        <li><a href="../hardware/">Hardware</a></li>
+        <li><a href="../comandi/">Comandi</a></li>
+        <li><a href="../problemi/">Problemi</a></li>
+        <li><a href="../faq/">FAQ</a></li>
+        <li><a href="../meshcore-vs-meshtastic/" aria-current="true">Confronti</a></li>
+        <li><a href="../glossario/">Glossario</a></li>
+        <li><a href="../community/">Community</a></li>
       </ul>
     </div>
     <p class="site-footer__note">MeshCore ITA — community indipendente. Non affiliata al progetto MeshCore.</p>
@@ -288,6 +288,6 @@
   </div>
 </footer>
 
-<script type="module" src="/assets/js/main.js?v=2" defer></script>
+<script type="module" src="../assets/js/main.js?v=2" defer></script>
 </body>
 </html>

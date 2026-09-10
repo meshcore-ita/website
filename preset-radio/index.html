@@ -8,15 +8,15 @@
 
 <title>Preset radio MeshCore Italia: frequenza 869.618 MHz e configurazione</title>
 <meta name="description" content="Preset radio MeshCore Italia: 869.618 MHz, banda 62.5 kHz, SF8, CR8. Comando per impostarlo, perché il preset 869.525 è deprecato e limiti normativi.">
-<link rel="canonical" href="https://meshcore-ita.github.io/preset-radio/">
+<link rel="canonical" href="https://meshcore-ita.github.io/website/preset-radio/">
 <meta name="robots" content="index,follow,max-image-preview:large">
 
 <meta property="og:type" content="article">
 <meta property="og:site_name" content="MeshCore ITA">
 <meta property="og:title" content="Preset radio MeshCore Italia: frequenza 869.618 MHz e configurazione">
 <meta property="og:description" content="Preset radio MeshCore Italia: 869.618 MHz, banda 62.5 kHz, SF8, CR8. Comando per impostarlo, perché il preset 869.525 è deprecato e limiti normativi.">
-<meta property="og:url" content="https://meshcore-ita.github.io/preset-radio/">
-<meta property="og:image" content="https://meshcore-ita.github.io/assets/img/og-image.png">
+<meta property="og:url" content="https://meshcore-ita.github.io/website/preset-radio/">
+<meta property="og:image" content="https://meshcore-ita.github.io/website/assets/img/og-image.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta property="og:locale" content="it_IT">
@@ -24,16 +24,16 @@
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Preset radio MeshCore Italia: frequenza 869.618 MHz e configurazione">
 <meta name="twitter:description" content="Preset radio MeshCore Italia: 869.618 MHz, banda 62.5 kHz, SF8, CR8. Comando per impostarlo, perché il preset 869.525 è deprecato e limiti normativi.">
-<meta name="twitter:image" content="https://meshcore-ita.github.io/assets/img/og-image.png">
+<meta property="twitter:image" content="https://meshcore-ita.github.io/website/assets/img/og-image.png">
 
-<link rel="icon" type="image/svg+xml" href="/assets/img/favicon.svg">
-<link rel="mask-icon" href="/assets/img/favicon.svg" color="#22c55e">
+<link rel="icon" type="image/svg+xml" href="../assets/img/favicon.svg">
+<link rel="mask-icon" href="../assets/img/favicon.svg" color="#22c55e">
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Geist:wght@300..700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 
-<link rel="stylesheet" href="/assets/css/style.css?v=2">
+<link rel="stylesheet" href="../assets/css/style.css?v=2">
 
 <script type="application/ld+json">{
   "@context": "https://schema.org",
@@ -88,13 +88,13 @@
           "@type": "ListItem",
           "position": 1,
           "name": "Home",
-          "item": "https://meshcore-ita.github.io/"
+          "item": "https://meshcore-ita.github.io/website/"
         },
         {
           "@type": "ListItem",
           "position": 2,
           "name": "Preset radio",
-          "item": "https://meshcore-ita.github.io/preset-radio/"
+          "item": "https://meshcore-ita.github.io/website/preset-radio/"
         }
       ]
     }
@@ -107,16 +107,16 @@
 
 <header class="site-header" data-scrolled="false">
   <div class="site-header__inner">
-    <a class="brand" href="/">
-      <img class="brand__mark" src="/assets/img/logo.svg" alt="" width="28" height="28">
+    <a class="brand" href="../">
+      <img class="brand__mark" src="../assets/img/logo.svg" alt="" width="28" height="28">
       <span class="brand__text">MeshCore <em>ITA</em></span>
     </a>
     <nav class="nav" id="nav">
-      <a class="nav__link" href="/guida/">Guida</a>
-      <a class="nav__link" href="/preset-radio/" aria-current="true">Preset radio</a>
-      <a class="nav__link" href="/hardware/">Hardware</a>
-      <a class="nav__link" href="/faq/">FAQ</a>
-      <a class="nav__link" href="/community/">Community</a>
+      <a class="nav__link" href="../guida/">Guida</a>
+      <a class="nav__link" href="../preset-radio/" aria-current="true">Preset radio</a>
+      <a class="nav__link" href="../hardware/">Hardware</a>
+      <a class="nav__link" href="../faq/">FAQ</a>
+      <a class="nav__link" href="../community/">Community</a>
       <a class="nav__link nav__link--ext" href="https://t.me/meshcore_ita" target="_blank" rel="noopener">TELEGRAM<span class="ext-arrow">↗</span></a>
       <a class="nav__link nav__link--ext" href="https://github.com/meshcore-ita" target="_blank" rel="noopener">GitHub<span class="ext-arrow">↗</span></a>
     </nav>
@@ -131,7 +131,7 @@
   <section class="hero hero--page">
     <nav class="crumbs" aria-label="Breadcrumb">
       <ol>
-        <li><a href="/">Home</a></li>
+        <li><a href="../">Home</a></li>
         <li aria-current="page">Preset radio</li>
       </ol>
     </nav>
@@ -189,7 +189,7 @@
     </tbody>
   </table>
   <div class="prose">
-    <p>Nell'app mobile Android/iOS e nel client web su <a class="link" href="https://app.meshcore.nz/" target="_blank" rel="noopener">app.meshcore.nz<span class="ext-arrow">↗</span></a> lo stesso risultato si ottiene dal menu delle impostazioni radio del nodo, scegliendo il preset <strong>EU/UK (Narrow)</strong> dall'elenco predefinito, senza dover digitare i singoli parametri. Dopo qualsiasi modifica radio il nodo va riavviato prima di riprovare a comunicare con la mesh: se dopo il riavvio non vedi ancora nessun contatto, la pagina <a class="link" href="/problemi/">soluzioni ai problemi più comuni di MeshCore</a> copre anche questo caso. L'elenco completo dei comandi CLI, oltre a <code>set radio</code> e <code>get radio</code>, è nella pagina <a class="link" href="/comandi/">comandi CLI per amministrare un nodo MeshCore</a>. Per la sequenza completa di primo avvio, dal flash del firmware fino al primo advert, vedi la <a class="link" href="/guida/">guida passo passo per configurare un nodo MeshCore</a>.</p>
+    <p>Nell'app mobile Android/iOS e nel client web su <a class="link" href="https://app.meshcore.nz/" target="_blank" rel="noopener">app.meshcore.nz<span class="ext-arrow">↗</span></a> lo stesso risultato si ottiene dal menu delle impostazioni radio del nodo, scegliendo il preset <strong>EU/UK (Narrow)</strong> dall'elenco predefinito, senza dover digitare i singoli parametri. Dopo qualsiasi modifica radio il nodo va riavviato prima di riprovare a comunicare con la mesh: se dopo il riavvio non vedi ancora nessun contatto, la pagina <a class="link" href="../problemi/">soluzioni ai problemi più comuni di MeshCore</a> copre anche questo caso. L'elenco completo dei comandi CLI, oltre a <code>set radio</code> e <code>get radio</code>, è nella pagina <a class="link" href="../comandi/">comandi CLI per amministrare un nodo MeshCore</a>. Per la sequenza completa di primo avvio, dal flash del firmware fino al primo advert, vedi la <a class="link" href="../guida/">guida passo passo per configurare un nodo MeshCore</a>.</p>
   </div>
 </section>
 
@@ -235,7 +235,7 @@
     <h2 class="section__title">Limiti di potenza e duty cycle</h2>
   </div>
   <div class="prose">
-    <p>Il preset condiviso opera nella sub-banda <strong>869.4–869.65 MHz</strong>, dove la normativa europea (ETSI EN 300 220) e il Piano Nazionale di Ripartizione delle Frequenze consentono l'uso libero, senza licenza, entro precisi limiti: potenza massima <strong>500 mW ERP</strong> e <strong>duty cycle del 10%</strong>, cioè al massimo 6 minuti di trasmissione ogni ora per ogni dispositivo. Questi limiti sono già rispettati dai parametri di default consigliati dalla community, ma restano comunque responsabilità di chi configura e gestisce il nodo, in particolare se si aumenta la potenza di trasmissione oltre i valori di default con il comando <code>set tx</code>. Per i termini tecnici usati in questa pagina — advert, path-discovery, room server e altri — consulta il <a class="link" href="/glossario/">glossario dei termini MeshCore</a>; per capire come questo approccio radio si confronta con altri sistemi mesh, vedi il <a class="link" href="/meshcore-vs-meshtastic/">confronto tra MeshCore e Meshtastic</a>.</p>
+    <p>Il preset condiviso opera nella sub-banda <strong>869.4–869.65 MHz</strong>, dove la normativa europea (ETSI EN 300 220) e il Piano Nazionale di Ripartizione delle Frequenze consentono l'uso libero, senza licenza, entro precisi limiti: potenza massima <strong>500 mW ERP</strong> e <strong>duty cycle del 10%</strong>, cioè al massimo 6 minuti di trasmissione ogni ora per ogni dispositivo. Questi limiti sono già rispettati dai parametri di default consigliati dalla community, ma restano comunque responsabilità di chi configura e gestisce il nodo, in particolare se si aumenta la potenza di trasmissione oltre i valori di default con il comando <code>set tx</code>. Per i termini tecnici usati in questa pagina — advert, path-discovery, room server e altri — consulta il <a class="link" href="../glossario/">glossario dei termini MeshCore</a>; per capire come questo approccio radio si confronta con altri sistemi mesh, vedi il <a class="link" href="../meshcore-vs-meshtastic/">confronto tra MeshCore e Meshtastic</a>.</p>
   </div>
 </section>
 
@@ -267,19 +267,19 @@
       <h2 class="section__title">Altri contenuti MeshCore ITA</h2>
     </div>
     <div class="grid grid--2">
-      <a class="card" href="/guida/">
+      <a class="card" href="../guida/">
         <h3 class="card__title">Guida</h3>
         <p class="card__body">Tutti i passaggi, in italiano, per configurare il tuo primo nodo MeshCore e agganciarlo alla mesh italiana.</p>
       </a>
-      <a class="card" href="/hardware/">
+      <a class="card" href="../hardware/">
         <h3 class="card__title">Hardware</h3>
         <p class="card__body">Le board LoRa supportate dal firmware Companion, confrontate per chip, connettività e uso tipico.</p>
       </a>
-      <a class="card" href="/comandi/">
+      <a class="card" href="../comandi/">
         <h3 class="card__title">Comandi</h3>
         <p class="card__body">Sintassi, effetti, esempi e rischi di ogni comando CLI per amministrare repeater e room server MeshCore.</p>
       </a>
-      <a class="card" href="/">
+      <a class="card" href="../">
         <h3 class="card__title">Home</h3>
         <p class="card__body">Torna alla pagina principale di MeshCore ITA.</p>
       </a>
@@ -293,15 +293,15 @@
     <div class="foot__nav">
       <p class="foot__nav-label">Documentazione</p>
       <ul class="foot__nav-list">
-        <li><a href="/guida/">Guida</a></li>
-        <li><a href="/preset-radio/" aria-current="true">Preset radio</a></li>
-        <li><a href="/hardware/">Hardware</a></li>
-        <li><a href="/comandi/">Comandi</a></li>
-        <li><a href="/problemi/">Problemi</a></li>
-        <li><a href="/faq/">FAQ</a></li>
-        <li><a href="/meshcore-vs-meshtastic/">Confronti</a></li>
-        <li><a href="/glossario/">Glossario</a></li>
-        <li><a href="/community/">Community</a></li>
+        <li><a href="../guida/">Guida</a></li>
+        <li><a href="../preset-radio/" aria-current="true">Preset radio</a></li>
+        <li><a href="../hardware/">Hardware</a></li>
+        <li><a href="../comandi/">Comandi</a></li>
+        <li><a href="../problemi/">Problemi</a></li>
+        <li><a href="../faq/">FAQ</a></li>
+        <li><a href="../meshcore-vs-meshtastic/">Confronti</a></li>
+        <li><a href="../glossario/">Glossario</a></li>
+        <li><a href="../community/">Community</a></li>
       </ul>
     </div>
     <p class="site-footer__note">MeshCore ITA — community indipendente. Non affiliata al progetto MeshCore.</p>
@@ -318,6 +318,6 @@
   </div>
 </footer>
 
-<script type="module" src="/assets/js/main.js?v=2" defer></script>
+<script type="module" src="../assets/js/main.js?v=2" defer></script>
 </body>
 </html>

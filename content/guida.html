@@ -25,14 +25,14 @@
         { "@type": "HowToTool", "name": "App MeshCore o client web app.meshcore.nz" }
       ],
       "step": [
-        { "@type": "HowToStep", "name": "Scegli la board", "text": "Procurati una board LoRa supportata, ad esempio Heltec V3, LilyGO T-Beam o RAK4631.", "url": "https://meshcore-ita.github.io/guida/#board" },
-        { "@type": "HowToStep", "name": "Flasha il firmware Companion", "text": "Collega la board via USB e installa il firmware Companion con il web flasher ufficiale, senza toolchain locali.", "url": "https://meshcore-ita.github.io/guida/#flash" },
-        { "@type": "HowToStep", "name": "Installa l'app o usa il client web", "text": "Installa l'app MeshCore su Android/iOS oppure apri il client web su app.meshcore.nz.", "url": "https://meshcore-ita.github.io/guida/#app" },
-        { "@type": "HowToStep", "name": "Accoppia il nodo", "text": "Accoppia via Bluetooth con il PIN di default 123456, oppure collega il nodo via USB.", "url": "https://meshcore-ita.github.io/guida/#accoppiamento" },
-        { "@type": "HowToStep", "name": "Imposta il preset radio italiano", "text": "Configura frequenza, banda, spreading factor e coding rate condivisi dalla community italiana.", "url": "https://meshcore-ita.github.io/guida/#preset" },
-        { "@type": "HowToStep", "name": "Scegli il nome del nodo", "text": "Assegna un nome che segue la convenzione IT-<citta>-NN per identificare il nodo sulla mesh.", "url": "https://meshcore-ita.github.io/guida/#nome" },
-        { "@type": "HowToStep", "name": "Invia il primo advert e verifica i contatti", "text": "Invia un advert e controlla che il nodo compaia tra i contatti di un altro nodo vicino.", "url": "https://meshcore-ita.github.io/guida/#advert" },
-        { "@type": "HowToStep", "name": "Presentati nel gruppo Telegram", "text": "Unisciti al gruppo Telegram MeshCore ITA e presenta il tuo nodo alla community.", "url": "https://meshcore-ita.github.io/guida/#community" }
+        { "@type": "HowToStep", "name": "Scegli la board", "text": "Procurati una board LoRa supportata, ad esempio Heltec V3, LilyGO T-Beam o RAK4631.", "url": "https://meshcore-ita.github.io/website/guida/#board" },
+        { "@type": "HowToStep", "name": "Flasha il firmware Companion", "text": "Collega la board via USB e installa il firmware Companion con il web flasher ufficiale, senza toolchain locali.", "url": "https://meshcore-ita.github.io/website/guida/#flash" },
+        { "@type": "HowToStep", "name": "Installa l'app o usa il client web", "text": "Installa l'app MeshCore su Android/iOS oppure apri il client web su app.meshcore.nz.", "url": "https://meshcore-ita.github.io/website/guida/#app" },
+        { "@type": "HowToStep", "name": "Accoppia il nodo", "text": "Accoppia via Bluetooth con il PIN di default 123456, oppure collega il nodo via USB.", "url": "https://meshcore-ita.github.io/website/guida/#accoppiamento" },
+        { "@type": "HowToStep", "name": "Imposta il preset radio italiano", "text": "Configura frequenza, banda, spreading factor e coding rate condivisi dalla community italiana.", "url": "https://meshcore-ita.github.io/website/guida/#preset" },
+        { "@type": "HowToStep", "name": "Scegli il nome del nodo", "text": "Assegna un nome che segue la convenzione IT-<citta>-NN per identificare il nodo sulla mesh.", "url": "https://meshcore-ita.github.io/website/guida/#nome" },
+        { "@type": "HowToStep", "name": "Invia il primo advert e verifica i contatti", "text": "Invia un advert e controlla che il nodo compaia tra i contatti di un altro nodo vicino.", "url": "https://meshcore-ita.github.io/website/guida/#advert" },
+        { "@type": "HowToStep", "name": "Presentati nel gruppo Telegram", "text": "Unisciti al gruppo Telegram MeshCore ITA e presenta il tuo nodo alla community.", "url": "https://meshcore-ita.github.io/website/guida/#community" }
       ]
     }
   ]
@@ -58,12 +58,12 @@
     <li class="step" id="board">
       <p class="step__num">01</p>
       <h3 class="step__title">Scegli la board</h3>
-      <p class="step__body">Procurati una board LoRa supportata. Per una panoramica completa dei modelli e delle differenze tra chip ESP32 e nRF52 consulta la <a class="link" href="/hardware/">guida hardware alle board LoRa compatibili con MeshCore</a>; l'elenco sempre aggiornato delle board supportate è comunque sul web flasher.</p>
+      <p class="step__body">Procurati una board LoRa supportata. Per una panoramica completa dei modelli e delle differenze tra chip ESP32 e nRF52 consulta la <a class="link" href="../hardware/">guida hardware alle board LoRa compatibili con MeshCore</a>; l'elenco sempre aggiornato delle board supportate è comunque sul web flasher.</p>
     </li>
     <li class="step" id="flash">
       <p class="step__num">02</p>
       <h3 class="step__title">Flasha il firmware Companion</h3>
-      <p class="step__body">Collega la board al computer via USB e apri <a class="link" href="https://flasher.meshcore.io/" target="_blank" rel="noopener">flasher.meshcore.io<span class="ext-arrow">↗</span></a> da un browser basato su Chromium (richiede WebSerial). Seleziona la board dall'elenco e installa il firmware Companion. Su Linux, se il flasher non vede la porta seriale, è quasi sempre un problema di permessi: dai i permessi con <code>sudo setfacl -m u:$USER:rw /dev/ttyUSB0</code> (adatta il device path al tuo caso, ad esempio <code>/dev/ttyACM0</code>) e ricarica la pagina. Se il problema persiste, consulta la pagina <a class="link" href="/problemi/">soluzioni ai problemi più comuni di MeshCore</a>.</p>
+      <p class="step__body">Collega la board al computer via USB e apri <a class="link" href="https://flasher.meshcore.io/" target="_blank" rel="noopener">flasher.meshcore.io<span class="ext-arrow">↗</span></a> da un browser basato su Chromium (richiede WebSerial). Seleziona la board dall'elenco e installa il firmware Companion. Su Linux, se il flasher non vede la porta seriale, è quasi sempre un problema di permessi: dai i permessi con <code>sudo setfacl -m u:$USER:rw /dev/ttyUSB0</code> (adatta il device path al tuo caso, ad esempio <code>/dev/ttyACM0</code>) e ricarica la pagina. Se il problema persiste, consulta la pagina <a class="link" href="../problemi/">soluzioni ai problemi più comuni di MeshCore</a>.</p>
     </li>
     <li class="step" id="app">
       <p class="step__num">03</p>
@@ -78,22 +78,22 @@
     <li class="step" id="preset">
       <p class="step__num">05</p>
       <h3 class="step__title">Imposta il preset radio italiano</h3>
-      <p class="step__body">Dal client, entra nelle impostazioni radio e scegli il preset <strong>EU/UK (Narrow)</strong>, che corrisponde a <code>869.618 MHz · BW 62.5 kHz · SF8 · CR8</code>. Da riga di comando, via seriale o da un client admin, lo stesso risultato si ottiene con <code>set radio 869.618,62.5,8,8</code> seguito da <code>reboot</code>. Tutti i dettagli, incluso perché il vecchio preset è deprecato, sono nella pagina dedicata al <a class="link" href="/preset-radio/">preset radio italiano per MeshCore</a>.</p>
+      <p class="step__body">Dal client, entra nelle impostazioni radio e scegli il preset <strong>EU/UK (Narrow)</strong>, che corrisponde a <code>869.618 MHz · BW 62.5 kHz · SF8 · CR8</code>. Da riga di comando, via seriale o da un client admin, lo stesso risultato si ottiene con <code>set radio 869.618,62.5,8,8</code> seguito da <code>reboot</code>. Tutti i dettagli, incluso perché il vecchio preset è deprecato, sono nella pagina dedicata al <a class="link" href="../preset-radio/">preset radio italiano per MeshCore</a>.</p>
     </li>
     <li class="step" id="nome">
       <p class="step__num">06</p>
       <h3 class="step__title">Scegli il nome del nodo</h3>
-      <p class="step__body">Assegna un nome riconoscibile: la convenzione usata dalla community italiana è <code>IT-&lt;citta&gt;-NN</code> per un companion, <code>IT-&lt;citta&gt;-RPT-NN</code> per un repeater e <code>IT-&lt;citta&gt;-ROOM-NN</code> per un room server (esempio: <code>IT-TORINO-RPT-01</code>). Da riga di comando si imposta con <code>set name &lt;nome&gt;</code>; l'elenco completo dei comandi disponibili è nella pagina <a class="link" href="/comandi/">comandi CLI per amministrare un nodo MeshCore</a>.</p>
+      <p class="step__body">Assegna un nome riconoscibile: la convenzione usata dalla community italiana è <code>IT-&lt;citta&gt;-NN</code> per un companion, <code>IT-&lt;citta&gt;-RPT-NN</code> per un repeater e <code>IT-&lt;citta&gt;-ROOM-NN</code> per un room server (esempio: <code>IT-TORINO-RPT-01</code>). Da riga di comando si imposta con <code>set name &lt;nome&gt;</code>; l'elenco completo dei comandi disponibili è nella pagina <a class="link" href="../comandi/">comandi CLI per amministrare un nodo MeshCore</a>.</p>
     </li>
     <li class="step" id="advert">
       <p class="step__num">07</p>
       <h3 class="step__title">Invia il primo advert e verifica i contatti</h3>
-      <p class="step__body">Dopo aver riavviato il nodo con il nuovo preset, invia un advert (dal client, o via CLI con il comando <code>advert</code>) e chiedi a un altro membro della community di verificare che il tuo nodo compaia tra i suoi contatti. Se non succede, il problema quasi sempre è un preset radio non allineato: la pagina <a class="link" href="/problemi/">soluzioni ai problemi più comuni di MeshCore</a> copre anche questo caso.</p>
+      <p class="step__body">Dopo aver riavviato il nodo con il nuovo preset, invia un advert (dal client, o via CLI con il comando <code>advert</code>) e chiedi a un altro membro della community di verificare che il tuo nodo compaia tra i suoi contatti. Se non succede, il problema quasi sempre è un preset radio non allineato: la pagina <a class="link" href="../problemi/">soluzioni ai problemi più comuni di MeshCore</a> copre anche questo caso.</p>
     </li>
     <li class="step" id="community">
       <p class="step__num">08</p>
       <h3 class="step__title">Presentati nel gruppo Telegram</h3>
-      <p class="step__body">Unisciti al <a class="link" href="https://t.me/meshcore_ita" target="_blank" rel="noopener">gruppo Telegram MeshCore ITA<span class="ext-arrow">↗</span></a>, pubblico e senza bisogno di invito, e presenta il tuo nodo nel topic dedicato ai nuovi membri o in quello della tua regione. Per dubbi non coperti da questa guida, la pagina <a class="link" href="/faq/">domande frequenti su MeshCore in italiano</a> raccoglie le domande più comuni della community.</p>
+      <p class="step__body">Unisciti al <a class="link" href="https://t.me/meshcore_ita" target="_blank" rel="noopener">gruppo Telegram MeshCore ITA<span class="ext-arrow">↗</span></a>, pubblico e senza bisogno di invito, e presenta il tuo nodo nel topic dedicato ai nuovi membri o in quello della tua regione. Per dubbi non coperti da questa guida, la pagina <a class="link" href="../faq/">domande frequenti su MeshCore in italiano</a> raccoglie le domande più comuni della community.</p>
     </li>
   </ol>
 </section>
