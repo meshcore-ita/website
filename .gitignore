@@ -5,3 +5,6 @@ Thumbs.db
 node_modules/
 *.log
 .env*
+
+# generato da bot/setup-topics.mjs
+bot/topics.created.json

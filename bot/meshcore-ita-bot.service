@@ -1,0 +1,31 @@
+# Unit systemd --user per il bot Telegram di MeshCore ITA.
+#
+# Installazione:
+#   mkdir -p ~/.config/systemd/user ~/.config/meshcore-ita
+#   cp bot/meshcore-ita-bot.service ~/.config/systemd/user/
+#   printf '%s' 'IL_TUO_TOKEN' > ~/.config/meshcore-ita/token
+#   chmod 600 ~/.config/meshcore-ita/token
+#   git clone (o copia) questo repo in ~/meshcore-ita
+#   systemctl --user daemon-reload
+#   systemctl --user enable --now meshcore-ita-bot.service
+#
+# Log:
+#   journalctl --user -u meshcore-ita-bot.service -f
+#
+# Per l'avvio anche senza login attivo (lingering):
+#   loginctl enable-linger "$USER"
+
+[Unit]
+Description=MeshCore ITA Telegram bot
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+ExecStart=/usr/bin/node %h/meshcore-ita/bot/bot.mjs
+Environment=TELEGRAM_BOT_TOKEN_FILE=%h/.config/meshcore-ita/token
+Restart=always
+RestartSec=5
+
+[Install]
+WantedBy=default.target

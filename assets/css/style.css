@@ -458,6 +458,11 @@ body[data-nav-open] .nav-toggle::after { transform: rotate(-45deg); }
   gap: 1.25rem;
 }
 
+.grid + .hwlist,
+.grid + .note {
+  margin-top: 1.75rem;
+}
+
 .grid--3 {
   grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
 }
@@ -655,6 +660,14 @@ table.spec caption {
   font-size: .85rem;
   line-height: 1.6;
   margin-top: 1.25rem;
+}
+
+.note code {
+  font-family: var(--font-mono);
+  color: var(--fg);
+  background: var(--panel);
+  padding: .1rem .35rem;
+  border-radius: 4px;
 }
 
 /* -----------------------------------------------------------
