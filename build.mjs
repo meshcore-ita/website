@@ -8,7 +8,7 @@
 //   node build.mjs --check   build in memory, fail if committed output drifts
 
 import { readFileSync, writeFileSync, mkdirSync, readdirSync, existsSync } from 'node:fs';
-import { join, dirname } from 'node:path';
+import { join, dirname, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 const ROOT = dirname(fileURLToPath(import.meta.url));
@@ -439,4 +439,8 @@ function main() {
   console.log(`Generati ${outputs.size} file (${pages.length} pagine + sitemap.xml + robots.txt + 404.html + worker/kb.generated.mjs).`);
 }
 
-main();
+// Eseguito solo da riga di comando: importare questo modulo (per SITE_BASE
+// o per le funzioni) non deve rigenerare il sito come effetto collaterale.
+if (process.argv[1] && resolve(process.argv[1]) === fileURLToPath(import.meta.url)) {
+  main();
+}

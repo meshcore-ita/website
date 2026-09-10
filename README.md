@@ -53,6 +53,15 @@ qualunque mount point. Gli URL assoluti (canonical, `og:url`, JSON-LD,
 variabile `SITE_BASE`, poi `GITHUB_REPOSITORY` in CI, infine il fallback
 `https://meshcore-ita.github.io/`.
 
+### IndexNow
+
+Ad ogni push su `main`, dopo il deploy, `scripts/indexnow.mjs` notifica
+IndexNow (Bing, Yandex, Seznam, Naver) delle **sole pagine cambiate**,
+ricavandole dal diff fra i due sha del push. La chiave è il file
+`<chiave>.txt` nella root del sito: è pubblica per specifica, e lo script
+la legge dal nome del file, così le due cose non possono divergere.
+Invio manuale di tutte le URL: `node scripts/indexnow.mjs --all`.
+
 ## Contribuire
 
 Vedi [CONTRIBUTING.md](CONTRIBUTING.md). In fondo a ogni pagina del sito c'è

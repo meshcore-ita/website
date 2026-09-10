@@ -23,6 +23,10 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+        with:
+          # serve lo storico per diffare i due sha del push e capire
+          # quali pagine sono cambiate davvero
+          fetch-depth: 0
       - name: Setup Node
         uses: actions/setup-node@v4
         with:
@@ -45,3 +49,11 @@ jobs:
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
+      # Notifica IndexNow (Bing, Yandex, Seznam, Naver) delle sole pagine
+      # cambiate in questo push. Gira dopo il deploy: le URL devono essere
+      # già raggiungibili quando i motori vengono a leggerle. Non fallisce
+      # il job: un deploy riuscito non si annulla per una notifica persa.
+      - name: Notify IndexNow
+        if: github.event_name == 'push'
+        continue-on-error: true
+        run: node scripts/indexnow.mjs "${{ github.event.before }}" "${{ github.sha }}"
