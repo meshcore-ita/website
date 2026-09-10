@@ -1,0 +1,135 @@
+<!--meta
+{
+  "slug": "hardware",
+  "nav": "Hardware",
+  "order": 3,
+  "primary": true,
+  "title": "Hardware MeshCore: guida alle board LoRa compatibili (Heltec, RAK, LilyGO)",
+  "description": "Guida hardware MeshCore: confronto tra Heltec V3, RAK4631, LilyGO T-Beam, T3S3, T-Deck e altre board LoRa compatibili, chip ESP32 vs nRF52, consumo e antenne.",
+  "h1": "Hardware compatibile con MeshCore",
+  "lede": "Le board LoRa supportate dal firmware Companion, confrontate per chip, connettività e uso tipico.",
+  "updated": "2026-09-10",
+  "jsonld": [
+    {
+      "@type": "TechArticle",
+      "headline": "Hardware MeshCore: guida alle board LoRa compatibili",
+      "description": "Confronto tecnico tra le board LoRa supportate dal firmware MeshCore, con dettagli su chip, connettività, consumo e installazione.",
+      "about": "MeshCore compatible LoRa hardware"
+    },
+    {
+      "@type": "ItemList",
+      "name": "Board LoRa compatibili con MeshCore",
+      "itemListElement": [
+        { "@type": "ListItem", "position": 1, "name": "Heltec V3" },
+        { "@type": "ListItem", "position": 2, "name": "Heltec T114" },
+        { "@type": "ListItem", "position": 3, "name": "Heltec T190" },
+        { "@type": "ListItem", "position": 4, "name": "LilyGO T-Deck" },
+        { "@type": "ListItem", "position": 5, "name": "LilyGO T-Beam" },
+        { "@type": "ListItem", "position": 6, "name": "LilyGO T3S3" },
+        { "@type": "ListItem", "position": 7, "name": "RAK4631 / WisBlock" },
+        { "@type": "ListItem", "position": 8, "name": "Seeed XIAO nRF52840 + Wio-SX1262" },
+        { "@type": "ListItem", "position": 9, "name": "Station G2" }
+      ]
+    }
+  ]
+}
+-->
+<section class="section">
+  <div class="section__head">
+    <p class="eyelash">Hardware supportato</p>
+    <h2 class="section__title">Una scelta ampia, tutta a basso costo</h2>
+    <p class="section__lede">MeshCore gira su firmware Arduino/PlatformIO open source, portato su due famiglie di chip: ESP32 e nRF52. La scelta della board dipende dall'uso che vuoi farne, non da vincoli del protocollo.</p>
+  </div>
+  <div class="prose">
+    <p>Non esiste una board "ufficiale" per MeshCore: il firmware Companion, Repeater e Room Server è compilato per decine di dispositivi LoRa diversi, dalle economiche Heltec ESP32 ai moduli nRF52840 a basso consumo di RAK e Seeed. Questa pagina confronta le board che la community italiana usa più spesso, indicate anche nella <a class="link" href="../guida/">guida passo passo per configurare un nodo MeshCore</a>. Qualunque board tu scelga, dopo il primo flash dovrai comunque allinearti al <a class="link" href="../preset-radio/">preset radio italiano per MeshCore</a> perché il tuo nodo venga sentito dal resto della mesh.</p>
+  </div>
+</section>
+
+<section class="section">
+  <div class="section__head">
+    <p class="eyelash">Confronto</p>
+    <h2 class="section__title">Le board</h2>
+  </div>
+  <table class="spec">
+    <caption>Board LoRa supportate dal firmware MeshCore</caption>
+    <thead>
+      <tr>
+        <th scope="col">Board</th>
+        <th scope="col">Chip</th>
+        <th scope="col">BLE / USB</th>
+        <th scope="col">Uso tipico</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr><th scope="row">Heltec V3</th><td>ESP32-S3</td><td>BLE, USB, Wi-Fi</td><td>Companion o repeater, buon punto di partenza</td></tr>
+      <tr><th scope="row">Heltec T114</th><td>nRF52840</td><td>BLE, USB</td><td>Repeater da tavolo (con display) o companion</td></tr>
+      <tr><th scope="row">Heltec T190</th><td>ESP32-S3</td><td>BLE, USB</td><td>Companion con display o repeater</td></tr>
+      <tr><th scope="row">LilyGO T-Deck</th><td>ESP32-S3</td><td>BLE, USB</td><td>Companion portatile, con tastiera e schermo</td></tr>
+      <tr><th scope="row">LilyGO T-Beam</th><td>ESP32</td><td>BLE, USB</td><td>Companion o repeater, con GPS integrato</td></tr>
+      <tr><th scope="row">LilyGO T3S3</th><td>ESP32-S3</td><td>BLE, USB</td><td>Repeater compatto o companion</td></tr>
+      <tr><th scope="row">RAK4631 / WisBlock</th><td>nRF52840</td><td>BLE, USB (Ethernet opzionale)</td><td>Repeater o room server per installazioni permanenti</td></tr>
+      <tr><th scope="row">Seeed XIAO nRF52840 + Wio-SX1262</th><td>nRF52840</td><td>BLE, USB</td><td>Companion o repeater a basso consumo, senza display</td></tr>
+      <tr><th scope="row">Station G2</th><td>ESP32-S3</td><td>BLE, USB, Wi-Fi</td><td>Repeater fisso</td></tr>
+    </tbody>
+  </table>
+  <p class="note">L'elenco delle board evolve insieme al firmware: la lista sempre aggiornata, con l'opzione di flash diretto dal browser, è sul <a class="link" href="https://flasher.meshcore.io/" target="_blank" rel="noopener">web flasher ufficiale<span class="ext-arrow">↗</span></a>.</p>
+</section>
+
+<section class="section">
+  <div class="section__head">
+    <p class="eyelash">Scegliere il chip giusto</p>
+    <h2 class="section__title">ESP32 o nRF52840?</h2>
+    <p class="section__lede">La differenza principale non è la copertura radio, ma il consumo energetico e cosa il chip fa quando il nodo non sta trasmettendo.</p>
+  </div>
+  <div class="grid grid--2">
+    <article class="card">
+      <p class="card__num">01</p>
+      <h3 class="card__title">Consumo e autonomia</h3>
+      <p class="card__body">I chip nRF52840 (Heltec T114, RAK4631, Seeed XIAO) consumano molto meno in idle rispetto a un ESP32, e sono la scelta più comune per un repeater a batteria o pannello solare. Sulle board ESP32 il comando <code>powersaving on</code> aiuta a ridurre il consumo mettendo il nodo in sospensione tra una trasmissione e l'altra, ma resta comunque più alto di un nRF52 equivalente.</p>
+    </article>
+    <article class="card">
+      <p class="card__num">02</p>
+      <h3 class="card__title">Connettività e display</h3>
+      <p class="card__body">Tutte le board di questa lista supportano sia BLE sia USB per il firmware Companion, e alcune (Heltec V3, Station G2) anche il Wi-Fi per l'app companion o l'aggiornamento OTA. Le board con display integrato (Heltec T114, T190, LilyGO T-Beam, T3S3) mostrano stato radio e contatti senza bisogno di un client collegato; il Seeed XIAO nRF52840 non ha display ed è pensato per installazioni headless.</p>
+    </article>
+  </div>
+</section>
+
+<section class="section">
+  <div class="section__head">
+    <p class="eyelash">Installazione</p>
+    <h2 class="section__title">Antenne, alimentazione e outdoor</h2>
+  </div>
+  <div class="grid grid--2">
+    <article class="card">
+      <p class="card__num">01</p>
+      <h3 class="card__title">Antenne e connettori</h3>
+      <p class="card__body">La maggior parte delle board monta un connettore SMA o U.FL/IPEX per l'antenna LoRa in sub-banda 868 MHz. Un'antenna esterna correttamente accordata sulla banda 869 MHz incide sulla portata più della potenza di trasmissione: prima di aumentare il <code>tx</code> conviene verificare che l'antenna in dotazione sia adatta all'uso outdoor previsto.</p>
+    </article>
+    <article class="card">
+      <p class="card__num">02</p>
+      <h3 class="card__title">Alimentazione e installazione outdoor</h3>
+      <p class="card__body">Per un repeater fisso, l'alimentazione tipica è un pannello solare con batteria tampone (LiPo o LiFePO4) collegato alle board nRF52 a basso consumo, oppure alimentazione a rete per installazioni indoor stabili. In esterno serve sempre una custodia con grado di protezione adeguato: né le board né le antenne standard sono impermeabili di fabbrica.</p>
+    </article>
+  </div>
+</section>
+
+<section class="section">
+  <div class="section__head">
+    <p class="eyelash">Dove comprare</p>
+    <h2 class="section__title">Reperire l'hardware in Italia</h2>
+  </div>
+  <div class="prose">
+    <p>Le board elencate in questa pagina sono prodotti generici, non legati a MeshCore: si trovano tramite i normali canali di vendita di elettronica e componentistica, sia su marketplace internazionali sia tramite rivenditori italiani di elettronica per hobbisti. Non esistono negozi o distributori ufficiali della community MeshCore ITA, e la community non gestisce né consiglia link affiliati: verifica sempre che il venditore indichi chiaramente il modello esatto (ad esempio "Heltec WiFi LoRa 32 V3" e non semplicemente "Heltec LoRa") prima di acquistare, perché board con nomi simili possono montare chip o moduli radio diversi.</p>
+  </div>
+</section>
+
+<section class="section">
+  <div class="section__head">
+    <p class="eyelash">Dopo l'acquisto</p>
+    <h2 class="section__title">Prossimi passi</h2>
+  </div>
+  <div class="prose">
+    <p>Una volta scelta e ricevuta la board, il percorso di configurazione è lo stesso per tutti i modelli: flash del firmware Companion, accoppiamento e impostazione del preset radio, descritti passo passo nella <a class="link" href="../guida/">guida passo passo per configurare un nodo MeshCore</a>. Se hai dubbi su comandi specifici per repeater e room server, ad esempio per attivare <code>powersaving</code> o regolare la potenza TX, la pagina <a class="link" href="../comandi/">comandi CLI per amministrare un nodo MeshCore</a> li elenca tutti. In caso di problemi di flash o accoppiamento, la pagina <a class="link" href="../problemi/">soluzioni ai problemi più comuni di MeshCore</a> copre i casi più frequenti segnalati dalla community, e il <a class="link" href="../glossario/">glossario dei termini MeshCore</a> spiega i termini tecnici usati in questa pagina come companion, repeater e room server.</p>
+  </div>
+</section>

@@ -1,0 +1,167 @@
+<!--meta
+{
+  "slug": "preset-radio",
+  "nav": "Preset radio",
+  "order": 2,
+  "primary": true,
+  "title": "Preset radio MeshCore Italia: frequenza 869.618 MHz e configurazione",
+  "description": "Preset radio MeshCore Italia: 869.618 MHz, banda 62.5 kHz, SF8, CR8. Comando per impostarlo, perché il preset 869.525 è deprecato e limiti normativi.",
+  "h1": "Il preset radio condiviso per l'Italia",
+  "lede": "Frequenza, banda, spreading factor e coding rate che permettono a tutti i nodi MeshCore italiani di sentirsi tra loro.",
+  "updated": "2026-09-10",
+  "jsonld": [
+    {
+      "@type": "TechArticle",
+      "headline": "Preset radio MeshCore per l'Italia: 869.618 MHz, BW 62.5 kHz, SF8, CR8",
+      "description": "Guida tecnica al preset radio condiviso dalla community MeshCore ITA, con comandi CLI, configurazione da app e quadro normativo.",
+      "about": "MeshCore radio preset Italia"
+    },
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Il preset radio è obbligatorio per usare MeshCore in Italia?",
+          "acceptedAnswer": { "@type": "Answer", "text": "Non è obbligatorio dal punto di vista tecnico: puoi impostare qualsiasi frequenza e parametri consentiti dalla normativa. È però fortemente raccomandato, perché è l'unico modo per sentire e farsi sentire dagli altri nodi della mesh italiana: due nodi con preset diversi semplicemente non si vedono." }
+        },
+        {
+          "@type": "Question",
+          "name": "Perché il vecchio preset 869.525 MHz è deprecato?",
+          "acceptedAnswer": { "@type": "Answer", "text": "Il vecchio preset EU/UK (869.525 MHz, SF11, BW 250 kHz, CR5) è oggi etichettato come Deprecato nell'elenco ufficiale dei preset del client MeshCore. La community internazionale è passata a un preset narrow, con banda più stretta e spreading factor più basso, per una migliore interoperabilità: per l'Italia il preset attuale è 869.618 MHz, BW 62.5 kHz, SF8, CR8, corrispondente a EU/UK (Narrow) nel client." }
+        },
+        {
+          "@type": "Question",
+          "name": "Cosa succede se resto sul preset vecchio?",
+          "acceptedAnswer": { "@type": "Answer", "text": "Un nodo rimasto sul preset deprecato non riceve né trasmette pacchetti verso i nodi allineati al preset attuale: frequenza, banda, spreading factor e coding rate devono coincidere esattamente perché due radio LoRa si sentano. Il nodo resta isolato dalla mesh italiana finché non viene riallineato." }
+        },
+        {
+          "@type": "Question",
+          "name": "Serve una licenza radioamatoriale per usare questo preset?",
+          "acceptedAnswer": { "@type": "Answer", "text": "No. Entro i limiti di potenza, ERP e duty cycle della sub-banda 869.4-869.65 MHz previsti da ETSI EN 300 220 e dal Piano Nazionale di Ripartizione delle Frequenze, l'uso è libero e non richiede licenza. La responsabilità del rispetto di questi limiti resta comunque dell'operatore del nodo." }
+        }
+      ]
+    }
+  ]
+}
+-->
+<section class="section">
+  <div class="section__head">
+    <p class="eyelash">Il preset in breve</p>
+    <h2 class="section__title">I parametri condivisi dalla community italiana</h2>
+    <p class="section__lede">Una radio LoRa sente solo un'altra radio impostata esattamente sugli stessi parametri: frequenza, banda, spreading factor e coding rate devono coincidere.</p>
+  </div>
+  <table class="spec">
+    <caption>Preset radio EU/Italia — EU/UK (Narrow)</caption>
+    <thead>
+      <tr>
+        <th scope="col">Parametro</th>
+        <th scope="col">Valore</th>
+        <th scope="col">Note</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr><th scope="row">Frequenza</th><td>869.618 MHz</td><td>Banda occupata 869.587–869.649 MHz</td></tr>
+      <tr><th scope="row">Bandwidth</th><td>62.5 kHz</td><td>—</td></tr>
+      <tr><th scope="row">Spreading Factor</th><td>SF8</td><td>—</td></tr>
+      <tr><th scope="row">Coding Rate</th><td>CR8</td><td>—</td></tr>
+      <tr><th scope="row">Potenza max</th><td>500 mW ERP</td><td>Entro la sub-banda 869.4–869.65 MHz</td></tr>
+      <tr><th scope="row">Duty cycle</th><td>10%</td><td>Max 6 minuti di trasmissione per ora</td></tr>
+    </tbody>
+  </table>
+  <p class="note">Nel client MeshCore (app o web) questo insieme di parametri corrisponde al preset <strong>EU/UK (Narrow)</strong> nella lista dei preset disponibili.</p>
+</section>
+
+<section class="section">
+  <div class="section__head">
+    <p class="eyelash">Configurazione</p>
+    <h2 class="section__title">Come impostarlo</h2>
+  </div>
+  <div class="prose">
+    <p>Il modo più diretto è da riga di comando, via USB seriale o da un client MeshCore autenticato come admin su repeater e room server:</p>
+  </div>
+  <table class="spec">
+    <caption>Comandi CLI</caption>
+    <thead>
+      <tr>
+        <th scope="col">Comando</th>
+        <th scope="col">Cosa fa</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr><th scope="row"><code>set radio 869.618,62.5,8,8</code></th><td>Imposta frequenza, banda, SF e CR in un colpo solo. Richiede <code>reboot</code> per applicarsi.</td></tr>
+      <tr><th scope="row"><code>get radio</code></th><td>Legge i parametri radio correnti, per verificare che il preset sia stato applicato.</td></tr>
+    </tbody>
+  </table>
+  <div class="prose">
+    <p>Nell'app mobile Android/iOS e nel client web su <a class="link" href="https://app.meshcore.nz/" target="_blank" rel="noopener">app.meshcore.nz<span class="ext-arrow">↗</span></a> lo stesso risultato si ottiene dal menu delle impostazioni radio del nodo, scegliendo il preset <strong>EU/UK (Narrow)</strong> dall'elenco predefinito, senza dover digitare i singoli parametri. Dopo qualsiasi modifica radio il nodo va riavviato prima di riprovare a comunicare con la mesh: se dopo il riavvio non vedi ancora nessun contatto, la pagina <a class="link" href="../problemi/">soluzioni ai problemi più comuni di MeshCore</a> copre anche questo caso. L'elenco completo dei comandi CLI, oltre a <code>set radio</code> e <code>get radio</code>, è nella pagina <a class="link" href="../comandi/">comandi CLI per amministrare un nodo MeshCore</a>. Per la sequenza completa di primo avvio, dal flash del firmware fino al primo advert, vedi la <a class="link" href="../guida/">guida passo passo per configurare un nodo MeshCore</a>.</p>
+  </div>
+</section>
+
+<section class="section">
+  <div class="section__head">
+    <p class="eyelash">Perché è cambiato</p>
+    <h2 class="section__title">Il vecchio preset è deprecato</h2>
+  </div>
+  <div class="prose">
+    <p>Il preset precedente — <code>869.525 MHz</code>, <code>SF11</code>, <code>BW 250 kHz</code>, <code>CR5</code> — è oggi etichettato come <strong>Deprecato</strong> nell'elenco ufficiale dei preset del client MeshCore. La community internazionale è passata a un preset "narrow", con banda più stretta e spreading factor più basso, per migliorare l'interoperabilità tra reti nazionali diverse. Chi resta sul preset vecchio non è in errore di configurazione in senso stretto, ma è semplicemente su una frequenza e con parametri che nessun altro nodo italiano ascolta più: frequenza, banda, SF e CR devono coincidere esattamente perché due radio LoRa si sentano, quindi un nodo disallineato resta isolato dalla mesh anche se acceso e funzionante. Se hai un nodo configurato da tempo, vale la pena controllare i suoi parametri con <code>get radio</code> e riallinearlo con il comando indicato sopra.</p>
+  </div>
+</section>
+
+<section class="section">
+  <div class="section__head">
+    <p class="eyelash">I parametri spiegati</p>
+    <h2 class="section__title">Cosa significano frequenza, banda, SF e CR</h2>
+    <p class="section__lede">Ogni parametro sposta l'equilibrio tra portata, robustezza del segnale e velocità di trasmissione.</p>
+  </div>
+  <div class="grid grid--2">
+    <article class="card">
+      <h3 class="card__title">Frequenza e banda (bandwidth)</h3>
+      <p class="card__body">La frequenza (869.618 MHz) è il canale su cui i nodi trasmettono e ricevono. La banda (62.5 kHz) è l'ampiezza dello spettro occupato attorno a quella frequenza: una banda più stretta concentra l'energia del segnale, aumentando la sensibilità in ricezione a scapito della velocità dati.</p>
+    </article>
+    <article class="card">
+      <h3 class="card__title">Spreading Factor (SF)</h3>
+      <p class="card__body">Determina quanto ogni bit viene "diffuso" nel tempo. Uno spreading factor più alto (es. SF11 del preset vecchio) aumenta la portata e la resistenza al rumore, ma allunga il tempo di trasmissione di ogni pacchetto. SF8, usato nel preset attuale, è un compromesso più veloce, adatto a mesh dense con più nodi che condividono lo stesso canale.</p>
+    </article>
+    <article class="card">
+      <h3 class="card__title">Coding Rate (CR)</h3>
+      <p class="card__body">Aggiunge ridondanza al pacchetto per correggere errori di trasmissione dovuti a interferenze o rumore. Un coding rate più alto protegge meglio il pacchetto ma aumenta l'airtime, cioè il tempo che il pacchetto occupa sul canale radio.</p>
+    </article>
+    <article class="card">
+      <h3 class="card__title">Il compromesso airtime/portata</h3>
+      <p class="card__body">Parametri che favoriscono la portata (SF alto, banda stretta, CR alto) allungano l'airtime di ogni pacchetto, riducendo quanti pacchetti la mesh può scambiare per unità di tempo entro i limiti di duty cycle. Il preset condiviso dalla community è la scelta di compromesso ritenuta migliore per l'uso tipico in Italia: cambiarlo unilateralmente isola il tuo nodo dal resto della rete.</p>
+    </article>
+  </div>
+</section>
+
+<section class="section">
+  <div class="section__head">
+    <p class="eyelash">Quadro normativo</p>
+    <h2 class="section__title">Limiti di potenza e duty cycle</h2>
+  </div>
+  <div class="prose">
+    <p>Il preset condiviso opera nella sub-banda <strong>869.4–869.65 MHz</strong>, dove la normativa europea (ETSI EN 300 220) e il Piano Nazionale di Ripartizione delle Frequenze consentono l'uso libero, senza licenza, entro precisi limiti: potenza massima <strong>500 mW ERP</strong> e <strong>duty cycle del 10%</strong>, cioè al massimo 6 minuti di trasmissione ogni ora per ogni dispositivo. Questi limiti sono già rispettati dai parametri di default consigliati dalla community, ma restano comunque responsabilità di chi configura e gestisce il nodo, in particolare se si aumenta la potenza di trasmissione oltre i valori di default con il comando <code>set tx</code>. Per i termini tecnici usati in questa pagina — advert, path-discovery, room server e altri — consulta il <a class="link" href="../glossario/">glossario dei termini MeshCore</a>; per capire come questo approccio radio si confronta con altri sistemi mesh, vedi il <a class="link" href="../meshcore-vs-meshtastic/">confronto tra MeshCore e Meshtastic</a>.</p>
+  </div>
+</section>
+
+<section class="section">
+  <div class="section__head">
+    <p class="eyelash">Domande frequenti</p>
+    <h2 class="section__title">FAQ sul preset radio</h2>
+  </div>
+  <details class="faq">
+    <summary class="faq__q">Il preset radio è obbligatorio per usare MeshCore in Italia?</summary>
+    <p class="faq__a">Non è obbligatorio dal punto di vista tecnico: puoi impostare qualsiasi frequenza e parametri consentiti dalla normativa. È però fortemente raccomandato, perché è l'unico modo per sentire e farsi sentire dagli altri nodi della mesh italiana: due nodi con preset diversi semplicemente non si vedono.</p>
+  </details>
+  <details class="faq">
+    <summary class="faq__q">Perché il vecchio preset 869.525 MHz è deprecato?</summary>
+    <p class="faq__a">Il vecchio preset EU/UK (869.525 MHz, SF11, BW 250 kHz, CR5) è oggi etichettato come Deprecato nell'elenco ufficiale dei preset del client MeshCore. La community internazionale è passata a un preset narrow, con banda più stretta e spreading factor più basso, per una migliore interoperabilità: per l'Italia il preset attuale è 869.618 MHz, BW 62.5 kHz, SF8, CR8, corrispondente a EU/UK (Narrow) nel client.</p>
+  </details>
+  <details class="faq">
+    <summary class="faq__q">Cosa succede se resto sul preset vecchio?</summary>
+    <p class="faq__a">Un nodo rimasto sul preset deprecato non riceve né trasmette pacchetti verso i nodi allineati al preset attuale: frequenza, banda, spreading factor e coding rate devono coincidere esattamente perché due radio LoRa si sentano. Il nodo resta isolato dalla mesh italiana finché non viene riallineato.</p>
+  </details>
+  <details class="faq">
+    <summary class="faq__q">Serve una licenza radioamatoriale per usare questo preset?</summary>
+    <p class="faq__a">No. Entro i limiti di potenza, ERP e duty cycle della sub-banda 869.4-869.65 MHz previsti da ETSI EN 300 220 e dal Piano Nazionale di Ripartizione delle Frequenze, l'uso è libero e non richiede licenza. La responsabilità del rispetto di questi limiti resta comunque dell'operatore del nodo.</p>
+  </details>
+</section>

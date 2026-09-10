@@ -105,7 +105,7 @@ export const REPLIES = {
     'Mappa copertura: <a href="https://map.meshcore.io/">map.meshcore.io</a>\n' +
     'Firmware (repo): <a href="https://github.com/meshcore-dev/MeshCore">github.com/meshcore-dev/MeshCore</a>\n' +
     'Community (repo): <a href="https://github.com/meshcore-ita">github.com/meshcore-ita</a>\n' +
-    'Sito community: <a href="https://meshcore-ita.github.io/website/">meshcore-ita.github.io/website</a>\n' +
+    'Sito community: <a href="https://meshcore-ita.github.io/">meshcore-ita.github.io</a>\n' +
     'Gruppo Telegram: <a href="https://t.me/meshcore_ita">t.me/meshcore_ita</a>',
 
   regole:

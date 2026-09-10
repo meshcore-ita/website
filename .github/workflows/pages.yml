@@ -23,6 +23,19 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      # GITHUB_REPOSITORY is a default env var GitHub Actions sets on every
+      # step (no explicit `env:` needed); build.mjs resolves SITE_BASE from
+      # it, so this always checks against the same absolute-URL base this
+      # repo publishes at. `--check` is a hard gate, not a rebuild-and-hope:
+      # if content/templates changed without regenerating <slug>/index.html,
+      # sitemap.xml, robots.txt or 404.html, the job fails here and nothing
+      # below deploys — stale generated pages can never reach production.
+      - name: Verify generated pages match content/
+        run: node build.mjs --check
       - name: Configure Pages
         uses: actions/configure-pages@v5
       - name: Upload artifact

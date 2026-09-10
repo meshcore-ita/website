@@ -2,7 +2,7 @@
 
 Sito statico della community italiana MeshCore ITA.
 
-Pubblicato su: **https://meshcore-ita.github.io/website/**
+Pubblicato su: **https://meshcore-ita.github.io/**
 
 MeshCore ITA è una community indipendente di utenti MeshCore, non affiliata al
 progetto MeshCore upstream né ad altre community italiane.
@@ -33,6 +33,13 @@ Il deploy è automatico: ad ogni push su `main`, il workflow
 `.github/workflows/pages.yml` pubblica la root del repository su GitHub
 Pages (source: GitHub Actions). Nessuna build, nessun Jekyll (vedi
 `.nojekyll`).
+
+I link interni e gli asset generati sono sempre relativi, quindi il sito
+funziona invariato a qualunque mount point. Gli URL assoluti (canonical,
+og:url, sitemap, robots.txt) sono risolti da `build.mjs` da `SITE_BASE` o,
+in CI, da `GITHUB_REPOSITORY`: rinominare il repo in
+`meshcore-ita.github.io` sposterebbe il sito alla root senza modifiche al
+codice.
 
 ## Contribuire
 

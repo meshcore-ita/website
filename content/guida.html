@@ -1,0 +1,119 @@
+<!--meta
+{
+  "slug": "guida",
+  "nav": "Guida",
+  "order": 1,
+  "primary": true,
+  "title": "Guida MeshCore in italiano: primo nodo LoRa passo passo",
+  "description": "Guida MeshCore in italiano: come iniziare con MeshCore, flashare il firmware Companion, accoppiare il nodo via BLE o USB e configurare il preset radio italiano.",
+  "h1": "Guida a MeshCore: dal firmware al primo nodo",
+  "lede": "Tutti i passaggi, in italiano, per configurare il tuo primo nodo MeshCore e agganciarlo alla mesh italiana.",
+  "updated": "2026-09-10",
+  "jsonld": [
+    {
+      "@type": "HowTo",
+      "name": "Come iniziare con MeshCore: primo nodo passo passo",
+      "description": "Guida completa in italiano per configurare un nodo MeshCore, dal flash del firmware Companion al primo advert sulla mesh italiana.",
+      "totalTime": "PT30M",
+      "supply": [
+        { "@type": "HowToSupply", "name": "Board LoRa compatibile (es. Heltec V3, RAK4631)" },
+        { "@type": "HowToSupply", "name": "Cavo USB dati" },
+        { "@type": "HowToSupply", "name": "Smartphone Android/iOS o computer" }
+      ],
+      "tool": [
+        { "@type": "HowToTool", "name": "Web flasher MeshCore (flasher.meshcore.io)" },
+        { "@type": "HowToTool", "name": "App MeshCore o client web app.meshcore.nz" }
+      ],
+      "step": [
+        { "@type": "HowToStep", "name": "Scegli la board", "text": "Procurati una board LoRa supportata, ad esempio Heltec V3, LilyGO T-Beam o RAK4631.", "url": "https://meshcore-ita.github.io/guida/#board" },
+        { "@type": "HowToStep", "name": "Flasha il firmware Companion", "text": "Collega la board via USB e installa il firmware Companion con il web flasher ufficiale, senza toolchain locali.", "url": "https://meshcore-ita.github.io/guida/#flash" },
+        { "@type": "HowToStep", "name": "Installa l'app o usa il client web", "text": "Installa l'app MeshCore su Android/iOS oppure apri il client web su app.meshcore.nz.", "url": "https://meshcore-ita.github.io/guida/#app" },
+        { "@type": "HowToStep", "name": "Accoppia il nodo", "text": "Accoppia via Bluetooth con il PIN di default 123456, oppure collega il nodo via USB.", "url": "https://meshcore-ita.github.io/guida/#accoppiamento" },
+        { "@type": "HowToStep", "name": "Imposta il preset radio italiano", "text": "Configura frequenza, banda, spreading factor e coding rate condivisi dalla community italiana.", "url": "https://meshcore-ita.github.io/guida/#preset" },
+        { "@type": "HowToStep", "name": "Scegli il nome del nodo", "text": "Assegna un nome che segue la convenzione IT-<citta>-NN per identificare il nodo sulla mesh.", "url": "https://meshcore-ita.github.io/guida/#nome" },
+        { "@type": "HowToStep", "name": "Invia il primo advert e verifica i contatti", "text": "Invia un advert e controlla che il nodo compaia tra i contatti di un altro nodo vicino.", "url": "https://meshcore-ita.github.io/guida/#advert" },
+        { "@type": "HowToStep", "name": "Presentati nel gruppo Telegram", "text": "Unisciti al gruppo Telegram MeshCore ITA e presenta il tuo nodo alla community.", "url": "https://meshcore-ita.github.io/guida/#community" }
+      ]
+    }
+  ]
+}
+-->
+<section class="section">
+  <div class="section__head">
+    <p class="eyelash">Prima di iniziare</p>
+    <h2 class="section__title">Cosa serve</h2>
+  </div>
+  <div class="prose">
+    <p>Per configurare il primo nodo MeshCore servono tre cose: una board LoRa compatibile, un cavo USB dati funzionante (non solo di ricarica) e uno smartphone o un computer con un browser aggiornato. Non serve installare nessuna toolchain: il flash del firmware si fa interamente dal browser tramite il web flasher ufficiale. Questa guida copre l'intero percorso, dalla scelta della board al primo scambio di messaggi sulla mesh italiana. In circa mezz'ora, dal primo collegamento USB al primo messaggio ricevuto, puoi avere un nodo companion funzionante e allineato alla mesh italiana; se scegli di configurare anche un repeater o un room server, i passaggi iniziali di flash e accoppiamento restano gli stessi.</p>
+  </div>
+</section>
+
+<section class="section">
+  <div class="section__head">
+    <p class="eyelash">Passo passo</p>
+    <h2 class="section__title">Dal firmware al primo advert</h2>
+    <p class="section__lede">Otto passaggi, in ordine, per portare un nodo nuovo sulla mesh italiana.</p>
+  </div>
+  <ol class="steps">
+    <li class="step" id="board">
+      <p class="step__num">01</p>
+      <h3 class="step__title">Scegli la board</h3>
+      <p class="step__body">Procurati una board LoRa supportata. Per una panoramica completa dei modelli e delle differenze tra chip ESP32 e nRF52 consulta la <a class="link" href="../hardware/">guida hardware alle board LoRa compatibili con MeshCore</a>; l'elenco sempre aggiornato delle board supportate è comunque sul web flasher.</p>
+    </li>
+    <li class="step" id="flash">
+      <p class="step__num">02</p>
+      <h3 class="step__title">Flasha il firmware Companion</h3>
+      <p class="step__body">Collega la board al computer via USB e apri <a class="link" href="https://flasher.meshcore.io/" target="_blank" rel="noopener">flasher.meshcore.io<span class="ext-arrow">↗</span></a> da un browser basato su Chromium (richiede WebSerial). Seleziona la board dall'elenco e installa il firmware Companion. Su Linux, se il flasher non vede la porta seriale, è quasi sempre un problema di permessi: dai i permessi con <code>sudo setfacl -m u:$USER:rw /dev/ttyUSB0</code> (adatta il device path al tuo caso, ad esempio <code>/dev/ttyACM0</code>) e ricarica la pagina. Se il problema persiste, consulta la pagina <a class="link" href="../problemi/">soluzioni ai problemi più comuni di MeshCore</a>.</p>
+    </li>
+    <li class="step" id="app">
+      <p class="step__num">03</p>
+      <h3 class="step__title">Installa l'app o usa il client web</h3>
+      <p class="step__body">Su Android o iOS installa l'app MeshCore dallo store del tuo dispositivo. In alternativa, senza installare nulla, puoi usare il client web su <a class="link" href="https://app.meshcore.nz/" target="_blank" rel="noopener">app.meshcore.nz<span class="ext-arrow">↗</span></a>, che funziona anche da computer collegando il nodo via USB.</p>
+    </li>
+    <li class="step" id="accoppiamento">
+      <p class="step__num">04</p>
+      <h3 class="step__title">Accoppia il nodo</h3>
+      <p class="step__body">Dall'app cerca il nodo via Bluetooth (companion BLE) e accoppialo inserendo il PIN di default <code>123456</code>. Se preferisci non usare il Bluetooth, o se il firmware installato è la variante "USB-only", collega il nodo via cavo USB: sia l'app mobile sia il client web supportano la connessione seriale.</p>
+    </li>
+    <li class="step" id="preset">
+      <p class="step__num">05</p>
+      <h3 class="step__title">Imposta il preset radio italiano</h3>
+      <p class="step__body">Dal client, entra nelle impostazioni radio e scegli il preset <strong>EU/UK (Narrow)</strong>, che corrisponde a <code>869.618 MHz · BW 62.5 kHz · SF8 · CR8</code>. Da riga di comando, via seriale o da un client admin, lo stesso risultato si ottiene con <code>set radio 869.618,62.5,8,8</code> seguito da <code>reboot</code>. Tutti i dettagli, incluso perché il vecchio preset è deprecato, sono nella pagina dedicata al <a class="link" href="../preset-radio/">preset radio italiano per MeshCore</a>.</p>
+    </li>
+    <li class="step" id="nome">
+      <p class="step__num">06</p>
+      <h3 class="step__title">Scegli il nome del nodo</h3>
+      <p class="step__body">Assegna un nome riconoscibile: la convenzione usata dalla community italiana è <code>IT-&lt;citta&gt;-NN</code> per un companion, <code>IT-&lt;citta&gt;-RPT-NN</code> per un repeater e <code>IT-&lt;citta&gt;-ROOM-NN</code> per un room server (esempio: <code>IT-TORINO-RPT-01</code>). Da riga di comando si imposta con <code>set name &lt;nome&gt;</code>; l'elenco completo dei comandi disponibili è nella pagina <a class="link" href="../comandi/">comandi CLI per amministrare un nodo MeshCore</a>.</p>
+    </li>
+    <li class="step" id="advert">
+      <p class="step__num">07</p>
+      <h3 class="step__title">Invia il primo advert e verifica i contatti</h3>
+      <p class="step__body">Dopo aver riavviato il nodo con il nuovo preset, invia un advert (dal client, o via CLI con il comando <code>advert</code>) e chiedi a un altro membro della community di verificare che il tuo nodo compaia tra i suoi contatti. Se non succede, il problema quasi sempre è un preset radio non allineato: la pagina <a class="link" href="../problemi/">soluzioni ai problemi più comuni di MeshCore</a> copre anche questo caso.</p>
+    </li>
+    <li class="step" id="community">
+      <p class="step__num">08</p>
+      <h3 class="step__title">Presentati nel gruppo Telegram</h3>
+      <p class="step__body">Unisciti al <a class="link" href="https://t.me/meshcore_ita" target="_blank" rel="noopener">gruppo Telegram MeshCore ITA<span class="ext-arrow">↗</span></a>, pubblico e senza bisogno di invito, e presenta il tuo nodo nel topic dedicato ai nuovi membri o in quello della tua regione. Per dubbi non coperti da questa guida, la pagina <a class="link" href="../faq/">domande frequenti su MeshCore in italiano</a> raccoglie le domande più comuni della community.</p>
+    </li>
+  </ol>
+</section>
+
+<section class="section">
+  <div class="section__head">
+    <p class="eyelash">Dopo il primo nodo</p>
+    <h2 class="section__title">Companion, repeater o room server?</h2>
+    <p class="section__lede">Il ruolo di un nodo dipende solo da come lo configuri, non dall'hardware.</p>
+  </div>
+  <div class="grid grid--2">
+    <article class="card">
+      <p class="card__num">01</p>
+      <h3 class="card__title">Companion</h3>
+      <p class="card__body">Il client collegato via BLE o USB tramite app mobile o interfaccia web, quello configurato in questa guida. Non ripete i pacchetti degli altri nodi: serve per leggere e inviare messaggi, ed è il ruolo giusto per iniziare finché non hai familiarità con la mesh e con il preset radio condiviso.</p>
+    </article>
+    <article class="card">
+      <p class="card__num">02</p>
+      <h3 class="card__title">Repeater e room server</h3>
+      <p class="card__body">Un repeater estende la copertura della mesh inoltrando i pacchetti sui percorsi appresi dal routing ibrido; un room server conserva fino a 32 messaggi non letti per utente, come una bacheca in stile BBS. Entrambi i ruoli danno il meglio se restano sempre accesi e raggiungibili, con lo stesso preset radio e lo stesso firmware aggiornato del resto della mesh.</p>
+    </article>
+  </div>
+</section>

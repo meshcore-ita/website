@@ -1,0 +1,141 @@
+<!--meta
+{
+  "slug": "comandi",
+  "nav": "Comandi",
+  "order": 4,
+  "primary": false,
+  "title": "Comandi MeshCore: guida CLI completa per repeater e room server",
+  "description": "Guida ai comandi CLI di MeshCore in italiano: come collegarsi, set radio, nome nodo, orologio, risparmio energetico e amministrazione OTA passo passo.",
+  "h1": "Comandi CLI di MeshCore: la guida completa",
+  "lede": "Sintassi, effetti, esempi e rischi di ogni comando CLI per amministrare repeater e room server MeshCore.",
+  "updated": "2026-09-10",
+  "jsonld": [
+    {
+      "@type": "TechArticle",
+      "headline": "Comandi CLI di MeshCore: guida completa per repeater e room server",
+      "description": "Riferimento in italiano ai comandi CLI di MeshCore per identità del nodo, radio, alimentazione, orologio e amministrazione OTA, con sintassi ed esempi.",
+      "inLanguage": "it",
+      "author": { "@type": "Organization", "name": "MeshCore ITA" }
+    }
+  ]
+}
+-->
+<section class="section">
+  <div class="section__head">
+    <p class="eyelash">Accesso alla CLI</p>
+    <h2 class="section__title">Come raggiungere la console del nodo</h2>
+    <p class="section__lede">Ogni repeater e room server MeshCore espone una console di comandi testuali, raggiungibile in due modi.</p>
+  </div>
+  <div class="prose">
+    <p>Il primo è via USB seriale: colleghi il nodo al computer con un cavo dati (non solo di ricarica) e apri una console seriale, ad esempio il web flasher ufficiale dal browser oppure <code>picocom</code> da terminale su Linux. Questo metodo funziona anche prima di aver mai configurato il nodo, perché non richiede una rete mesh già funzionante. Il secondo è da remoto, tramite un client MeshCore (app o web) già autenticato come amministratore sul nodo target: utile per un repeater o un room server già installato in un punto alto o difficile da raggiungere fisicamente. In entrambi i casi serve la password admin, il cui valore di default è <code>password</code>: cambiala non appena metti in servizio un nodo, con il comando descritto più sotto.</p>
+    <p>Per l'elenco delle board supportate e delle differenze tra chip ESP32 e nRF52 (rilevanti per capire quale comando OTA usare) consulta la <a class="link" href="../hardware/">guida hardware alle board LoRa compatibili con MeshCore</a>. Se il flasher o il terminale seriale non vedono la porta su Linux, è quasi sempre un problema di permessi: la pagina <a class="link" href="../problemi/">soluzioni ai problemi più comuni di MeshCore</a> spiega come risolverlo con <code>setfacl</code>.</p>
+  </div>
+</section>
+
+<section class="section">
+  <div class="section__head">
+    <p class="eyelash">Identità del nodo</p>
+    <h2 class="section__title">Nome e password amministrativa</h2>
+  </div>
+  <table class="spec">
+    <caption>Identità e nome nodo</caption>
+    <thead>
+      <tr><th scope="col">Comando</th><th scope="col">Effetto</th></tr>
+    </thead>
+    <tbody>
+      <tr><th scope="row"><code>set name &lt;nome&gt;</code></th><td>Cambia il nome del nodo mostrato negli advert e nei contatti degli altri nodi.</td></tr>
+      <tr><th scope="row"><code>password &lt;nuova-password&gt;</code></th><td>Cambia la password amministrativa della console (default <code>password</code>).</td></tr>
+    </tbody>
+  </table>
+  <div class="prose">
+    <p>Esempio per un repeater a Torino, seguendo la convenzione di naming della community: <code>set name IT-Torino-RPT-01</code>. Dopo un cambio nome è buona norma inviare subito un nuovo advert (vedi sotto) così che i nodi vicini aggiornino il contatto. Per la password, scegline una che non condividi con altri servizi: la console non offre un modo per leggerla in chiaro, solo per sovrascriverla.</p>
+  </div>
+</section>
+
+<section class="section">
+  <div class="section__head">
+    <p class="eyelash">Radio</p>
+    <h2 class="section__title">Preset, potenza e diagnostica radio</h2>
+  </div>
+  <table class="spec">
+    <caption>Configurazione e diagnostica radio</caption>
+    <thead>
+      <tr><th scope="col">Comando</th><th scope="col">Effetto</th></tr>
+    </thead>
+    <tbody>
+      <tr><th scope="row"><code>get radio</code> / <code>set radio &lt;freq&gt;,&lt;bw&gt;,&lt;sf&gt;,&lt;cr&gt;</code></th><td>Legge o imposta frequenza, banda, spreading factor e coding rate in un solo comando. Richiede <code>reboot</code> per applicarsi.</td></tr>
+      <tr><th scope="row"><code>get freq</code> / <code>set freq &lt;MHz&gt;</code></th><td>Legge o cambia la sola frequenza, senza toccare banda, SF o CR.</td></tr>
+      <tr><th scope="row"><code>get tx</code> / <code>set tx &lt;dbm&gt;</code></th><td>Legge o imposta la potenza di trasmissione in dBm (1–22).</td></tr>
+      <tr><th scope="row"><code>set lat &lt;lat&gt;</code> / <code>set lon &lt;lon&gt;</code></th><td>Imposta la posizione GPS del nodo, usata per la mappa pubblica e per l'advert.</td></tr>
+      <tr><th scope="row"><code>advert</code></th><td>Invia subito un advert flood, senza aspettare l'intervallo periodico.</td></tr>
+      <tr><th scope="row"><code>set flood.advert.interval &lt;ore&gt;</code></th><td>Cambia l'intervallo dell'advert flood periodico (default 12 ore).</td></tr>
+      <tr><th scope="row"><code>set repeat &lt;on|off&gt;</code></th><td>Attiva o disattiva la ripetizione dei pacchetti altrui su un repeater o room server.</td></tr>
+      <tr><th scope="row"><code>neighbors</code></th><td>Elenca i vicini diretti uditi di recente (solo repeater).</td></tr>
+      <tr><th scope="row"><code>stats-radio</code></th><td>Mostra noise floor, ultimo RSSI/SNR e airtime del radio.</td></tr>
+      <tr><th scope="row"><code>log start</code> / <code>log stop</code></th><td>Avvia o ferma la cattura del log di ricezione radio, utile per diagnosticare la copertura.</td></tr>
+    </tbody>
+  </table>
+  <div class="prose">
+    <p>Per allineare un nodo al preset condiviso dalla community italiana il comando è <code>set radio 869.618,62.5,8,8</code> seguito da <code>reboot</code>: i dettagli sul preset, sul perché è cambiato e sulla differenza col vecchio preset deprecato sono nella pagina dedicata al <a class="link" href="../preset-radio/">preset radio italiano per MeshCore</a>. Attenzione: cambiare i parametri radio su un nodo già in servizio lo disallinea immediatamente dal resto della mesh finché non lo riporti allo stesso preset di tutti gli altri; su un repeater o room server condiviso, annuncia la modifica nel gruppo prima di farla, così chi dipende da quel nodo non perde copertura senza preavviso. Il significato tecnico di banda, spreading factor, coding rate, RSSI, SNR e airtime è spiegato nel <a class="link" href="../glossario/">glossario dei termini tecnici MeshCore</a>.</p>
+  </div>
+</section>
+
+<section class="section">
+  <div class="section__head">
+    <p class="eyelash">Alimentazione</p>
+    <h2 class="section__title">Risparmio energetico e stato del nodo</h2>
+  </div>
+  <table class="spec">
+    <caption>Alimentazione e risparmio</caption>
+    <thead>
+      <tr><th scope="col">Comando</th><th scope="col">Effetto</th></tr>
+    </thead>
+    <tbody>
+      <tr><th scope="row"><code>powersaving &lt;on|off&gt;</code></th><td>Attiva o disattiva il risparmio energetico: il nodo dorme tra una trasmissione e l'altra.</td></tr>
+      <tr><th scope="row"><code>stats-core</code></th><td>Mostra stato batteria, uptime e coda messaggi del nodo.</td></tr>
+    </tbody>
+  </table>
+  <div class="prose">
+    <p>Su un repeater alimentato a batteria o pannello solare, <code>powersaving on</code> è spesso la prima leva da usare se l'autonomia non basta, insieme a una potenza TX (<code>set tx</code>) non più alta del necessario per la copertura richiesta. Se la batteria si scarica comunque troppo in fretta, <code>stats-core</code> aiuta a capire se il problema è di consumo o se il nodo si sta riavviando in loop: la pagina <a class="link" href="../problemi/">soluzioni ai problemi più comuni di MeshCore</a> copre anche questo caso insieme ad altri sintomi frequenti.</p>
+  </div>
+</section>
+
+<section class="section">
+  <div class="section__head">
+    <p class="eyelash">Orologio</p>
+    <h2 class="section__title">Sincronizzazione dell'ora</h2>
+  </div>
+  <table class="spec">
+    <caption>Orologio</caption>
+    <thead>
+      <tr><th scope="col">Comando</th><th scope="col">Effetto</th></tr>
+    </thead>
+    <tbody>
+      <tr><th scope="row"><code>time &lt;epoch&gt;</code></th><td>Imposta manualmente l'orologio del nodo, utile su board senza GPS o senza fix.</td></tr>
+      <tr><th scope="row"><code>clock sync</code></th><td>Sincronizza l'orologio del nodo con quello del dispositivo collegato (companion o client admin).</td></tr>
+    </tbody>
+  </table>
+  <div class="prose">
+    <p>Un orologio sbagliato è una delle cause più comuni per cui un nodo sembra "sparito": gli advert non risultano validi e il nodo smette di comparire come recente nei contatti altrui. Su una board con GPS (ad esempio LilyGO T-Beam o T-Deck) il fix corregge l'ora da solo appena disponibile; su una board senza GPS, o finché il fix non arriva, usa <code>clock sync</code> da un client collegato oppure imposta l'epoch manualmente con <code>time &lt;epoch&gt;</code> via seriale.</p>
+  </div>
+</section>
+
+<section class="section">
+  <div class="section__head">
+    <p class="eyelash">Amministrazione e OTA</p>
+    <h2 class="section__title">Riavvio e aggiornamento firmware</h2>
+  </div>
+  <table class="spec">
+    <caption>Amministrazione e OTA</caption>
+    <thead>
+      <tr><th scope="col">Comando</th><th scope="col">Effetto</th></tr>
+    </thead>
+    <tbody>
+      <tr><th scope="row"><code>reboot</code></th><td>Riavvia il nodo: necessario dopo aver cambiato parametri radio o nome.</td></tr>
+      <tr><th scope="row"><code>start ota</code></th><td>Avvia l'aggiornamento firmware via OTA (Wi-Fi su ESP32, DFU su nRF52).</td></tr>
+    </tbody>
+  </table>
+  <div class="prose">
+    <p>Su board ESP32 come Heltec V3, <code>start ota</code> apre un hotspot Wi-Fi chiamato "MeshCore OTA": ti colleghi a quell'hotspot dal telefono o dal computer e vai su <code>192.168.4.1/update</code> per caricare il nuovo firmware. Su board nRF52 (RAK4631, Heltec T114, Seeed XIAO) lo stesso comando prepara il nodo, ma il caricamento avviene con l'app nRF DFU dello smartphone. In entrambi i casi non scollegare l'alimentazione del nodo durante il trasferimento: un OTA interrotto a metà può lasciare il nodo in uno stato da recuperare via USB con il web flasher. Nota anche la differenza tra bin "merged" (azzera l'abbinamento Bluetooth esistente ma mantiene nome, chiavi e preset salvati) e bin "non-merged" (mantiene l'abbinamento Bluetooth): la scelta sbagliata costringe a un nuovo pairing BLE non necessario. La domanda "come aggiorno il firmware" è coperta con più dettaglio anche nella pagina <a class="link" href="../faq/">domande frequenti su MeshCore in italiano</a>.</p>
+  </div>
+</section>
