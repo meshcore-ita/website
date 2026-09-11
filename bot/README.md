@@ -26,6 +26,13 @@ un messaggio d'errore chiaro.
 Opzionale: `TELEGRAM_CHAT_ID` per limitare le risposte a un solo gruppo
 (default nello script di setup: `-1003711129218`, il gruppo MeshCore ITA).
 
+Opzionale: `TELEGRAM_HELP_TOPIC_ID` — `message_thread_id` del topic in cui il
+bot risponde ai comandi (default `17`, "Supporto e troubleshooting"). Fuori da
+quel topic i comandi vengono ignorati e loggati come
+`/cmd ignorato chat=… thread=…`: se i topic vengono ricreati, l'id corretto si
+legge da quel log (o dall'URL `t.me/meshcore_ita/<id>` del topic) e si imposta
+qui. In chat privata col bot i comandi funzionano sempre.
+
 ## Avvio del bot
 
 ```sh

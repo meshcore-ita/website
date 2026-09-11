@@ -2,6 +2,8 @@
 // Runtime del bot Telegram di MeshCore ITA: long polling, zero dipendenze.
 // Token: TELEGRAM_BOT_TOKEN (env) oppure TELEGRAM_BOT_TOKEN_FILE (percorso a un file).
 // Opzionale: TELEGRAM_CHAT_ID per rispondere solo in quel gruppo.
+// Opzionale: TELEGRAM_HELP_TOPIC_ID per cambiare il topic in cui il bot risponde
+// (default: 17, "Supporto e troubleshooting"). In chat privata risponde sempre.
 
 import { readFileSync } from 'node:fs';
 import process from 'node:process';
@@ -35,6 +37,10 @@ function getToken() {
 const TOKEN = getToken();
 const API = `https://api.telegram.org/bot${TOKEN}`;
 const ALLOWED_CHAT_ID = process.env.TELEGRAM_CHAT_ID ? String(process.env.TELEGRAM_CHAT_ID) : null;
+// I comandi sono attivi solo nel topic "Supporto e troubleshooting": il suo
+// message_thread_id coincide con l'id del messaggio di creazione del topic
+// (t.me/meshcore_ita/17). Override via env se il topic viene ricreato.
+const HELP_TOPIC_ID = Number(process.env.TELEGRAM_HELP_TOPIC_ID ?? 17);
 
 async function tg(method, payload, options = {}) {
   const res = await fetch(`${API}/${method}`, {
@@ -71,6 +77,17 @@ async function handleMessage(message) {
 
   const cmd = parseCommand(message.text);
   if (!cmd || !COMMANDS.has(cmd)) return;
+
+  // Fuori dal topic di supporto il bot resta zitto: niente risposte nei topic
+  // regionali, in Annunci o in General. Il thread ignorato finisce nei log,
+  // così si ricava l'id giusto se i topic vengono ricreati.
+  const isPrivate = message.chat && message.chat.type === 'private';
+  if (!isPrivate && message.message_thread_id !== HELP_TOPIC_ID) {
+    console.log(
+      `${new Date().toISOString()} /${cmd} ignorato chat=${chatId} thread=${message.message_thread_id ?? 'none'}`
+    );
+    return;
+  }
 
   const payload = {
     chat_id: chatId,
